@@ -1,8 +1,8 @@
 // Français. Las claves salen de data-i18n / data-i18n-attr en index.html (el español es la fuente).
 //   = espace fine insécable avant « : », « ? » et « ! ».
 (window.I18N = window.I18N || {}).fr = {
-  'meta.title': 'Muhammad Hicho — Développeur full stack',
-  'meta.desc': 'Portfolio de Muhammad Hicho, développeur full stack à Alicante, Espagne (télétravail). Java, Spring et Angular, avec 3 ans de projets pour Iberdrola et Orange.',
+  'meta.title': 'Muhammad Hicho Haidor — Développeur full stack',
+  'meta.desc': 'Portfolio de Muhammad Hicho Haidor, développeur full stack à Alicante, Espagne (télétravail). Java, Spring et Angular, avec 3 ans de projets pour Iberdrola et Orange.',
 
   'nav.skip': 'Aller aux projets',
   'nav.main': 'Principale',

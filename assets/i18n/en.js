@@ -1,7 +1,7 @@
 // English. Las claves salen de data-i18n / data-i18n-attr en index.html (el español es la fuente).
 (window.I18N = window.I18N || {}).en = {
-  'meta.title': 'Muhammad Hicho — Full stack developer',
-  'meta.desc': 'Portfolio of Muhammad Hicho, full stack developer in Alicante, Spain (remote). Java, Spring and Angular, with 3 years on projects for Iberdrola and Orange.',
+  'meta.title': 'Muhammad Hicho Haidor — Full stack developer',
+  'meta.desc': 'Portfolio of Muhammad Hicho Haidor, full stack developer in Alicante, Spain (remote). Java, Spring and Angular, with 3 years on projects for Iberdrola and Orange.',
 
   'nav.skip': 'Skip to projects',
   'nav.main': 'Main',
