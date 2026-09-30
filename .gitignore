@@ -1,0 +1,18 @@
+# Código fuente de los proyectos: vive en sus propios repos.
+# daw/ incluye una base de datos con datos personales reales: no subir nunca.
+daw/
+DAW/
+
+# Herramienta de grabación: dependencias y fotogramas temporales
+tools/preview/node_modules/
+tools/preview/rec/
+
+# El CV no se publica: se pide con el formulario y lo envío yo.
+cv.pdf
+*.docx
+
+# Copia de revisión de lo que se publica (se genera con git archive)
+/publicar/
+
+# Notas e instrucciones de trabajo para Claude Code: no se publican
+CLAUDE.md
