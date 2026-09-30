@@ -9,7 +9,7 @@
     <title>Muhammad Hicho Haidor — Desarrollador full stack</title>
     <meta
       name="description"
-      content="Portfolio de Muhammad Hicho Haidor, desarrollador full stack en Alicante (remoto). Java, Spring y Angular, con 3 años en proyectos para Iberdrola y Orange."
+      content="Portfolio de Muhammad Hicho Haidor, desarrollador full stack en Alicante (remoto). Desde 2023 en proyectos para Iberdrola y Orange con Java, Spring y Angular."
     />
     <script>
       // Idioma: se decide antes de pintar (?lang=, elección guardada o idioma del navegador)
@@ -1516,14 +1516,9 @@
         }
       }
 
-      /* Sobre mí */
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(2rem, 6vw, 5rem);
-      }
-      .about-text p {
-        font-size: 1.15rem;
+      /* Formación */
+      .edu .timeline {
+        max-width: 62ch;
       }
       .timeline {
         list-style: none;
@@ -1567,11 +1562,6 @@
       .timeline p {
         color: var(--muted);
         margin: 0;
-      }
-      @media (max-width: 800px) {
-        .about-grid {
-          grid-template-columns: 1fr;
-        }
       }
 
       /* Habilidades */
@@ -1711,7 +1701,7 @@
           <a href="#proyectos" class="keep" data-i18n="nav.projects"
             >Proyectos</a
           >
-          <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+          <a href="#formacion" data-i18n="nav.edu">Formación</a>
           <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
           <a href="#contacto" class="keep" data-i18n="nav.contact">Contacto</a>
           <div class="lang">
@@ -1838,11 +1828,7 @@
               >
             </p>
             <h1 class="name" data-split>Muhammad Hicho Haidor</h1>
-            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">
-              Desarrollador <strong>full stack</strong> con 3 años en proyectos
-              para <strong>Iberdrola</strong> y <strong>Orange</strong>. Java,
-              Spring y Angular, de la interfaz a producción.
-            </p>
+            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">Soy desarrollador <strong>full stack</strong>. Desde 2023 trabajo en proyectos empresariales, primero en Centauro Rent a Car y después en NTT DATA para <strong>Iberdrola</strong> y <strong>Orange</strong>. Trabajo de punta a punta: la interfaz, la API, la base de datos, los despliegues y lo que pasa cuando algo falla en producción.</p>
             <div class="cta fade" style="--d: 0.85s">
               <a
                 class="btn"
@@ -1901,9 +1887,7 @@
               data-i18n-attr="aria-label:hero.flowAlt"
               aria-label="Diagrama animado de mi trabajo: el frontend (Angular y React) pide mi experiencia al backend (Spring, .NET y Node), que la consulta en la base de datos (Oracle y SQLite); después se autentica con Azure AD y MFA, y termina con POST /entrevista respondido con 201 Created."
             ></svg>
-            <p class="caption" data-i18n="hero.caption">
-              Mi trabajo, petición a petición.
-            </p>
+            <p class="caption" data-i18n="hero.caption">Mi experiencia, contada como peticiones a una API.</p>
           </div>
         </div>
       </section>
@@ -1912,10 +1896,7 @@
       <section id="experiencia">
         <div class="wrap" style="--p: var(--accent)">
           <h2 class="reveal" data-i18n="exp.title">Experiencia</h2>
-          <p class="section-intro reveal" data-i18n="exp.intro">
-            Tres años desarrollando para empresas. Frontend, backend, base de
-            datos y producción.
-          </p>
+          <p class="section-intro reveal" data-i18n="exp.intro">Desarrollando para empresas desde 2023: frontend, backend, bases de datos y producción.</p>
           <ol class="jobs">
             <li class="job reveal">
               <div class="job-meta">
@@ -1934,10 +1915,7 @@
                     con más de 15 años en producción: frontend, backend y base
                     de datos Oracle.
                   </li>
-                  <li data-i18n="job1.b2">
-                    Implementé la migración del login heredado a Azure Active
-                    Directory con MFA.
-                  </li>
+                  <li data-i18n="job1.b2">Implemento la migración del login de varias aplicaciones web, con distintas tecnologías, a Azure Active Directory con MFA.</li>
                   <li data-i18n="job1.b3">
                     Resuelvo incidencias en producción con análisis de causa
                     raíz y corrijo vulnerabilidades de seguridad.
@@ -1950,11 +1928,7 @@
                     Desarrollo a partir de historias en Gherkin (BDD) y diseño
                     las pruebas con Xray, en Scrum.
                   </li>
-                  <li data-i18n="job1.b6">
-                    Documento en Confluence y Enterprise Architect. Trato
-                    directamente con el cliente en un equipo de más de 10
-                    personas.
-                  </li>
+                  <li data-i18n="job1.b6">Documento en Confluence y Enterprise Architect. Trato directamente con el cliente en un equipo de más de 15 personas.</li>
                 </ul>
               </div>
             </li>
@@ -1970,13 +1944,7 @@
                   NTT DATA · cliente: Orange
                 </p>
                 <ul class="features">
-                  <li data-i18n="job2.b1">
-                    Migración de una aplicación corporativa de gran escala de
-                    AngularJS a Angular (hasta la v17).
-                  </li>
-                  <li data-i18n="job2.b2">
-                    Arquitectura de micro-frontends con Module Federation.
-                  </li>
+                  <li data-i18n="job2.b1">Desarrollo en una aplicación corporativa de gran escala con micro-frontends (Module Federation): cada módulo usaba una versión distinta de Angular, desde AngularJS hasta Angular 17.</li>
                   <li data-i18n="job2.b3">
                     Implementé una capa BFF en Node.js que orquesta llamadas a
                     varios servicios del backend.
@@ -2586,23 +2554,10 @@
         </div>
       </section>
 
-      <!-- SOBRE MÍ -->
-      <section id="sobre-mi">
-        <div class="wrap about-grid">
-          <div class="about-text reveal">
-            <h2 data-i18n="about.title">Sobre mí</h2>
-            <p data-i18n="about.p1">
-              Soy desarrollador full stack. Desde 2023 trabajo en proyectos
-              empresariales, primero en Centauro Rent a Car y después en NTT
-              DATA para Iberdrola y Orange.
-            </p>
-            <p data-i18n="about.p2">
-              Trabajo de punta a punta: la interfaz, la API, la base de datos,
-              los despliegues y lo que pasa cuando algo falla en producción.
-            </p>
-            <!-- ✏️ EDITA: algo personal y concreto que te haga memorable (afición, qué te motiva…) -->
-            <p data-i18n="about.p3">Vivo en Alicante y trabajo en remoto.</p>
-          </div>
+      <!-- FORMACIÓN -->
+      <!-- ✏️ Pendiente: sección «Sobre mí» con algo personal y concreto -->
+      <section id="formacion">
+        <div class="wrap edu">
           <div class="reveal">
             <h2 data-i18n="edu.title">Formación</h2>
             <ol class="timeline">
@@ -2675,7 +2630,7 @@
                 </li>
                 <li>
                   <strong>AngularJS</strong
-                  ><small data-i18n="sk.angularjs">Migración en Orange</small>
+                  ><small data-i18n="sk.angularjs">Micro-frontends en Orange</small>
                 </li>
                 <li>
                   <strong data-i18n="sk.jsTs">JavaScript y TypeScript</strong
@@ -3466,7 +3421,7 @@
               { link: "ca", dir: 1, label: "GET /experiencia", kind: "req" },
               { link: "ad", dir: 1, label: "SELECT", kind: "req" },
               { link: "ad", dir: -1, label: "Iberdrola, Orange", kind: "res" },
-              { link: "ca", dir: -1, label: "200 OK · 3 años", kind: "res" },
+              { link: "ca", dir: -1, label: "200 OK · desde 2023", kind: "res" },
               { link: "ca", dir: 1, label: "AUTH Azure AD + MFA", kind: "req" },
               { link: "ca", dir: -1, label: "200 OK", kind: "res" },
               { link: "ca", dir: 1, label: "POST /entrevista", kind: "req" },
