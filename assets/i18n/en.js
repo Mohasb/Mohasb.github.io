@@ -1,7 +1,7 @@
-// English. Las claves salen de data-i18n / data-i18n-attr en index.html (el español es la fuente).
+// English (el portfolio está en ES y EN). Las claves salen de data-i18n / data-i18n-attr en index.html (el español es la fuente).
 (window.I18N = window.I18N || {}).en = {
-  'meta.title': 'Muhammad Hicho Haidor — Full stack developer',
-  'meta.desc': 'Portfolio of Muhammad Hicho Haidor, full stack developer in Alicante, Spain (remote). Working on projects for Iberdrola and Orange since 2023 with Java, Spring and Angular.',
+  'meta.title': 'Muhammad Hicho Haidor — Software developer',
+  'meta.desc': 'Portfolio of Muhammad Hicho Haidor, software developer in Alicante, Spain (remote). Since 2023 building applications across every layer for clients such as Iberdrola and Orange, with Java, Spring and Angular.',
 
   'nav.skip': 'Skip to projects',
   'nav.main': 'Main',
@@ -10,18 +10,17 @@
   'nav.edu': 'Education',
   'nav.skills': 'Skills',
   'nav.contact': 'Contact',
-  'nav.lang': 'Language: English',
+  'nav.lang': 'Language',
   'nav.theme': 'Toggle light and dark theme',
+  'nav.palette': 'Surprise palette: different colours on every visit',
+  'nav.menu': 'Menu',
 
-  'hero.status': 'Open to new opportunities · Alicante or remote',
-  'hero.tagline': 'I am a <strong>full stack</strong> developer. Since 2023 I have worked on enterprise projects, first at Centauro Rent a Car and then at NTT DATA for <strong>Iberdrola</strong> and <strong>Orange</strong>. I work end to end: the interface, the API, the database, deployments, and what happens when something breaks in production.',
+  'hero.tagline': 'Since 2023 I have been building, improving and maintaining enterprise applications across every layer: the interface, the API, the database and deployments, right down to what happens when something breaks in production. First at Centauro Rent a Car, then at NTT DATA, with clients such as <strong>Orange</strong> and <strong>Iberdrola</strong>.',
   'hero.contact': 'Get in touch',
   'hero.cv': 'Request my CV',
-  'hero.caption': 'My experience, told as requests to an API.',
   'hero.flowAlt': 'Animated diagram of my work: the frontend (Angular and React) requests my experience from the backend (Spring, .NET and Node), which queries it in the database (Oracle and SQLite); then it authenticates with Azure AD and MFA, and ends with POST /interview answered with 201 Created.',
 
   'exp.title': 'Experience',
-  'exp.intro': 'Building software for companies since 2023: frontend, backend, databases and production.',
   'job.remote': 'Alicante · remote',
   'job.fullstack': 'Full stack developer',
   'job1.when': 'Jul 2024 – present',
@@ -46,9 +45,7 @@
   'tab.demo': 'Live demo',
   'tab.how': 'How it works',
   'ctrl.reload': 'Restart',
-  'ctrl.full': 'Full screen',
-  'ctrl.open': 'Open in new tab',
-  'ctrl.off': 'Turn off',
+  'ctrl.open': 'Open in a new tab',
   'stack.data': 'Data',
 
   'daw.tabs': 'DAW project view',
@@ -123,11 +120,10 @@
   'contact.title': 'Shall we talk?',
   'contact.text': 'If you have a role where I could fit, or want to see the code up close, write to me.',
   'contact.copy': 'Copy email',
-  'footer.made': 'Handmade and published on GitHub Pages.',
 
   'cv.close': 'Close',
   'cv.title': 'Would you like my CV?',
-  'cv.lead': 'I will send it to you myself. Tell me who you are and your email app will open with the message ready to send.',
+  'cv.lead': 'Leave your details and I will send it to you personally. When you press the button, your email app will open with the request already written.',
   'cv.name': 'Name',
   'cv.company': 'Company',
   'cv.role': 'Role or job posting (optional)',
@@ -145,6 +141,9 @@
   'js.pause': 'Pause video',
   'js.copied': 'Email copied',
   'js.copyFail': 'Could not copy. Please select the email manually.',
+  'js.paletteOn': 'Surprise palette on: every visit will have different colours.',
+  'js.paletteOff': 'Back to the original palette.',
+  'js.closeDemo': 'Close the demo',
 
   // Diagramas (nodos y paquetes)
   'flow.Datos': 'Data',

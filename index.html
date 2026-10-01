@@ -6,16 +6,59 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Muhammad Hicho Haidor — Desarrollador full stack</title>
+    <title>Muhammad Hicho Haidor — Desarrollador de software</title>
     <meta
       name="description"
-      content="Portfolio de Muhammad Hicho Haidor, desarrollador full stack en Alicante (remoto). Desde 2023 en proyectos para Iberdrola y Orange con Java, Spring y Angular."
+      content="Portfolio de Muhammad Hicho Haidor, desarrollador de software en Alicante (remoto). Desde 2023 desarrollo aplicaciones en todas sus capas para clientes como Iberdrola y Orange, con Java, Spring y Angular."
     />
     <script>
+      // Paleta sorpresa (opcional, se activa con el botón 🎨 de la barra): cada visita usa una
+      // paleta distinta de esta lista. Generadas en OKLCH y con el contraste WCAG comprobado.
+      // Orden de cada fila: --bg, --surface, --line, --accent, --accent-soft, --accent-ink
+      window.PALETTES = [
+        [["#FCEFEE", "#FFFDFD", "#E7D4D3", "#B6303E", "#FEDDDC", "#FFFFFF"], ["#180F0F", "#241818", "#3C2C2B", "#F98E8F", "#4A2323", "#180808"]], // coral
+        [["#FBF0EB", "#FFFDFC", "#E6D5CD", "#AB4501", "#FFDED0", "#FFFFFF"], ["#180F0C", "#241914", "#3B2D26", "#F59569", "#492515", "#180904"]], // naranja
+        [["#F8F1E8", "#FEFDFC", "#E2D7CA", "#8D5E05", "#F8E3C6", "#FFFFFF"], ["#16110A", "#211A11", "#382F23", "#E1A447", "#422B06", "#150B01"]], // ámbar
+        [["#EEF5EC", "#FCFEFC", "#D2DDCF", "#257E03", "#D7EED2", "#FFFFFF"], ["#0E130D", "#171E15", "#2A3328", "#83C575", "#1F3819", "#061005"]], // verde
+        [["#E9F6F2", "#FBFEFD", "#CBDED8", "#007B66", "#C8F1E4", "#FFFFFF"], ["#0A1411", "#121F1B", "#233430", "#37CCAC", "#013A2F", "#00110C"]], // turquesa
+        [["#E8F5F8", "#FBFEFF", "#C9DDE1", "#007785", "#C5EFF7", "#FFFFFF"], ["#091415", "#101E21", "#223437", "#0EC7DE", "#03373F", "#001014"]], // cielo
+        [["#ECF3FC", "#FCFDFF", "#CFDBE7", "#036BB9", "#D4E9FF", "#FFFFFF"], ["#0C1218", "#151D25", "#27313C", "#6FB6FE", "#16324D", "#040E1A"]], // azul
+        [["#F0F2FC", "#FDFDFF", "#D6D8E8", "#5A56C7", "#E1E4FE", "#FFFFFF"], ["#101119", "#1A1B25", "#2E2F3C", "#A2A8FE", "#2B2C4E", "#0B0C1A"]], // índigo
+        [["#F4F0FA", "#FEFDFE", "#DCD6E5", "#8048B6", "#EDE0FE", "#FFFFFF"], ["#131017", "#1E1923", "#332D3A", "#C49BF3", "#372849", "#100A18"]], // violeta
+        [["#F9EFF5", "#FEFDFE", "#E4D4DE", "#A43687", "#FCDBF0", "#FFFFFF"], ["#170F14", "#22181F", "#392C34", "#E88FCB", "#44233A", "#160811"]], // frambuesa
+      ];
+      // Aplica la paleta i según el tema efectivo (claro/oscuro); i = null vuelve a la original
+      window.applyPalette = (i) => {
+        const root = document.documentElement,
+          vars = ["--bg", "--surface", "--line", "--accent", "--accent-soft", "--accent-ink", "--req"];
+        if (i == null) {
+          vars.forEach((v) => root.style.removeProperty(v));
+          delete root.dataset.palette;
+          return;
+        }
+        const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        const row = window.PALETTES[i][dark ? 1 : 0];
+        // --req (peticiones del diagrama) usa el mismo color que el acento
+        vars.forEach((v, k) => root.style.setProperty(v, row[k === 6 ? 3 : k]));
+        root.dataset.palette = i;
+      };
+      (() => {
+        try {
+          const t = localStorage.getItem("theme");
+          if (t) document.documentElement.dataset.theme = t;
+          if (localStorage.getItem("palette") !== "on") return;
+          const last = +localStorage.getItem("paletteLast"), n = window.PALETTES.length;
+          let i = Math.floor(Math.random() * (n - 1));
+          if (i >= last) i++; // nunca repite la de la visita anterior
+          localStorage.setItem("paletteLast", i);
+          window.applyPalette(i);
+        } catch (e) {}
+      })();
+
       // Idioma: se decide antes de pintar (?lang=, elección guardada o idioma del navegador)
       // y se empieza a descargar su diccionario. El español está en el propio HTML.
       (() => {
-        const L = ["es", "en", "fr", "de", "pt", "it"],
+        const L = ["es", "en"],
           root = document.documentElement;
         let l = new URLSearchParams(location.search).get("lang");
         if (!L.includes(l)) {
@@ -25,11 +68,11 @@
             l = null;
           }
         }
-        if (!L.includes(l))
-          l =
-            (navigator.languages || [navigator.language])
-              .map((x) => String(x).slice(0, 2).toLowerCase())
-              .find((x) => L.includes(x)) || "es";
+        // Navegador en español, catalán, gallego o euskera → español; cualquier otro → inglés
+        if (!L.includes(l)) {
+          const b = String((navigator.languages || [navigator.language])[0] || "es").slice(0, 2).toLowerCase();
+          l = ["es", "ca", "gl", "eu"].includes(b) ? "es" : "en";
+        }
         root.dataset.lang = l;
         if (l === "es") return;
         root.classList.add("i18n-wait");
@@ -254,7 +297,17 @@
         color: var(--ink);
         background: var(--accent-soft);
       }
-      .theme-btn {
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .nav-tools {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .tool-btn {
         border: 1px solid var(--line);
         background: var(--surface);
         color: var(--ink);
@@ -264,66 +317,116 @@
         cursor: pointer;
         display: grid;
         place-items: center;
-        margin-left: 0.5rem;
-        transition: transform 0.5s var(--ease);
+        transition:
+          transform 0.5s var(--ease),
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .tool-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+      .tool-btn:hover {
+        border-color: var(--ink);
       }
       .theme-btn:hover {
         transform: rotate(40deg);
       }
-      .theme-btn svg {
-        width: 18px;
-        height: 18px;
-      }
-      @media (max-width: 640px) {
-        .nav-links a:not(.keep) {
-          display: none;
-        }
+      .palette-btn[aria-pressed="true"] {
+        color: var(--accent);
+        border-color: var(--accent);
+        background: var(--accent-soft);
       }
 
-      /* Selector de idioma */
-      .lang {
-        position: relative;
-        margin-left: 0.5rem;
-      }
-      .lang-btn {
-        height: 40px;
-        padding: 0 0.75rem 0 0.65rem;
+      /* Idioma: banderas */
+      .flags {
+        display: flex;
+        gap: 0.25rem;
+        padding: 3px;
+        border: 1px solid var(--line);
         border-radius: 999px;
-        border: 1px solid var(--line);
         background: var(--surface);
-        color: var(--ink);
-        font: inherit;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
+      }
+      .flag {
+        width: 34px;
+        height: 32px;
+        padding: 0;
+        border: 0;
+        border-radius: 999px;
+        background: none;
+        display: grid;
+        place-items: center;
         cursor: pointer;
-        transition: border-color 0.2s;
+        opacity: 0.45;
+        filter: saturate(0.6);
+        transition:
+          opacity 0.2s,
+          filter 0.2s,
+          background 0.2s;
       }
-      .lang-btn:hover,
-      .lang-btn[aria-expanded="true"] {
-        border-color: var(--ink);
+      .flag svg {
+        width: 22px;
+        height: 15px;
+        border-radius: 3px;
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
       }
-      .lang-btn svg {
-        width: 17px;
-        height: 17px;
+      .flag:hover {
+        opacity: 0.85;
       }
-      .lang-menu {
-        position: absolute;
-        right: 0;
-        top: calc(100% + 0.5rem);
-        list-style: none;
-        margin: 0;
-        padding: 0.35rem;
-        min-width: 170px;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
-        z-index: 70;
-        animation: menuIn 0.2s var(--ease);
+      .flag[aria-pressed="true"] {
+        opacity: 1;
+        filter: none;
+        background: var(--accent-soft);
+      }
+
+      /* Menú en pantallas estrechas: las secciones se recogen bajo el botón ☰ */
+      .menu-btn {
+        display: none;
+      }
+      .menu-btn path {
+        transition:
+          transform 0.3s var(--ease),
+          opacity 0.2s;
+        transform-origin: 12px 12px;
+      }
+      .nav.open .menu-btn .m1 {
+        transform: translateY(5px) rotate(45deg);
+      }
+      .nav.open .menu-btn .m2 {
+        opacity: 0;
+      }
+      .nav.open .menu-btn .m3 {
+        transform: translateY(-5px) rotate(-45deg);
+      }
+      @media (max-width: 900px) {
+        .menu-btn {
+          display: grid;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: calc(100% - 0.25rem);
+          left: 1rem;
+          right: 1rem;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.15rem;
+          padding: 0.5rem;
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.4);
+          animation: menuIn 0.22s var(--ease);
+        }
+        .nav.open .nav-links {
+          display: flex;
+        }
+        .nav-links a {
+          padding: 0.8rem 1rem;
+          border-radius: 12px;
+          color: var(--ink);
+          font-size: 1.05rem;
+        }
       }
       @keyframes menuIn {
         from {
@@ -335,44 +438,123 @@
           transform: none;
         }
       }
-      .lang-menu button {
+      @media (max-width: 400px) {
+        .nav-tools {
+          gap: 0.3rem;
+        }
+        .tool-btn {
+          width: 38px;
+          height: 38px;
+        }
+        .flag {
+          width: 30px;
+        }
+      }
+
+      /* Ventana de la demo: en móvil, pantalla completa; en escritorio, casi completa
+         sobre el portfolio difuminado */
+      .demo-sheet {
         width: 100%;
-        text-align: left;
+        max-width: none;
+        height: 100%;
+        max-height: none;
+        margin: 0;
+        padding: 0;
         border: 0;
-        background: none;
+        overflow: hidden;
+        background: var(--surface);
         color: var(--ink);
-        font: inherit;
-        font-size: 0.95rem;
-        padding: 0.55rem 0.75rem;
-        border-radius: 9px;
-        cursor: pointer;
+        flex-direction: column;
+      }
+      .demo-sheet[open] {
         display: flex;
-        justify-content: space-between;
-        gap: 1rem;
+        animation: sheetIn 0.35s var(--ease);
       }
-      .lang-menu button:hover,
-      .lang-menu button:focus-visible {
-        background: var(--accent-soft);
-      }
-      .lang-menu button[aria-checked="true"] {
-        font-weight: 600;
-      }
-      .lang-menu button[aria-checked="true"]::after {
-        content: "✓";
-        color: var(--accent);
-      }
-      @media (max-width: 640px) {
-        .nav-links a {
-          padding: 0.45rem 0.55rem;
+      @keyframes sheetIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.985);
         }
-        .lang {
-          margin-left: 0.25rem;
+        to {
+          opacity: 1;
+          transform: none;
         }
-        .lang-btn {
-          padding: 0 0.6rem;
-        }
-        .lang-btn svg {
+      }
+      .demo-sheet::backdrop {
+        background: color-mix(in srgb, var(--bg) 55%, rgba(8, 10, 18, 0.55));
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .demo-sheet-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: calc(0.45rem + env(safe-area-inset-top, 0px)) 0.6rem 0.45rem 0.9rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .sheet-dots {
+        display: flex;
+        gap: 7px;
+      }
+      .sheet-dots i {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--line);
+      }
+      .sheet-url {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+        background: var(--bg);
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .sheet-actions {
+        display: flex;
+        gap: 0.35rem;
+      }
+      .sheet-actions .tool-btn {
+        width: 36px;
+        height: 36px;
+        text-decoration: none;
+      }
+      .demo-sheet iframe {
+        flex: 1;
+        width: 100%;
+        border: 0;
+        background: #fff;
+      }
+      .sheet-boot {
+        position: absolute;
+        inset: 52px 0 0;
+        display: none;
+        place-items: center;
+        background: var(--surface);
+      }
+      .demo-sheet.loading .sheet-boot {
+        display: grid;
+      }
+      .sheet-boot .loader {
+        --p: var(--accent);
+      }
+      @media (max-width: 900px) {
+        .sheet-dots {
           display: none;
+        }
+      }
+      @media (min-width: 901px) {
+        .demo-sheet {
+          width: min(1480px, calc(100vw - 3rem));
+          height: calc(100dvh - 3rem);
+          margin: auto;
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.6);
         }
       }
 
@@ -553,35 +735,6 @@
         align-items: center;
         position: relative;
       }
-      .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        font-size: 0.95rem;
-        color: var(--muted);
-        margin-bottom: 1.4rem;
-        padding: 0.35rem 0.9rem 0.35rem 0.7rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: var(--surface);
-      }
-      .status i {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: var(--res);
-        box-shadow: 0 0 0 0 var(--res);
-        animation: ping 2.2s infinite;
-      }
-      @keyframes ping {
-        0% {
-          box-shadow: 0 0 0 0 color-mix(in srgb, var(--res) 60%, transparent);
-        }
-        80%,
-        100% {
-          box-shadow: 0 0 0 10px transparent;
-        }
-      }
       .name {
         font-size: clamp(3.2rem, 8.5vw, 6.8rem);
         font-weight: 800;
@@ -625,6 +778,11 @@
       .cta {
         display: flex;
         flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .cta-main,
+      .cta-social {
+        display: flex;
         gap: 0.75rem;
       }
       .btn {
@@ -788,12 +946,6 @@
       }
       .hero-visual {
         position: relative;
-      }
-      .hero-visual .caption {
-        font-size: 0.9rem;
-        color: var(--muted);
-        text-align: center;
-        margin: 1rem auto 0;
       }
 
       @media (max-width: 900px) {
@@ -1254,7 +1406,8 @@
         color: var(--muted);
         font-size: 0.9rem;
       }
-      .boot .loader {
+      .boot .loader,
+      .sheet-boot .loader {
         width: 120px;
         height: 4px;
         border-radius: 2px;
@@ -1262,7 +1415,8 @@
         overflow: hidden;
         position: relative;
       }
-      .boot .loader::after {
+      .boot .loader::after,
+      .sheet-boot .loader::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -1300,17 +1454,6 @@
       }
       .demo.on iframe {
         opacity: 1;
-      }
-      .demo-controls {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 1.1rem;
-        min-height: 2.3rem;
-      }
-      .demo:not(.on) .demo-controls {
-        display: none;
       }
       .chip-btn {
         border: 1px solid var(--line);
@@ -1692,126 +1835,30 @@
     <header class="nav">
       <div class="wrap nav-inner">
         <a class="brand" href="#inicio">MH².</a>
-        <nav
-          class="nav-links"
-          aria-label="Principal"
-          data-i18n-attr="aria-label:nav.main"
-        >
-          <a href="#experiencia" data-i18n="nav.exp">Experiencia</a>
-          <a href="#proyectos" class="keep" data-i18n="nav.projects"
-            >Proyectos</a
-          >
-          <a href="#formacion" data-i18n="nav.edu">Formación</a>
-          <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
-          <a href="#contacto" class="keep" data-i18n="nav.contact">Contacto</a>
-          <div class="lang">
-            <button
-              class="lang-btn"
-              type="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="langMenu"
-              aria-label="Idioma: español"
-              data-i18n-attr="aria-label:nav.lang"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path
-                  d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"
-                />
-              </svg>
-              <span class="lang-code" aria-hidden="true">ES</span>
+        <div class="nav-right">
+          <nav class="nav-links" id="navLinks" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
+            <a href="#experiencia" data-i18n="nav.exp">Experiencia</a>
+            <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+            <a href="#formacion" data-i18n="nav.edu">Formación</a>
+            <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
+            <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+          </nav>
+          <div class="nav-tools">
+            <div class="flags" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang">
+              <button class="flag" type="button" data-lang="es" lang="es" aria-pressed="true" aria-label="Español" title="Español"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/></svg></button>
+              <button class="flag" type="button" data-lang="en" lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 60 40" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><clipPath id="gb-t"><path d="M30 20h30v20zv20H0zH0V0zV0h30z"/></clipPath><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="4" clip-path="url(#gb-t)"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="7"/></svg></button>
+            </div>
+            <button class="tool-btn palette-btn" type="button" aria-pressed="false" aria-label="Paleta sorpresa: colores distintos en cada visita" title="Paleta sorpresa: colores distintos en cada visita" data-i18n-attr="aria-label:nav.palette;title:nav.palette">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10.5" cy="7" r="1.2" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1.2" fill="currentColor"/></svg>
             </button>
-            <ul class="lang-menu" id="langMenu" role="menu" hidden>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="es"
-                  data-lang="es"
-                >
-                  Español
-                </button>
-              </li>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="en"
-                  data-lang="en"
-                >
-                  English
-                </button>
-              </li>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="fr"
-                  data-lang="fr"
-                >
-                  Français
-                </button>
-              </li>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="de"
-                  data-lang="de"
-                >
-                  Deutsch
-                </button>
-              </li>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="pt"
-                  data-lang="pt"
-                >
-                  Português
-                </button>
-              </li>
-              <li role="none">
-                <button
-                  type="button"
-                  role="menuitemradio"
-                  lang="it"
-                  data-lang="it"
-                >
-                  Italiano
-                </button>
-              </li>
-            </ul>
+            <button class="tool-btn theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label:nav.theme">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            </button>
+            <button class="tool-btn menu-btn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menú" data-i18n-attr="aria-label:nav.menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg>
+            </button>
           </div>
-          <button
-            class="theme-btn"
-            type="button"
-            aria-label="Cambiar entre tema claro y oscuro"
-            data-i18n-attr="aria-label:nav.theme"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            >
-              <circle cx="12" cy="12" r="4.5" />
-              <path
-                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
-              />
-            </svg>
-          </button>
-        </nav>
+        </div>
       </div>
     </header>
 
@@ -1821,15 +1868,10 @@
         <canvas class="hive" aria-hidden="true"></canvas>
         <div class="wrap hero-grid">
           <div>
-            <p class="status fade" style="--d: 0.05s">
-              <i></i
-              ><span data-i18n="hero.status"
-                >Abierto a nuevas oportunidades · Alicante o remoto</span
-              >
-            </p>
             <h1 class="name" data-split>Muhammad Hicho Haidor</h1>
-            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">Soy desarrollador <strong>full stack</strong>. Desde 2023 trabajo en proyectos empresariales, primero en Centauro Rent a Car y después en NTT DATA para <strong>Iberdrola</strong> y <strong>Orange</strong>. Trabajo de punta a punta: la interfaz, la API, la base de datos, los despliegues y lo que pasa cuando algo falla en producción.</p>
+            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">Desde 2023 desarrollo, mejoro y mantengo aplicaciones empresariales en todas sus capas: la interfaz, la API, la base de datos y los despliegues, hasta lo que pasa cuando algo falla en producción. Primero en Centauro Rent a Car y después en NTT DATA, con clientes como <strong>Orange</strong> e <strong>Iberdrola</strong>.</p>
             <div class="cta fade" style="--d: 0.85s">
+              <div class="cta-main">
               <a
                 class="btn"
                 id="heroContact"
@@ -1846,6 +1888,8 @@
               >
                 Solicitar CV
               </button>
+              </div>
+              <div class="cta-social">
               <a
                 class="icon-btn"
                 href="https://www.linkedin.com/in/mhhaidor"
@@ -1876,6 +1920,7 @@
                     d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
                   /></svg
               ></a>
+              </div>
             </div>
           </div>
           <div class="hero-visual fade" style="--d: 0.4s">
@@ -1887,7 +1932,6 @@
               data-i18n-attr="aria-label:hero.flowAlt"
               aria-label="Diagrama animado de mi trabajo: el frontend (Angular y React) pide mi experiencia al backend (Spring, .NET y Node), que la consulta en la base de datos (Oracle y SQLite); después se autentica con Azure AD y MFA, y termina con POST /entrevista respondido con 201 Created."
             ></svg>
-            <p class="caption" data-i18n="hero.caption">Mi experiencia, contada como peticiones a una API.</p>
           </div>
         </div>
       </section>
@@ -1896,7 +1940,6 @@
       <section id="experiencia">
         <div class="wrap" style="--p: var(--accent)">
           <h2 class="reveal" data-i18n="exp.title">Experiencia</h2>
-          <p class="section-intro reveal" data-i18n="exp.intro">Desarrollando para empresas desde 2023: frontend, backend, bases de datos y producción.</p>
           <ol class="jobs">
             <li class="job reveal">
               <div class="job-meta">
@@ -2122,54 +2165,6 @@
                     >
                       <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
                     </svg>
-                  </button>
-                </div>
-                <div class="demo-controls">
-                  <button class="chip-btn" type="button" data-act="reload">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M20 11a8 8 0 1 0-2.3 5.7" />
-                      <path d="M20 4v7h-7" /></svg
-                    ><span data-i18n="ctrl.reload">Reiniciar</span>
-                  </button>
-                  <button class="chip-btn" type="button" data-act="full">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg
-                    ><span data-i18n="ctrl.full">Pantalla completa</span>
-                  </button>
-                  <a class="chip-btn" data-open target="_blank" rel="noopener"
-                    ><svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" /></svg
-                    ><span data-i18n="ctrl.open">Abrir aparte</span></a
-                  >
-                  <button class="chip-btn" type="button" data-act="off">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M12 3v8" />
-                      <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
-                    ><span data-i18n="ctrl.off">Apagar</span>
                   </button>
                 </div>
                 <p class="demo-note" data-i18n="daw.note">
@@ -2419,54 +2414,6 @@
                       <span data-i18n="dam.boot">Arrancando la app…</span>
                     </div>
                   </div>
-                </div>
-                <div class="demo-controls">
-                  <button class="chip-btn" type="button" data-act="reload">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M20 11a8 8 0 1 0-2.3 5.7" />
-                      <path d="M20 4v7h-7" /></svg
-                    ><span data-i18n="ctrl.reload">Reiniciar</span>
-                  </button>
-                  <button class="chip-btn" type="button" data-act="full">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg
-                    ><span data-i18n="ctrl.full">Pantalla completa</span>
-                  </button>
-                  <a class="chip-btn" data-open target="_blank" rel="noopener"
-                    ><svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" /></svg
-                    ><span data-i18n="ctrl.open">Abrir aparte</span></a
-                  >
-                  <button class="chip-btn" type="button" data-act="off">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
-                      <path d="M12 3v8" />
-                      <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
-                    ><span data-i18n="ctrl.off">Apagar</span>
-                  </button>
                 </div>
                 <p class="demo-note" data-i18n="dam.note">
                   Es la misma app compilada para web. Cambia entre Android y
@@ -2766,12 +2713,29 @@
     <footer>
       <div class="wrap">
         <span>© <span id="year"></span> Muhammad Hicho Haidor</span>
-        <span data-i18n="footer.made"
-          >Hecho a mano y publicado en GitHub Pages.</span
-        >
       </div>
     </footer>
     <div class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Ventana de la demo: casi a pantalla completa sobre el portfolio difuminado (en móvil, pantalla completa) -->
+    <dialog class="demo-sheet" id="demoSheet">
+      <div class="demo-sheet-bar">
+        <span class="sheet-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="sheet-url" id="demoSheetUrl"></span>
+        <div class="sheet-actions">
+          <button class="tool-btn" type="button" data-act="reload" aria-label="Reiniciar" title="Reiniciar" data-i18n-attr="aria-label:ctrl.reload;title:ctrl.reload">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+          </button>
+          <a class="tool-btn" id="demoSheetOpen" target="_blank" rel="noopener" aria-label="Abrir en una pestaña nueva" title="Abrir en una pestaña nueva" data-i18n-attr="aria-label:ctrl.open;title:ctrl.open">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          </a>
+          <button class="tool-btn" type="button" data-close aria-label="Cerrar la demo" title="Cerrar la demo" data-i18n-attr="aria-label:js.closeDemo;title:js.closeDemo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="sheet-boot" aria-hidden="true"><div class="loader"></div></div>
+    </dialog>
 
     <!-- Solicitud de CV: prepara un correo en el programa del visitante (mailto), sin servicios externos -->
     <dialog class="modal" id="cvDialog" aria-labelledby="cvTitle">
@@ -2794,10 +2758,7 @@
         </svg>
       </button>
       <h2 id="cvTitle" data-i18n="cv.title">¿Quieres mi CV?</h2>
-      <p class="modal-lead" data-i18n="cv.lead">
-        Te lo envío yo. Dime quién eres y se abrirá tu correo con el mensaje
-        listo para mandarlo.
-      </p>
+      <p class="modal-lead" data-i18n="cv.lead">Déjame tus datos y te lo envío personalmente. Al pulsar el botón se abrirá tu correo con la solicitud ya escrita.</p>
       <form class="cv-form" id="cvForm">
         <div class="field-row">
           <label
@@ -2860,7 +2821,7 @@
         /* ---------- Idiomas ----------
      El español es el propio HTML (data-i18n / data-i18n-attr="atributo:clave;…").
      Los demás idiomas están en assets/i18n/<idioma>.js y solo se descargan al usarlos. */
-        const LANGS = ["es", "en", "fr", "de", "pt", "it"];
+        const LANGS = ["es", "en"];
         const I18N = window.I18N || (window.I18N = {});
         const metaDesc = document.querySelector('meta[name="description"]');
         const attrPairs = (el) =>
@@ -2875,6 +2836,9 @@
           "js.pause": "Pausar vídeo",
           "js.copied": "Email copiado",
           "js.copyFail": "No se pudo copiar. Selecciona el email a mano.",
+          "js.paletteOn": "Paleta sorpresa activada: cada visita tendrá colores distintos.",
+          "js.paletteOff": "Vuelves a la paleta original.",
+          "js.closeDemo": "Cerrar la demo",
           "cv.mailSubject": "Solicitud de CV — {company}",
           "cv.mailBody":
             "Hola, Muhammad:\n\nMe gustaría recibir tu CV.\n\nNombre: {name}\nEmpresa: {company}\nPuesto u oferta: {role}\n\n{msg}\n\nUn saludo.",
@@ -2945,64 +2909,26 @@
           root.classList.remove("i18n-wait");
         };
 
-        // Selector de idioma (menú accesible con teclado)
-        const langBtn = document.querySelector(".lang-btn");
-        const langMenu = document.getElementById("langMenu");
-        const langItems = [...langMenu.querySelectorAll("[data-lang]")];
-        onLang(() => {
-          langBtn.querySelector(".lang-code").textContent = lang.toUpperCase();
-          langItems.forEach((i) =>
-            i.setAttribute("aria-checked", i.dataset.lang === lang),
-          );
-        });
-        const openLang = (idx) => {
-          langMenu.hidden = false;
-          langBtn.setAttribute("aria-expanded", "true");
-          langItems[
-            idx ??
-              Math.max(
-                0,
-                langItems.findIndex((i) => i.dataset.lang === lang),
-              )
-          ].focus();
+        // Idioma: banderas (botones conmutables)
+        const flags = [...document.querySelectorAll(".flag")];
+        onLang(() => flags.forEach((f) => f.setAttribute("aria-pressed", f.dataset.lang === lang)));
+        flags.forEach((f) => f.addEventListener("click", () => { if (f.dataset.lang !== lang) setLang(f.dataset.lang); }));
+
+        // Menú de secciones en pantallas estrechas
+        const navBar = document.querySelector(".nav");
+        const menuBtn = document.querySelector(".menu-btn");
+        const navLinks = document.getElementById("navLinks");
+        const setMenu = (open, focusBtn) => {
+          navBar.classList.toggle("open", open);
+          menuBtn.setAttribute("aria-expanded", open);
+          if (open) navLinks.querySelector("a").focus();
+          else if (focusBtn) menuBtn.focus();
         };
-        const closeLang = (focusBtn) => {
-          langMenu.hidden = true;
-          langBtn.setAttribute("aria-expanded", "false");
-          if (focusBtn) langBtn.focus();
-        };
-        langBtn.addEventListener("click", () =>
-          langMenu.hidden ? openLang() : closeLang(),
-        );
-        langBtn.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-            e.preventDefault();
-            openLang(e.key === "ArrowUp" ? langItems.length - 1 : 0);
-          }
-        });
-        langMenu.addEventListener("keydown", (e) => {
-          const i = langItems.indexOf(document.activeElement),
-            n = langItems.length;
-          const go = (j) => {
-            e.preventDefault();
-            langItems[(j + n) % n].focus();
-          };
-          if (e.key === "ArrowDown") go(i + 1);
-          else if (e.key === "ArrowUp") go(i - 1);
-          else if (e.key === "Home") go(0);
-          else if (e.key === "End") go(n - 1);
-          else if (e.key === "Escape") closeLang(true);
-          else if (e.key === "Tab") closeLang();
-        });
-        langItems.forEach((i) =>
-          i.addEventListener("click", () => {
-            closeLang(true);
-            setLang(i.dataset.lang);
-          }),
-        );
-        document.addEventListener("click", (e) => {
-          if (!langMenu.hidden && !e.target.closest(".lang")) closeLang();
-        });
+        menuBtn.addEventListener("click", () => setMenu(!navBar.classList.contains("open")));
+        navLinks.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && navBar.classList.contains("open")) setMenu(false, true); });
+        document.addEventListener("click", (e) => { if (navBar.classList.contains("open") && !e.target.closest(".nav")) setMenu(false); });
+        matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
 
         /* ---------- Tema claro / oscuro ---------- */
         try {
@@ -3017,6 +2943,35 @@
           try {
             localStorage.setItem("theme", root.dataset.theme);
           } catch (e) {}
+          reapplyPalette();
+        });
+
+        /* ---------- Paleta sorpresa ----------
+           Desactivada por defecto. Al activarla se guarda y cada visita usa una paleta distinta
+           de window.PALETTES (definidas y aplicadas en el <head>, antes de pintar). */
+        const paletteBtn = document.querySelector(".palette-btn");
+        const reapplyPalette = () => {
+          if (root.dataset.palette != null) window.applyPalette(+root.dataset.palette);
+        };
+        matchMedia("(prefers-color-scheme: dark)").addEventListener("change", reapplyPalette);
+        const syncPaletteBtn = () => paletteBtn.setAttribute("aria-pressed", root.dataset.palette != null);
+        syncPaletteBtn();
+        paletteBtn.addEventListener("click", () => {
+          const on = root.dataset.palette == null;
+          try {
+            localStorage.setItem("palette", on ? "on" : "off");
+            if (on) {
+              const last = +localStorage.getItem("paletteLast"), n = window.PALETTES.length;
+              let i = Math.floor(Math.random() * (n - 1));
+              if (i >= last) i++;
+              localStorage.setItem("paletteLast", i);
+              window.applyPalette(i);
+            } else window.applyPalette(null);
+          } catch (e) {
+            window.applyPalette(on ? Math.floor(Math.random() * window.PALETTES.length) : null);
+          }
+          syncPaletteBtn();
+          showToast(t(on ? "js.paletteOn" : "js.paletteOff"));
         });
 
         /* ---------- Nombre letra a letra ---------- */
@@ -3193,7 +3148,7 @@
           };
           new MutationObserver(recolor).observe(root, {
             attributes: true,
-            attributeFilter: ["data-theme"],
+            attributeFilter: ["data-theme", "data-palette"],
           });
           matchMedia("(prefers-color-scheme: dark)").addEventListener(
             "change",
@@ -3584,15 +3539,56 @@
         });
 
         /* ---------- Demos en vivo ---------- */
+        // Ventana de la demo (un único <dialog> para todos los proyectos)
+        const sheet = document.getElementById("demoSheet");
+        const sheetUrl = document.getElementById("demoSheetUrl");
+        let sheetFrame = null,
+          sheetOnClose = null;
+        const openDemo = ({ url, name, opener, onOpen, onClose }) => {
+          onOpen();
+          sheet.setAttribute("aria-label", t("js.demoOf", { name }));
+          sheetUrl.textContent = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+          document.getElementById("demoSheetOpen").href = url;
+          sheet.classList.add("loading");
+          sheetFrame = document.createElement("iframe");
+          sheetFrame.title = t("js.demoOf", { name });
+          sheetFrame.allow = "clipboard-write";
+          sheetFrame.addEventListener("load", () => sheet.classList.remove("loading"));
+          sheetFrame.src = url;
+          sheet.appendChild(sheetFrame);
+          sheetOnClose = () => {
+            opener.focus();
+            onClose();
+          };
+          sheet.showModal();
+          history.pushState({ demoSheet: true }, "");
+        };
+        sheet.addEventListener("close", () => {
+          sheetFrame?.remove();
+          sheetFrame = null;
+          if (history.state?.demoSheet) history.back();
+          sheetOnClose?.();
+          sheetOnClose = null;
+        });
+        sheet.querySelector("[data-close]").addEventListener("click", () => sheet.close());
+        sheet.querySelector('[data-act="reload"]').addEventListener("click", () => {
+          if (!sheetFrame) return;
+          sheet.classList.add("loading");
+          sheetFrame.src = sheetFrame.src;
+        });
+        // Pulsar fuera de la ventana (sobre el fondo difuminado) la cierra
+        sheet.addEventListener("click", (e) => {
+          const r = sheet.getBoundingClientRect();
+          if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) sheet.close();
+        });
+        // El botón «atrás» del navegador o del móvil cierra la demo en vez de salir del portfolio
+        addEventListener("popstate", () => { if (sheet.open) sheet.close(); });
         document.querySelectorAll(".demo").forEach((demo) => {
           const url = DEMOS[demo.dataset.demo];
           const screen = demo.querySelector(".screen");
           const btn = demo.querySelector(".power-btn");
           const label = demo.querySelector(".power span");
-          const openLink = demo.querySelector("[data-open]");
           const urlText = demo.querySelector("[data-url]");
-          const bootDelay = +demo.dataset.bootDelay || 500;
-          let frame = null;
 
           /* Vista previa en vídeo: solo se descarga y reproduce cuando se ve,
        respeta prefers-reduced-motion y se puede pausar */
@@ -3661,54 +3657,16 @@
             label.innerHTML = t("js.soon");
             return;
           }
-          openLink.href = url;
           if (urlText)
             urlText.textContent = url
               .replace(/^https?:\/\//, "")
               .replace(/\/$/, "");
 
-          const turnOn = () => {
-            preview.pause();
-            demo.classList.add("booting");
-            frame = document.createElement("iframe");
-            frame.title = t("js.demoOf", { name: demo.dataset.name });
-            frame.allow = "clipboard-write; fullscreen";
-            frame.addEventListener(
-              "load",
-              () =>
-                setTimeout(() => {
-                  demo.classList.remove("booting");
-                  demo.classList.add("on");
-                }, bootDelay),
-              { once: true },
-            );
-            frame.src = url;
-            screen.appendChild(frame);
-          };
-          const turnOff = () => {
-            if (frame) frame.remove();
-            frame = null;
-            demo.classList.remove("on", "booting");
-            btn.focus();
-            preview.play();
-          };
-          btn.addEventListener("click", turnOn);
-          demo
-            .querySelector('[data-act="off"]')
-            .addEventListener("click", turnOff);
-          demo
-            .querySelector('[data-act="reload"]')
-            .addEventListener("click", () => {
-              turnOff();
-              turnOn();
-            });
-          demo
-            .querySelector('[data-act="full"]')
-            .addEventListener(
-              "click",
-              () =>
-                frame && frame.requestFullscreen && frame.requestFullscreen(),
-            );
+          // La demo se abre en una ventana grande sobre el portfolio (que queda difuminado);
+          // en móvil ocupa toda la pantalla. Nunca se sale del portfolio.
+          btn.addEventListener("click", () =>
+            openDemo({ url, name: demo.dataset.name, opener: btn, onOpen: preview.pause, onClose: preview.play }),
+          );
         });
 
         /* ---------- Selector Android / Windows ---------- */

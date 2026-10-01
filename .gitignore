@@ -16,3 +16,6 @@ cv.pdf
 
 # Notas e instrucciones de trabajo para Claude Code: no se publican
 CLAUDE.md
+
+# Salida del generador de paletas (los valores se copian a index.html)
+tools/paletas/paletas.json
