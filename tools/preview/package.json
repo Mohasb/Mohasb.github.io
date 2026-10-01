@@ -2,9 +2,10 @@
   "name": "grabar-preview",
   "private": true,
   "type": "module",
-  "description": "Graba la vista previa en vídeo de MHCars para el portfolio",
+  "description": "Graba las vistas previas en vídeo de los proyectos del portfolio",
   "scripts": {
-    "grabar": "node grabar.mjs"
+    "grabar:modelia": "node grabar-modelia.mjs",
+    "grabar:mhcars": "node grabar-mhcars.mjs"
   },
   "devDependencies": {
     "ffmpeg-static": "5.3.0",

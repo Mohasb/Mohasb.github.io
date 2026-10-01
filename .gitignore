@@ -2,6 +2,8 @@
 # daw/ incluye una base de datos con datos personales reales: no subir nunca.
 daw/
 DAW/
+DAM/
+dam/
 
 # Herramienta de grabación: dependencias y fotogramas temporales
 tools/preview/node_modules/

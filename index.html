@@ -523,15 +523,62 @@
         height: 36px;
         text-decoration: none;
       }
-      .demo-sheet iframe {
+      .sheet-modes {
+        display: flex;
+        gap: 2px;
+        padding: 3px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+      }
+      .sheet-modes button {
+        width: 34px;
+        height: 28px;
+        border: 0;
+        border-radius: 999px;
+        background: none;
+        color: var(--muted);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .sheet-modes svg {
+        width: 17px;
+        height: 17px;
+      }
+      .sheet-modes button[aria-pressed="true"] {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+      /* Escenario: el iframe se coloca y escala por JS según la vista elegida */
+      .sheet-stage {
+        position: relative;
         flex: 1;
-        width: 100%;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .sheet-stage iframe {
+        position: absolute;
         border: 0;
         background: #fff;
+        transform-origin: 0 0;
+        transition:
+          width 0.45s var(--ease),
+          height 0.45s var(--ease),
+          left 0.45s var(--ease),
+          top 0.45s var(--ease),
+          border-radius 0.45s var(--ease);
+      }
+      /* Vista móvil en pantalla grande: marco de teléfono centrado */
+      .sheet-stage.phone iframe {
+        box-sizing: content-box;
+        border: 10px solid #1b1c22;
+        border-radius: 34px;
+        box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.55);
       }
       .sheet-boot {
         position: absolute;
-        inset: 52px 0 0;
+        inset: 0;
         display: none;
         place-items: center;
         background: var(--surface);
@@ -793,9 +840,10 @@
         border-radius: 14px;
         font-weight: 600;
         text-decoration: none;
-        border: 1.5px solid var(--ink);
-        background: var(--ink);
-        color: var(--bg);
+        /* Color de acento: cambia con la paleta sorpresa (contraste comprobado ≥ 4,5:1) */
+        border: 1.5px solid var(--accent);
+        background: var(--accent);
+        color: var(--accent-ink);
         transition:
           transform 0.25s var(--ease),
           background 0.25s,
@@ -809,11 +857,11 @@
       }
       .btn.ghost {
         background: transparent;
-        color: var(--ink);
+        color: var(--accent);
       }
       .btn.ghost:hover {
-        background: var(--ink);
-        color: var(--bg);
+        background: var(--accent);
+        color: var(--accent-ink);
       }
       .btn svg {
         width: 18px;
@@ -1218,122 +1266,6 @@
         font-size: 0.92rem;
       }
 
-      .device {
-        position: relative;
-        margin-inline: auto;
-        background: #1b1c22;
-        box-shadow: 0 30px 60px -25px
-          color-mix(in srgb, var(--p) 55%, transparent);
-        transition:
-          width 0.7s var(--ease),
-          border-radius 0.7s var(--ease),
-          padding 0.7s var(--ease),
-          background 0.5s,
-          transform 0.5s var(--ease);
-      }
-      .device .screen {
-        transition:
-          height 0.7s var(--ease),
-          border-radius 0.7s var(--ease);
-      }
-      .device[data-mode="android"] {
-        width: min(300px, 78vw);
-        border-radius: 42px;
-        padding: 11px;
-      }
-      .device[data-mode="android"] .screen {
-        height: min(620px, 160vw);
-        border-radius: 31px;
-      }
-      .device[data-mode="windows"] {
-        width: 100%;
-        border-radius: 12px;
-        padding: 0;
-        background: var(--surface);
-        outline: 1px solid var(--line);
-      }
-      .device[data-mode="windows"] .screen {
-        height: clamp(340px, 36vw, 470px);
-        border-radius: 0 0 12px 12px;
-      }
-      .device .notch {
-        position: absolute;
-        top: 21px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 74px;
-        height: 20px;
-        border-radius: 12px;
-        background: #1b1c22;
-        z-index: 3;
-        transition: opacity 0.3s;
-      }
-      .device[data-mode="windows"] .notch {
-        opacity: 0;
-      }
-      .win-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 0;
-        opacity: 0;
-        overflow: hidden;
-        padding: 0 0.9rem;
-        font-size: 0.82rem;
-        color: var(--muted);
-        transition:
-          height 0.7s var(--ease),
-          opacity 0.4s;
-      }
-      .device[data-mode="windows"] .win-bar {
-        height: 36px;
-        opacity: 1;
-      }
-      .win-bar .ctrls {
-        display: flex;
-        gap: 1.2rem;
-      }
-      .win-bar svg {
-        width: 10px;
-        height: 10px;
-      }
-      .device[data-mode="android"] [data-for="windows"],
-      .device[data-mode="windows"] [data-for="android"] {
-        display: none;
-      }
-      .seg {
-        display: flex;
-        justify-content: center;
-        gap: 0.3rem;
-        margin-bottom: 1.2rem;
-      }
-      .seg button {
-        border: 1px solid var(--line);
-        background: var(--surface);
-        color: var(--muted);
-        font: inherit;
-        font-size: 0.9rem;
-        font-weight: 600;
-        padding: 0.4rem 0.95rem;
-        border-radius: 999px;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        transition:
-          color 0.25s,
-          border-color 0.25s,
-          background 0.25s;
-      }
-      .seg button svg {
-        width: 16px;
-        height: 16px;
-      }
-      .seg button[aria-pressed="true"] {
-        color: var(--p);
-        border-color: var(--p);
-        background: color-mix(in srgb, var(--p) 10%, var(--surface));
-      }
 
       /* Encendido de la demo */
       .power {
@@ -2024,15 +1956,199 @@
       <section id="proyectos">
         <div class="wrap">
           <h2 class="reveal" data-i18n="proj.title">Proyectos</h2>
-          <p class="section-intro reveal" data-i18n="proj.intro">
-            Mis proyectos de DAW y DAM: dos aplicaciones completas, de la
-            pantalla a la base de datos. Pulsa «Cómo funciona» para ver la
-            arquitectura de cada una.
-          </p>
+          <p class="section-intro reveal" data-i18n="proj.intro">Mis proyectos de DAM y DAW: dos aplicaciones completas, de la pantalla a la base de datos. Pulsa «Cómo funciona» para ver la arquitectura de cada una.</p>
+
+          <!-- PROYECTO DAM -->
+          <article
+            class="project reveal"
+            id="proyecto-dam"
+            style="--p: var(--dam)"
+          >
+            <div class="project-media">
+              <div
+                class="tabs"
+                role="tablist"
+                aria-label="Vista del proyecto DAM"
+                data-i18n-attr="aria-label:dam.tabs"
+              >
+                <span class="pill" aria-hidden="true"></span>
+                <button
+                  role="tab"
+                  id="dam-t1"
+                  aria-selected="true"
+                  aria-controls="dam-demo"
+                  data-i18n="tab.demo"
+                >
+                  Demo en vivo
+                </button>
+                <button
+                  role="tab"
+                  id="dam-t2"
+                  aria-selected="false"
+                  aria-controls="dam-arch"
+                  tabindex="-1"
+                  data-i18n="tab.how"
+                >
+                  Cómo funciona
+                </button>
+              </div>
+              <div
+                class="panel demo has-preview"
+                id="dam-demo"
+                role="tabpanel"
+                aria-labelledby="dam-t1"
+                data-demo="dam"
+                data-name="Modelia"
+              >
+                <div class="browser tilt">
+                  <div class="browser-bar">
+                    <span></span><span></span><span></span>
+                    <div class="url" data-url>
+                      mohasb.github.io/modeliaWeb
+                    </div>
+                  </div>
+                  <div class="screen">
+                    <!-- Vídeo grabado de la demo real: visor 3D, catálogo y editor de temas -->
+                    <video
+                      class="preview"
+                      muted
+                      loop
+                      playsinline
+                      preload="none"
+                      poster="img/modelia-poster.webp"
+                      data-i18n-attr="aria-label:dam.videoAlt"
+                      aria-label="Vídeo de Modelia: visor 3D, catálogo y editor de temas"
+                    >
+                      <source src="img/modelia-preview.webm" type="video/webm" />
+                      <source src="img/modelia-preview.mp4" type="video/mp4" />
+                    </video>
+                    <div class="power">
+                      <button class="power-btn" type="button">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                          stroke-linecap="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 3v8" />
+                          <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
+                        ><span data-i18n="dam.try">Pruébalo</span>
+                      </button>
+                    </div>
+                    <div class="boot">
+                      <div class="loader"></div>
+                      <span data-i18n="dam.boot">Arrancando la app…</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="chapters"
+                  role="group"
+                  aria-label="Partes del vídeo"
+                  data-i18n-attr="aria-label:dam.chapters"
+                >
+                  <button class="chip-btn chapter" type="button" data-start="0" data-i18n="ch.visor3d">Visor 3D</button>
+                  <button class="chip-btn chapter" type="button" data-start="7.6" data-i18n="ch.catalogo">Catálogo</button>
+                  <button class="chip-btn chapter" type="button" data-start="21" data-i18n="ch.temas">Editor de temas</button>
+                  <button
+                    class="chip-btn play-toggle"
+                    type="button"
+                    aria-label="Reproducir vídeo"
+                  >
+                    <svg
+                      class="i-play"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 5.5v13l10.5-6.5z" /></svg
+                    ><svg
+                      class="i-pause"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
+                    </svg>
+                  </button>
+                </div>
+                <p class="demo-note" data-i18n="dam.note">El vídeo es la demo real. Pruébala tú: entras como cliente y, si cierras sesión, también como administrador. Datos de ejemplo, sin servidor.</p>
+              </div>
+              <div
+                class="panel arch"
+                id="dam-arch"
+                role="tabpanel"
+                aria-labelledby="dam-t2"
+                hidden
+              >
+                <svg
+                  class="flow"
+                  data-flow="dam"
+                  viewBox="0 0 640 330"
+                  role="img"
+                  data-i18n-attr="aria-label:dam.flowAlt"
+                  aria-label="Flutter pide datos a la API de Spring Boot, que comprueba el token JWT y consulta MariaDB con Spring Data JPA."
+                ></svg>
+                <p class="flow-note" data-i18n="dam.flowNote">La app Flutter consume una API REST en Spring Boot protegida con Spring Security y JWT. Spring Data JPA guarda los datos en MariaDB. En esta demo, un cliente HTTP simulado responde en lugar del servidor.</p>
+              </div>
+            </div>
+            <div class="project-text">
+              <p class="project-kind" data-i18n="dam.kind">Proyecto final de DAM</p>
+              <h3>Modelia</h3>
+              <p class="lead" data-i18n="dam.lead">Tienda online multiplataforma con visor 3D y realidad aumentada: cada producto se puede girar en 3D y, en el móvil, ver en tu espacio antes de comprarlo. Funciona en Android, Windows y web con el mismo código. Proyecto final de DAM, hecho en solitario. <strong>Nota: 9.</strong></p>
+              <ul class="features">
+                <li data-i18n="dam.f1"><strong>Visor 3D y realidad aumentada:</strong> los productos se ven en 3D con &lt;model-viewer&gt; en Android y web, y dentro de WebView2 en Windows. Fue lo más difícil: el 3D es otra plataforma y lo integré en Flutter sin Three.js, con un visor para cada sistema.</li>
+                <li data-i18n="dam.f2"><strong>Un solo código, tres plataformas:</strong> Flutter con Riverpod para el estado y go_router para la navegación, adaptado a móvil y escritorio.</li>
+                <li data-i18n="dam.f3"><strong>Panel de administración:</strong> productos, categorías, pedidos y usuarios, y un editor de temas que cambia los colores y el nombre de la app con vista previa en tiempo real.</li>
+                <li data-i18n="dam.f4"><strong>API REST en Spring Boot:</strong> Spring Security con JWT y refresh tokens, Spring Data JPA sobre MariaDB y documentación con Swagger.</li>
+              </ul>
+              <dl class="stack">
+                <div>
+                  <dt>App</dt>
+                  <dd>Flutter, Dart, Riverpod, go_router</dd>
+                </div>
+                <div>
+                  <dt>Backend</dt>
+                  <dd>Spring Boot, Spring Security, JWT, Spring Data JPA</dd>
+                </div>
+                <div>
+                  <dt data-i18n="stack.data">Datos</dt>
+                  <dd>MariaDB (MySQL)</dd>
+                </div>
+              </dl>
+              <div class="actions">
+                <a
+                  class="btn"
+                  href="https://github.com/Mohasb/Modelia"
+                  target="_blank"
+                  rel="noopener"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
+                    /></svg
+                  ><span data-i18n="dam.codeApp">Código de la app</span></a
+                >
+                <a
+                  class="btn ghost"
+                  href="https://github.com/Mohasb/ModeliaBackend"
+                  target="_blank"
+                  rel="noopener"
+                  data-i18n="dam.codeApi"
+                  >Código de la API</a
+                >
+              </div>
+            </div>
+          </article>
 
           <!-- PROYECTO DAW -->
           <article
-            class="project reveal"
+            class="project flip reveal"
             id="proyecto-daw"
             style="--p: var(--daw)"
           >
@@ -2106,7 +2222,7 @@
                         >
                           <path d="M12 3v8" />
                           <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
-                        ><span data-i18n="daw.try">Probar demo en vivo</span>
+                        ><span data-i18n="daw.try">Pruébalo</span>
                       </button>
                     </div>
                     <div class="boot">
@@ -2271,233 +2387,6 @@
             </div>
           </article>
 
-          <!-- PROYECTO DAM -->
-          <article
-            class="project flip reveal"
-            id="proyecto-dam"
-            style="--p: var(--dam)"
-          >
-            <div class="project-media">
-              <div
-                class="tabs"
-                role="tablist"
-                aria-label="Vista del proyecto DAM"
-                data-i18n-attr="aria-label:dam.tabs"
-              >
-                <span class="pill" aria-hidden="true"></span>
-                <button
-                  role="tab"
-                  id="dam-t1"
-                  aria-selected="true"
-                  aria-controls="dam-demo"
-                  data-i18n="tab.demo"
-                >
-                  Demo en vivo
-                </button>
-                <button
-                  role="tab"
-                  id="dam-t2"
-                  aria-selected="false"
-                  aria-controls="dam-arch"
-                  tabindex="-1"
-                  data-i18n="tab.how"
-                >
-                  Cómo funciona
-                </button>
-              </div>
-              <div
-                class="panel demo"
-                id="dam-demo"
-                role="tabpanel"
-                aria-labelledby="dam-t1"
-                data-demo="dam"
-                data-name="la app Flutter"
-                data-boot-delay="1500"
-              >
-                <div
-                  class="seg"
-                  role="group"
-                  aria-label="Plataforma"
-                  data-i18n-attr="aria-label:dam.platform"
-                >
-                  <button type="button" data-mode="android" aria-pressed="true">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <rect x="6" y="2.5" width="12" height="19" rx="3" />
-                      <path d="M11 18h2" /></svg
-                    >Android
-                  </button>
-                  <button
-                    type="button"
-                    data-mode="windows"
-                    aria-pressed="false"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <rect x="3" y="4" width="18" height="13" rx="2" />
-                      <path d="M8 21h8M12 17v4" /></svg
-                    >Windows
-                  </button>
-                </div>
-                <div class="device tilt" data-mode="android">
-                  <div class="notch"></div>
-                  <!-- ✏️ EDITA: nombre de la app en la barra de la ventana -->
-                  <div class="win-bar">
-                    <span>Nombre de la app</span
-                    ><span class="ctrls" aria-hidden="true">
-                      <svg viewBox="0 0 10 10" stroke="currentColor">
-                        <path d="M0 5h10" />
-                      </svg>
-                      <svg
-                        viewBox="0 0 10 10"
-                        stroke="currentColor"
-                        fill="none"
-                      >
-                        <rect x=".5" y=".5" width="9" height="9" />
-                      </svg>
-                      <svg viewBox="0 0 10 10" stroke="currentColor">
-                        <path d="M0 0l10 10M10 0L0 10" /></svg
-                    ></span>
-                  </div>
-                  <div class="screen">
-                    <div class="placeholder" data-for="android">
-                      Guarda una captura como <code>img/dam-android.png</code>
-                    </div>
-                    <div class="placeholder" data-for="windows">
-                      Guarda una captura como <code>img/dam-windows.png</code>
-                    </div>
-                    <img
-                      data-for="android"
-                      src="img/dam-android.png"
-                      alt="App Flutter en Android"
-                      data-i18n-attr="alt:dam.altAndroid"
-                      loading="lazy"
-                      onerror="this.remove()"
-                    />
-                    <img
-                      data-for="windows"
-                      src="img/dam-windows.png"
-                      alt="App Flutter en Windows"
-                      data-i18n-attr="alt:dam.altWindows"
-                      loading="lazy"
-                      onerror="this.remove()"
-                    />
-                    <div class="power">
-                      <button
-                        class="power-btn"
-                        type="button"
-                        aria-label="Encender la demo de la app Flutter"
-                        data-i18n-attr="aria-label:dam.powerAlt"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.4"
-                          stroke-linecap="round"
-                        >
-                          <path d="M12 3v8" />
-                          <path d="M6.3 6.8a8 8 0 1 0 11.4 0" />
-                        </svg></button
-                      ><span data-i18n="dam.power">Encender demo</span>
-                    </div>
-                    <div class="boot">
-                      <div class="loader"></div>
-                      <span data-i18n="dam.boot">Arrancando la app…</span>
-                    </div>
-                  </div>
-                </div>
-                <p class="demo-note" data-i18n="dam.note">
-                  Es la misma app compilada para web. Cambia entre Android y
-                  Windows con la demo encendida y verás cómo se adapta.
-                </p>
-              </div>
-              <div
-                class="panel arch"
-                id="dam-arch"
-                role="tabpanel"
-                aria-labelledby="dam-t2"
-                hidden
-              >
-                <svg
-                  class="flow"
-                  data-flow="dam"
-                  viewBox="0 0 640 330"
-                  role="img"
-                  data-i18n-attr="aria-label:dam.flowAlt"
-                  aria-label="La app Flutter llama a la API de Spring Boot, que guarda los datos con Spring Data JPA."
-                ></svg>
-                <p class="flow-note" data-i18n="dam.flowNote">
-                  La app Flutter habla con una API REST en Spring Boot y Spring
-                  Data JPA guarda los datos. En esta demo, un cliente HTTP
-                  simulado responde con datos de ejemplo.
-                </p>
-              </div>
-            </div>
-            <div class="project-text">
-              <p class="project-kind" data-i18n="dam.kind">
-                Proyecto final de DAM
-              </p>
-              <!-- ✏️ EDITA: nombre real y descripción -->
-              <h3>Nombre de la app</h3>
-              <p class="lead">
-                Explica qué hace la app y quién la usaría. Si tuvo buena nota o
-                la presentaste ante un tribunal, dilo aquí.
-              </p>
-              <ul class="features">
-                <li>La pantalla o función más llamativa de la app.</li>
-                <li data-i18n="dam.fSame">
-                  Funciona en Android y en Windows con el mismo código.
-                </li>
-                <li>
-                  Un reto técnico: gestión de estado, sincronización,
-                  notificaciones…
-                </li>
-              </ul>
-              <dl class="stack">
-                <div>
-                  <dt>App</dt>
-                  <dd data-i18n="dam.stackApp">
-                    Flutter, Dart (Android y Windows)
-                  </dd>
-                </div>
-                <div>
-                  <dt>Backend</dt>
-                  <dd>Spring Boot, Spring Data JPA</dd>
-                </div>
-                <div>
-                  <dt data-i18n="stack.data">Datos</dt>
-                  <dd>MySQL</dd>
-                </div>
-              </dl>
-              <div class="actions">
-                <!-- TODO: nombre real del repositorio -->
-                <a
-                  class="btn"
-                  href="https://github.com/Mohasb/proyecto-dam"
-                  target="_blank"
-                  rel="noopener"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
-                    /></svg
-                  ><span data-i18n="dam.code">Ver código</span></a
-                >
-              </div>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -2513,10 +2402,7 @@
                 <h3 data-i18n="edu.dam">
                   Desarrollo de Aplicaciones Multiplataforma
                 </h3>
-                <p data-i18n="edu.damP">
-                  Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto final
-                  con Flutter y Spring Boot.
-                </p>
+                <p data-i18n="edu.damP">Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto final: Modelia, con Flutter y Spring Boot.</p>
               </li>
               <li>
                 <span class="when">2021 – 2023</span>
@@ -2556,7 +2442,7 @@
                 </li>
                 <li>
                   <strong>Spring Boot</strong
-                  ><small data-i18n="sk.damProj">Proyecto de DAM</small>
+                  ><small data-i18n="sk.damProj">Modelia (DAM)</small>
                 </li>
                 <li>
                   <strong>Node.js</strong
@@ -2594,7 +2480,7 @@
                 <li>
                   <strong data-i18n="sk.flutter">Flutter y Dart</strong
                   ><small data-i18n="sk.flutterWhere"
-                    >Proyecto de DAM (Android y Windows)</small
+                    >Modelia (DAM): Android, Windows y web</small
                   >
                 </li>
                 <li><strong>React Native</strong><small>Centauro</small></li>
@@ -2604,7 +2490,8 @@
               <h3 data-i18n="sk.data">Datos</h3>
               <ul>
                 <li><strong>Oracle</strong><small>Iberdrola</small></li>
-                <li><strong>SQLite</strong><small>MHCars (DAW)</small></li>
+                <li><strong>MariaDB / MySQL</strong><small>Modelia (DAM)</small></li>
+          <li><strong>SQLite</strong><small>MHCars (DAW)</small></li>
                 <li><strong>SQL Server</strong></li>
                 <li><strong>MongoDB</strong></li>
               </ul>
@@ -2612,7 +2499,8 @@
             <div>
               <h3 data-i18n="sk.security">Seguridad</h3>
               <ul>
-                <li>
+                <li><strong data-i18n="sk.springSec">Spring Security y JWT</strong><small>Modelia (DAM) · MHCars (DAW)</small></li>
+          <li>
                   <strong data-i18n="sk.azure"
                     >Azure Active Directory y MFA</strong
                   ><small data-i18n="sk.azureWhere"
@@ -2675,10 +2563,6 @@
       <section id="contacto" class="contact">
         <div class="wrap reveal">
           <h2 data-i18n="contact.title">¿Hablamos?</h2>
-          <p data-i18n="contact.text">
-            Si tienes un puesto en el que encaje o quieres ver el código de
-            cerca, escríbeme.
-          </p>
           <a class="mail" href="mailto:mhichoha@gmail.com"
             >mhichoha@gmail.com</a
           >
@@ -2722,6 +2606,14 @@
       <div class="demo-sheet-bar">
         <span class="sheet-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="sheet-url" id="demoSheetUrl"></span>
+        <div class="sheet-modes" role="group" aria-label="Vista" data-i18n-attr="aria-label:demo.view">
+          <button type="button" data-mode="desktop" aria-pressed="true" aria-label="Versión de ordenador" title="Versión de ordenador" data-i18n-attr="aria-label:demo.desktop;title:demo.desktop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+          </button>
+          <button type="button" data-mode="mobile" aria-pressed="false" aria-label="Versión móvil" title="Versión móvil" data-i18n-attr="aria-label:demo.mobile;title:demo.mobile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg>
+          </button>
+        </div>
         <div class="sheet-actions">
           <button class="tool-btn" type="button" data-act="reload" aria-label="Reiniciar" title="Reiniciar" data-i18n-attr="aria-label:ctrl.reload;title:ctrl.reload">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
@@ -2734,7 +2626,9 @@
           </button>
         </div>
       </div>
-      <div class="sheet-boot" aria-hidden="true"><div class="loader"></div></div>
+      <div class="sheet-stage">
+        <div class="sheet-boot" aria-hidden="true"><div class="loader"></div></div>
+      </div>
     </dialog>
 
     <!-- Solicitud de CV: prepara un correo en el programa del visitante (mailto), sin servicios externos -->
@@ -2814,7 +2708,7 @@
         // Mientras estén vacías, el botón de encendido aparece desactivado.
         const DEMOS = {
           daw: "https://mohasb.github.io/MHCars-React/",
-          dam: "", // p. ej. 'https://mohasb.github.io/proyecto-dam/'
+          dam: "https://mohasb.github.io/modeliaWeb/",
         };
         const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -3444,46 +3338,23 @@
           },
           dam: {
             nodes: [
-              {
-                id: "c",
-                x: 0,
-                y: 10,
-                w: 220,
-                h: 86,
-                title: "Flutter",
-                sub: "Dart, Android",
-                color: css("--dam"),
-              },
-              {
-                id: "a",
-                x: 410,
-                y: 122,
-                w: 230,
-                h: 86,
-                title: "Spring Boot",
-                sub: "Spring Data JPA",
-                color: css("--dam"),
-              },
-              {
-                id: "d",
-                x: 0,
-                y: 234,
-                w: 220,
-                h: 86,
-                title: "MySQL",
-                sub: "Entidades JPA",
-                color: css("--dam"),
-              },
+              { id: "c", x: 0, y: 10, w: 220, h: 86, title: "Flutter", sub: "Android · Windows · web", color: css("--dam") },
+              { id: "a", x: 410, y: 122, w: 230, h: 86, title: "Spring Boot", sub: "Spring Security · JWT", color: css("--dam") },
+              { id: "d", x: 0, y: 234, w: 220, h: 86, title: "MariaDB", sub: "Spring Data JPA", color: css("--dam") },
             ],
             links: [
               { id: "ca", from: "c", to: "a" },
               { id: "ad", from: "a", to: "d" },
             ],
             script: [
-              { link: "ca", dir: 1, label: "POST /api", kind: "req" },
-              { link: "ad", dir: 1, label: "save()", kind: "req" },
-              { link: "ad", dir: -1, label: "entidad", kind: "res" },
+              { link: "ca", dir: 1, label: "GET /api/productos", kind: "req" },
+              { link: "ad", dir: 1, label: "SELECT", kind: "req" },
+              { link: "ad", dir: -1, label: "74 productos", kind: "res" },
               { link: "ca", dir: -1, label: "200 OK", kind: "res" },
+              { link: "ca", dir: 1, label: "POST /api/pedidos", kind: "req" },
+              { link: "ad", dir: 1, label: "INSERT", kind: "req" },
+              { link: "ad", dir: -1, label: "1 fila", kind: "res" },
+              { link: "ca", dir: -1, label: "201 Created", kind: "res" },
             ],
           },
         };
@@ -3544,6 +3415,38 @@
         const sheetUrl = document.getElementById("demoSheetUrl");
         let sheetFrame = null,
           sheetOnClose = null;
+        // Vista ordenador / móvil. El iframe tiene el ancho real de cada dispositivo, así que
+        // la web cambia de verdad de diseño (media queries), sin recargar.
+        const stage = sheet.querySelector(".sheet-stage");
+        const modeBtns = [...sheet.querySelectorAll(".sheet-modes [data-mode]")];
+        const DESKTOP_W = 1280, PHONE_W = 390, PHONE_H = 844;
+        let sheetMode = "desktop";
+        const fitFrame = () => {
+          if (!sheetFrame) return;
+          const W = stage.clientWidth, H = stage.clientHeight, f = sheetFrame.style;
+          const phoneFrame = sheetMode === "mobile" && W >= PHONE_W + 80;
+          stage.classList.toggle("phone", phoneFrame);
+          f.transform = "";
+          if (phoneFrame) {
+            // Teléfono centrado (el marco de 10 px va fuera del ancho útil)
+            const h = Math.min(PHONE_H, H - 48);
+            Object.assign(f, { width: PHONE_W + "px", height: h + "px", left: (W - PHONE_W) / 2 - 10 + "px", top: (H - h) / 2 - 10 + "px" });
+          } else if (sheetMode === "desktop" && W < 1024) {
+            // Pantalla estrecha: la versión de ordenador se dibuja a 1280 px y se reduce
+            const s = W / DESKTOP_W;
+            Object.assign(f, { width: DESKTOP_W + "px", height: H / s + "px", left: "0", top: "0", transform: `scale(${s})` });
+          } else {
+            Object.assign(f, { width: "100%", height: "100%", left: "0", top: "0" });
+          }
+        };
+        const setMode = (m) => {
+          sheetMode = m;
+          modeBtns.forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === m));
+          fitFrame();
+        };
+        modeBtns.forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
+        new ResizeObserver(fitFrame).observe(stage);
+
         const openDemo = ({ url, name, opener, onOpen, onClose }) => {
           onOpen();
           sheet.setAttribute("aria-label", t("js.demoOf", { name }));
@@ -3552,10 +3455,13 @@
           sheet.classList.add("loading");
           sheetFrame = document.createElement("iframe");
           sheetFrame.title = t("js.demoOf", { name });
-          sheetFrame.allow = "clipboard-write";
+          // xr-spatial-tracking: realidad aumentada (WebXR) del visor 3D de Modelia
+          sheetFrame.allow = "clipboard-write; xr-spatial-tracking";
           sheetFrame.addEventListener("load", () => sheet.classList.remove("loading"));
           sheetFrame.src = url;
-          sheet.appendChild(sheetFrame);
+          stage.appendChild(sheetFrame);
+          // En escritorio arranca en versión ordenador; en un teléfono, en versión móvil
+          setMode(matchMedia("(max-width: 900px)").matches ? "mobile" : "desktop");
           sheetOnClose = () => {
             opener.focus();
             onClose();
@@ -3666,20 +3572,6 @@
           // en móvil ocupa toda la pantalla. Nunca se sale del portfolio.
           btn.addEventListener("click", () =>
             openDemo({ url, name: demo.dataset.name, opener: btn, onOpen: preview.pause, onClose: preview.play }),
-          );
-        });
-
-        /* ---------- Selector Android / Windows ---------- */
-        document.querySelectorAll(".seg").forEach((seg) => {
-          const device = seg.parentElement.querySelector(".device");
-          seg.querySelectorAll("button").forEach((b) =>
-            b.addEventListener("click", () => {
-              seg
-                .querySelectorAll("button")
-                .forEach((x) => x.setAttribute("aria-pressed", x === b));
-              device.style.transform = "";
-              device.dataset.mode = b.dataset.mode;
-            }),
           );
         });
 
