@@ -18,7 +18,8 @@
   'hero.tagline': 'Since 2023 I have been building, improving and maintaining enterprise applications across every layer: the interface, the API, the database and deployments, right down to what happens when something breaks in production. First at Centauro Rent a Car, then at NTT DATA, with clients such as <strong>Orange</strong> and <strong>Iberdrola</strong>.',
   'hero.contact': 'Get in touch',
   'hero.cv': 'Request my CV',
-  'hero.flowAlt': 'Animated diagram of my work: the frontend (Angular and React) requests my experience from the backend (Spring, .NET and Node), which queries it in the database (Oracle and SQLite); then it authenticates with Azure AD and MFA, and ends with POST /interview answered with 201 Created.',
+  'hero.scDam': 'See the Modelia project: cross-platform store with a 3D viewer and augmented reality',
+  'hero.scDaw': 'See the MHCars project: car rental and sales with a 3D showroom',
 
   'exp.title': 'Experience',
   'job.remote': 'Alicante · remote',
@@ -154,10 +155,6 @@
   'js.closeDemo': 'Close the demo',
 
   // Diagramas (nodos y paquetes)
-  'flow.Datos': 'Data',
-  'flow.GET /experiencia': 'GET /experience',
-  'flow.200 OK · desde 2023': '200 OK · since 2023',
-  'flow.POST /entrevista': 'POST /interview',
   'flow.1 fila': '1 row',
   'flow.74 productos': '74 products',
   'flow.datos': 'data',

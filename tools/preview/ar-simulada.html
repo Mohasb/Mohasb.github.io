@@ -1,0 +1,172 @@
+<!doctype html>
+<!--
+  Recreación de la realidad aumentada de Modelia (Android) para el clip del teléfono del portfolio.
+  La app real coloca el modelo con la cámara del móvil; la demo web no puede, así que aquí se usa el
+  mismo modelo GLB de la tienda dentro de un entorno HDRI de Poly Haven (CC0) proyectado sobre el
+  suelo. La usa grabar-modelia-movil.mjs: window.colocar() hace aparecer el producto.
+  Parámetros: ?modelo=<url .glb>&entorno=<nombre HDRI de Poly Haven>
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modelia AR</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+        font-family: Roboto, "Segoe UI", system-ui, sans-serif;
+      }
+      model-viewer {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        --poster-color: transparent;
+        --progress-bar-height: 0;
+      }
+      .top {
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        right: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        pointer-events: none;
+      }
+      .round {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(20, 20, 24, 0.55);
+        color: #fff;
+        font-size: 18px;
+        backdrop-filter: blur(6px);
+      }
+      .pill {
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(20, 20, 24, 0.55);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        backdrop-filter: blur(6px);
+      }
+      .pill b {
+        color: #e7b416;
+      }
+      .hint {
+        position: fixed;
+        left: 50%;
+        bottom: 46px;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        transition: opacity 0.4s;
+      }
+      /* Círculo de colocación sobre el suelo */
+      .reticle {
+        position: fixed;
+        left: 50%;
+        top: 71%;
+        width: 150px;
+        height: 54px;
+        margin: -27px 0 0 -75px;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.45);
+        animation: pulse 1.4s ease-in-out infinite;
+        transition: opacity 0.4s;
+      }
+      .reticle::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 4px;
+        margin: -2px 0 0 -5px;
+        border-radius: 50%;
+        background: #fff;
+      }
+      @keyframes pulse {
+        50% {
+          transform: scale(1.12);
+        }
+      }
+      .oculto {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <model-viewer
+      id="mv"
+      camera-controls
+      disable-zoom
+      disable-pan
+      interaction-prompt="none"
+      shadow-intensity="0"
+      shadow-softness="0.8"
+      skybox-height="1.5m"
+      camera-orbit="25deg 74deg 2.4m"
+      min-camera-orbit="auto 60deg 2.4m"
+      max-camera-orbit="auto 84deg 2.4m"
+      camera-target="-0.09m 0.67m 0.02m"
+      field-of-view="72deg"
+      exposure="1"
+    ></model-viewer>
+    <div class="top">
+      <span class="round">✕</span>
+      <span class="pill"><b>Modelia</b> · Ver en tu espacio</span>
+    </div>
+    <div class="reticle" id="reticle"></div>
+    <div class="pill hint" id="hint">Apunta al suelo para colocar el producto</div>
+    <script>
+      const q = new URLSearchParams(location.search);
+      const mv = document.getElementById("mv");
+      const entorno = q.get("entorno") || "lebombo";
+      mv.src = q.get("modelo") || "https://raw.githubusercontent.com/mohasb/modelia-assets/main/electronica/patinete/patinete.glb";
+      mv.skyboxImage = `https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/${entorno}_2k.hdr`;
+      // El modelo se carga a tamaño real pero transparente y sin sombra; colocar() lo hace aparecer
+      if (q.get("objetivo")) mv.cameraTarget = q.get("objetivo");
+      const opacidad = (a) =>
+        mv.model.materials.forEach((m) => {
+          const c = m.pbrMetallicRoughness.baseColorFactor;
+          m.pbrMetallicRoughness.setBaseColorFactor([c[0], c[1], c[2], a]);
+        });
+      mv.addEventListener("load", () => {
+        mv.model.materials.forEach((m) => m.setAlphaMode("BLEND"));
+        opacidad(0);
+        document.body.dataset.listo = 1;
+      });
+      // Aparece el producto en el círculo, con un pequeño rebote
+      window.colocar = () =>
+        new Promise((fin) => {
+          document.getElementById("reticle").classList.add("oculto");
+          const hint = document.getElementById("hint");
+          hint.classList.add("oculto");
+          const t0 = performance.now();
+          const paso = (now) => {
+            const k = Math.min(1, (now - t0) / 700), e = 1 - (1 - k) ** 3;
+            opacidad(e);
+            mv.shadowIntensity = 1.2 * e;
+            if (k < 1) requestAnimationFrame(paso);
+            else {
+              mv.model.materials.forEach((m) => m.setAlphaMode("OPAQUE"));
+              hint.textContent = "Arrastra para girar el producto";
+              hint.classList.remove("oculto");
+              fin();
+            }
+          };
+          requestAnimationFrame(paso);
+        });
+    </script>
+  </body>
+</html>

@@ -51,26 +51,35 @@ await record("2-alquiler", async () => {
   await page.waitForTimeout(700);
 });
 
-// ---------- 3. Venta ----------
+// ---------- 3. Venta: recorrido por los coches de la lista ----------
 await page.goto(BASE + "#/venta", { waitUntil: "load" });
-const bmw = page.getByText("BMW M4 COMPETITION COUPÉ").first();
-await bmw.scrollIntoViewIfNeeded();
-await page.waitForFunction(() => document.querySelectorAll("canvas").length > 0);
-await page.waitForTimeout(6000); // modelo GLB cargado y girando
+const COCHES = ["BMW M4 COMPETITION COUPÉ", "CHEVROLET CORVETTE STINGRAY", "PORCHE CARRERA GT", "MCLAREN MP4-12C ULTIMATE"];
+// Precarga: cada modelo GLB se carga al verse, así que se pasa por todos antes de grabar
+for (const n of COCHES) {
+  await page.getByText(n).first().scrollIntoViewIfNeeded();
+  await page.waitForTimeout(4500);
+}
+const top = async (n) => page.evaluate((y) => y + scrollY - 90, (await page.getByText(n).first().boundingBox()).y);
+const posiciones = [];
+for (const n of COCHES) posiciones.push(await top(n));
 await page.evaluate(() => scrollTo(0, 0));
 await page.mouse.move(1180, 700);
 await page.waitForTimeout(1500);
-const target = await page.evaluate((y) => y + scrollY - 110, (await bmw.boundingBox()).y);
 await record("3-venta", async () => {
-  await page.waitForTimeout(1300);
-  await smoothScroll(target, 1800);
   await page.waitForTimeout(400);
+  await smoothScroll(posiciones[0], 1300);
+  await page.waitForTimeout(500);
+  // Girar el BMW
   const c = await page.locator("canvas").first().boundingBox();
   const cx = c.x + c.width / 2, cy = c.y + c.height / 2;
-  await glide(1180, 700, cx + c.width * 0.25, cy, 700);
-  await glide(cx + c.width * 0.25, cy, cx - c.width * 0.3, cy + 10, 1900, true);
-  await page.mouse.move(cx + c.width * 0.6, cy + 180);
-  await page.waitForTimeout(700);
+  await glide(1180, 700, cx + c.width * 0.25, cy, 600);
+  await glide(cx + c.width * 0.25, cy, cx - c.width * 0.3, cy + 10, 1500, true);
+  await page.mouse.move(1180, 760);
+  // Resto de la lista
+  for (const y of posiciones.slice(1)) {
+    await smoothScroll(y, 1100);
+    await page.waitForTimeout(900);
+  }
 });
 
 await g.browser.close();

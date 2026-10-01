@@ -10,12 +10,13 @@ import ffmpeg from "ffmpeg-static";
 const HERE = path.dirname(new URL(import.meta.url).pathname.slice(1));
 const IMG = path.join(HERE, "..", "..", "img");
 
-export async function abrirGrabador({ ancho = 1280, alto = 800, initScript } = {}) {
+// escala: densidad de píxeles (2 = pantalla retina, para el formato móvil)
+export async function abrirGrabador({ ancho = 1280, alto = 800, escala = 1, initScript } = {}) {
   const OUT = path.join(HERE, "rec");
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   const browser = await chromium.launch({ channel: "msedge", headless: true, args: ["--use-angle=d3d11", "--ignore-gpu-blocklist", "--mute-audio"] });
-  const page = await browser.newPage({ locale: "es-ES", viewport: { width: ancho, height: alto } });
+  const page = await browser.newPage({ locale: "es-ES", viewport: { width: ancho, height: alto }, deviceScaleFactor: escala });
   page.setDefaultTimeout(90000);
   if (initScript) await page.addInitScript(initScript);
 
@@ -42,7 +43,7 @@ export async function abrirGrabador({ ancho = 1280, alto = 800, initScript } = {
   const segments = [];
   async function record(name, actions) {
     frames = [];
-    await cdp.send("Page.startScreencast", { format: "jpeg", quality: 92, everyNthFrame: 1, maxWidth: ancho, maxHeight: alto });
+    await cdp.send("Page.startScreencast", { format: "jpeg", quality: 92, everyNthFrame: 1, maxWidth: ancho * escala, maxHeight: alto * escala });
     await page.waitForTimeout(150);
     await actions();
     await cdp.send("Page.stopScreencast");
@@ -89,11 +90,12 @@ export async function abrirGrabador({ ancho = 1280, alto = 800, initScript } = {
 }
 
 // Une los segmentos con fundidos y genera img/<nombre>-preview.{mp4,webm} e img/<nombre>-poster.webp
-export function codificar({ segments, OUT }, nombre) {
+// master: tamaño de trabajo · salida: tamaño final publicado (ancho:alto)
+export function codificar({ segments, OUT }, nombre, { master = "1280:800", salida = "1024:640" } = {}) {
   const FADE = 0.4;
   const run = (args, cwd = OUT) => execFileSync(ffmpeg, ["-loglevel", "error", "-y", ...args], { cwd, stdio: "inherit" });
   const durations = segments.map(({ name }) => {
-    run(["-f", "concat", "-safe", "0", "-i", "list.txt", "-vf", "fps=30,scale=1280:800,format=yuv420p", "-c:v", "libx264", "-crf", "10", "-preset", "fast", `../${name}.mp4`], path.join(OUT, name));
+    run(["-f", "concat", "-safe", "0", "-i", "list.txt", "-vf", `fps=30,scale=${master},format=yuv420p`, "-c:v", "libx264", "-crf", "10", "-preset", "fast", `../${name}.mp4`], path.join(OUT, name));
     const info = (() => { try { execFileSync(ffmpeg, ["-i", path.join(OUT, name + ".mp4")], { stdio: "pipe" }); } catch (e) { return String(e.stderr); } })();
     const [, h, m, s] = info.match(/Duration: (\d+):(\d+):([\d.]+)/);
     return +h * 3600 + +m * 60 + +s;
@@ -108,7 +110,7 @@ export function codificar({ segments, OUT }, nombre) {
     starts.push(+(offset + FADE / 2).toFixed(1));
   });
   run([...segments.flatMap(({ name }) => ["-i", name + ".mp4"]), "-filter_complex", filters.join(";"), "-map", "[v]", "-c:v", "libx264", "-crf", "10", "-preset", "fast", "master.mp4"]);
-  const scale = "scale=1024:640:flags=lanczos";
+  const scale = `scale=${salida}:flags=lanczos`;
   run(["-i", "master.mp4", "-vf", scale, "-c:v", "libx264", "-crf", "29", "-preset", "veryslow", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", path.join(IMG, `${nombre}-preview.mp4`)]);
   run(["-i", "master.mp4", "-vf", scale, "-c:v", "libvpx-vp9", "-crf", "48", "-b:v", "0", "-row-mt", "1", "-deadline", "good", "-cpu-used", "1", "-pix_fmt", "yuv420p", "-an", path.join(IMG, `${nombre}-preview.webm`)]);
   run(["-i", "master.mp4", "-frames:v", "1", "-vf", scale, "-c:v", "libwebp", "-quality", "78", path.join(IMG, `${nombre}-poster.webp`)]);

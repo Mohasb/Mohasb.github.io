@@ -35,28 +35,30 @@ const ir = async (ruta, espera = 6000) => {
   await semantica();
 };
 
-// ---------- 1. Visor 3D (inicio con los destacados) ----------
-// Precarga: el iPhone y el siguiente destacado (patinete) quedan en la caché del navegador
+// ---------- 1. Visor 3D: los destacados del inicio, en 3D sobre fondo claro ----------
+// Precarga de los modelos que se van a ver (patinete, silla y cámara) en la caché del navegador
+for (const id of [22, 25, 24]) await ir(`#/producto/${id}/ar`, 9000);
 await ir("#/", 12000);
-await page.mouse.move(1040, 778);
-await pulsar();
-await page.waitForTimeout(9000);
-await ir("#/", 12000);
+const SIGUIENTE = [1040, 778]; // flecha «siguiente destacado»
 await page.mouse.move(1200, 600);
 await record("1-visor3d", async () => {
-  await page.waitForTimeout(600);
-  await glide(1200, 600, 600, 430, 800);
-  await glide(600, 430, 260, 450, 2200, true); // girar el iPhone
-  await page.waitForTimeout(300);
-  await glide(260, 450, 1040, 778, 900);
-  await pulsar(); // siguiente destacado
-  await page.waitForTimeout(2600);
+  await page.waitForTimeout(500);
+  await glide(1200, 600, 600, 430, 700);
+  await glide(600, 430, 300, 450, 1700, true); // girar el iPhone
+  // Siguientes destacados: patinete, silla y cámara, girando cada uno
+  for (let n = 0; n < 3; n++) {
+    await glide(300, 450, ...SIGUIENTE, 650);
+    await pulsar();
+    await page.waitForTimeout(1500);
+    await glide(...SIGUIENTE, 640, 430, 500);
+    await glide(640, 430, 380, 445, 1200, true);
+  }
+  await page.waitForTimeout(500);
 });
 
 // ---------- 2. Catálogo: filtrar y abrir un producto en 3D ----------
-await ir("#/producto/13/ar", 12000); // precarga del modelo de las zapatillas
 await ir("#/catalogo", 6000);
-const chip = await centro(page.getByRole("checkbox", { name: "Calzado" }));
+const chip = await centro(page.getByRole("checkbox", { name: "Electrónica" }));
 await page.mouse.move(1100, 700);
 await record("2-catalogo", async () => {
   await page.waitForTimeout(500);
@@ -66,27 +68,25 @@ await record("2-catalogo", async () => {
   // Bajar con la rueda hasta que la tarjeta quede a la vista
   await glide(...chip, 640, 520, 600);
   // La tarjeta es «button» fuera de la vista y «group» dentro: se buscan ambos roles
-  const nombre = { name: /Zapatillas Running Ultralight/ };
-  const zapatillas = page.getByRole("group", nombre).or(page.getByRole("button", nombre)).first();
-  const posicion = async () => ((await zapatillas.count()) ? (await zapatillas.boundingBox())?.y : null);
+  const nombre = { name: /Patinete Electrico Xiaomi/ };
+  const producto = page.getByRole("group", nombre).or(page.getByRole("button", nombre)).first();
+  const posicion = async () => ((await producto.count()) ? (await producto.boundingBox())?.y : null);
   for (let i = 0; i < 60; i++) {
     const y = await posicion();
     if (y != null && y > 120 && y < 520) break;
-    await page.mouse.wheel(0, y != null && y < 120 ? -50 : 50);
+    await page.mouse.wheel(0, y != null && y < 120 ? -60 : 120);
     await page.waitForTimeout(60);
   }
   await page.waitForTimeout(500);
-  const tarjeta = await centro(zapatillas);
+  const tarjeta = await centro(producto);
   await glide(640, 520, ...tarjeta, 700);
   await pulsar();
   await page.waitForTimeout(1500);
   await page.waitForTimeout(300); // la capa de accesibilidad sigue activa
-  const ver3d = await centro(page.getByRole("button", { name: /Ver en 3D/ }));
-  await glide(...tarjeta, ...ver3d, 800);
+  const carrito = await centro(page.getByRole("button", { name: /Añadir al carrito/ }));
+  await glide(...tarjeta, ...carrito, 900);
   await pulsar();
-  await page.waitForTimeout(3200);
-  await glide(760, 420, 460, 440, 1600, true); // girar las zapatillas
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1800);
 });
 
 // ---------- 3. Editor de temas (administrador) ----------

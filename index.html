@@ -92,10 +92,26 @@
         visibility: hidden;
       }
     </style>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>"
-    />
+    <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp…): og-image.jpg se genera con
+         tools/preview (npm run og). Las URL deben ser absolutas. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mohasb.github.io/" />
+    <meta property="og:title" content="Muhammad Hicho Haidor — Desarrollador de software" />
+    <meta property="og:description" content="Desarrollador de software en Alicante (remoto). Proyectos para Iberdrola y Orange, y dos apps con demo en vivo: MHCars y Modelia." />
+    <meta property="og:image" content="https://mohasb.github.io/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Muhammad Hicho Haidor, desarrollador de software, con capturas de sus proyectos MHCars y Modelia" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://mohasb.github.io/" />
+    <!-- Iconos «MH².»: se generan con tools/preview (npm run iconos) -->
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/icon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/icon-16.png" />
+    <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -728,11 +744,12 @@
 
       /* Hero */
       .hero {
-        min-height: 100vh;
-        min-height: 100svh;
+        /* Algo menos que la pantalla: el título «Experiencia» asoma e invita a bajar */
+        min-height: 88vh;
+        min-height: 88svh;
         display: grid;
         align-items: center;
-        padding: 110px 0 60px;
+        padding: 110px 0 40px;
         position: relative;
         overflow: hidden;
       }
@@ -888,16 +905,39 @@
         width: 20px;
         height: 20px;
       }
-      /* El diagrama del hero termina en «201 Created»: el botón de contacto responde */
-      .btn.glow {
-        animation: glow 1.6s var(--ease);
+      .soc-label {
+        display: none;
       }
-      @keyframes glow {
-        0% {
-          box-shadow: 0 0 0 0 color-mix(in srgb, var(--res) 70%, transparent);
+      /* Móvil: los cuatro botones del hero en una rejilla 2 × 2 del mismo ancho */
+      @media (max-width: 560px) {
+        .cta,
+        .cta-main,
+        .cta-social {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
         }
-        100% {
-          box-shadow: 0 0 0 18px transparent;
+        .cta {
+          grid-template-columns: 1fr;
+        }
+        .cta .btn {
+          justify-content: center;
+          padding-inline: 0.8rem;
+        }
+        .cta-social .icon-btn {
+          width: auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.55rem;
+          font-weight: 600;
+          text-decoration: none;
+          order: 0;
+        }
+        .cta-social .icon-btn svg {
+          order: -1;
+        }
+        .soc-label {
+          display: inline;
         }
       }
       .js .fade {
@@ -995,6 +1035,262 @@
       .hero-visual {
         position: relative;
       }
+      /* Escaparate del hero, en dos grupos que flotan sobre el panal: delante, MHCars en una
+         ventana de navegador; detrás, Modelia en una ventana y en un teléfono (la misma app en
+         escritorio y en móvil). Cada grupo es un único enlace a su proyecto. */
+      .showcase {
+        position: relative;
+        aspect-ratio: 1 / 0.86;
+        perspective: 1600px;
+      }
+      @media (min-width: 1200px) {
+        .showcase {
+          width: 112%;
+        }
+      }
+      .sc-browser,
+      .sc-group {
+        position: absolute;
+        display: block;
+        text-decoration: none;
+        /* La capa cambia a mitad del movimiento, cuando se cruzan */
+        transition:
+          transform 0.9s var(--ease),
+          filter 0.9s var(--ease),
+          z-index 0s linear 0.4s;
+      }
+      /* Delante/detrás (data-front en .showcase, lo pone el JS). Sin JS, MHCars queda delante.
+         Con ratón, el señalado pasa delante sin moverse de su sitio (crece hacia el centro desde
+         su esquina y sigue bajo el cursor). En táctil, los dos cambian de hueco: --gx/--gy/--gk
+         llevan Modelia al hueco de delante y --bx/--by/--bk llevan MHCars al de detrás. */
+      .sc-browser {
+        transform-origin: 0 100%;
+      }
+      .sc-group {
+        transform-origin: 100% 0;
+      }
+      .showcase:not([data-front="dam"]) .sc-browser,
+      .showcase[data-front="dam"] .sc-group {
+        z-index: 3;
+        filter: none;
+      }
+      .showcase:not([data-front="dam"]) .sc-browser {
+        transform: rotateY(-8deg) rotateX(3deg);
+      }
+      .showcase:not([data-front="dam"]) .sc-group {
+        z-index: 1;
+        transform: rotateY(-12deg) rotateX(4deg) translateZ(-110px) scale(0.92);
+        filter: brightness(0.88) saturate(0.85);
+      }
+      .showcase[data-front="dam"] .sc-browser {
+        z-index: 1;
+        filter: brightness(0.78) saturate(0.8);
+      }
+      @media (hover: hover) {
+        .showcase[data-front="dam"] .sc-group {
+          transform: rotateY(-4deg) rotateX(2deg) scale(1.16);
+        }
+        .showcase[data-front="dam"] .sc-browser {
+          transform: rotateY(-14deg) rotateX(5deg) translateZ(-120px) scale(0.8);
+        }
+      }
+      @media (hover: none) {
+        .sc-browser,
+        .sc-group {
+          transform-origin: 50% 50%;
+        }
+        .showcase[data-front="dam"] .sc-group {
+          transform: translate(var(--gx, 0), var(--gy, 0)) scale(var(--gk, 1)) rotateY(-8deg) rotateX(3deg);
+        }
+        .showcase[data-front="dam"] .sc-browser {
+          transform: translate(var(--bx, 0), var(--by, 0)) scale(var(--bk, 1)) rotateY(-12deg) rotateX(4deg)
+            translateZ(-110px) scale(0.92);
+        }
+      }
+      .sc-browser:focus-visible,
+      .sc-group:focus-visible {
+        outline-offset: 8px;
+      }
+      .showcase video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: var(--bg);
+      }
+      /* Ventana de navegador */
+      .sc-browser,
+      .sc-win {
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow:
+          0 34px 70px -28px rgba(10, 12, 30, 0.45),
+          0 0 0 1px color-mix(in srgb, var(--p) 18%, transparent);
+      }
+      .sc-browser video,
+      .sc-win video {
+        height: auto;
+        aspect-ratio: 16 / 10;
+      }
+      .sc-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 30px;
+        padding: 0 12px;
+        background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+        border-bottom: 1px solid var(--line);
+        font: 500 11px var(--mono);
+        color: var(--muted);
+      }
+      .sc-bar i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--line);
+      }
+      .sc-bar span {
+        margin-left: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      /* MHCars, delante */
+      .sc-browser {
+        left: 0;
+        bottom: 0;
+        width: 74%;
+      }
+      /* Grupo de Modelia, detrás: ventana y teléfono */
+      .sc-group {
+        top: 0;
+        right: 0;
+        width: 66%;
+        aspect-ratio: 1 / 0.66;
+      }
+      .sc-win {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 82%;
+        display: block;
+      }
+      .sc-phone {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 24%;
+        aspect-ratio: 390 / 844;
+        padding: 4px;
+        border-radius: 13% / 6%;
+        background: #0d0e12;
+        box-shadow:
+          -10px 18px 30px -12px rgba(10, 12, 30, 0.45),
+          inset 0 0 0 1px #2a2c33;
+      }
+      .sc-screen {
+        display: block;
+        height: 100%;
+        border-radius: 10% / 4.6%;
+        overflow: hidden;
+        position: relative;
+      }
+      .sc-screen::after {
+        /* isla superior */
+        content: "";
+        position: absolute;
+        top: 2.2%;
+        left: 50%;
+        width: 32%;
+        height: 3.4%;
+        transform: translateX(-50%);
+        border-radius: 999px;
+        background: #0d0e12;
+      }
+      /* Etiquetas con el nombre y las tecnologías de cada proyecto */
+      .sc-tag {
+        position: absolute;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.32rem 0.7rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--line);
+        font-size: 0.78rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .sc-tag::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--p);
+      }
+      .sc-tag b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .sc-browser .sc-tag {
+        left: 12px;
+        bottom: 12px;
+      }
+      .sc-group .sc-tag {
+        top: 42px;
+        left: 12px;
+      }
+      @media (max-width: 560px) {
+        /* En pantallas pequeñas: MHCars y, detrás, solo el teléfono de Modelia */
+        .showcase {
+          aspect-ratio: 1 / 0.8;
+        }
+        .sc-win {
+          display: none;
+        }
+        .sc-group {
+          width: 27%;
+          aspect-ratio: 390 / 844;
+          right: 1%;
+        }
+
+        .sc-phone {
+          width: 100%;
+          padding: 3px;
+        }
+        .sc-group .sc-tag {
+          top: auto;
+          left: auto;
+          right: 0;
+          bottom: calc(100% + 8px);
+        }
+        /* Delante, el teléfono crece y se aleja del borde: la etiqueta va centrada */
+        .showcase[data-front="dam"] .sc-group .sc-tag {
+          right: 50%;
+          transform: translateX(50%);
+        }
+        .sc-browser {
+          width: 82%;
+        }
+        .sc-bar {
+          height: 24px;
+          font-size: 10px;
+        }
+        .sc-tag {
+          font-size: 0.7rem;
+          padding: 0.25rem 0.55rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sc-browser,
+        .sc-group {
+          transition: none;
+        }
+      }
 
       @media (max-width: 900px) {
         .hero-grid {
@@ -1010,8 +1306,14 @@
       }
 
       /* Secciones */
+      /* Las secciones se tocan, así que el espacio entre dos es la suma del relleno de abajo de una
+         y el de arriba de la siguiente (192 px en escritorio, 112 px en móvil) */
       section {
-        padding: clamp(4.5rem, 10vw, 8rem) 0;
+        padding: clamp(3.5rem, 7vw, 6rem) 0;
+      }
+      /* El hero ya ocupa la pantalla: Experiencia empieza justo debajo, sin doble margen */
+      .hero + section {
+        padding-top: clamp(2rem, 4vw, 3rem);
       }
       .section-intro {
         color: var(--muted);
@@ -1828,7 +2130,7 @@
                 target="_blank"
                 rel="noopener"
                 aria-label="LinkedIn"
-                ><svg
+                ><span class="soc-label">LinkedIn</span><svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -1843,7 +2145,7 @@
                 target="_blank"
                 rel="noopener"
                 aria-label="GitHub"
-                ><svg
+                ><span class="soc-label">GitHub</span><svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -1856,14 +2158,47 @@
             </div>
           </div>
           <div class="hero-visual fade" style="--d: 0.4s">
-            <svg
-              class="flow"
-              id="heroFlow"
-              viewBox="0 0 520 430"
-              role="img"
-              data-i18n-attr="aria-label:hero.flowAlt"
-              aria-label="Diagrama animado de mi trabajo: el frontend (Angular y React) pide mi experiencia al backend (Spring, .NET y Node), que la consulta en la base de datos (Oracle y SQLite); después se autentica con Azure AD y MFA, y termina con POST /entrevista respondido con 201 Created."
-            ></svg>
+            <!-- Escaparate: los dos proyectos en vídeo; al pulsar, baja a cada uno -->
+            <div class="showcase">
+              <a
+                class="sc-group"
+                href="#proyecto-dam"
+                style="--p: var(--dam)"
+                data-i18n-attr="aria-label:hero.scDam"
+                aria-label="Ver el proyecto Modelia: tienda multiplataforma con visor 3D y realidad aumentada"
+              >
+                <span class="sc-win">
+                  <span class="sc-bar" aria-hidden="true"><i></i><i></i><i></i><span>mohasb.github.io/modeliaWeb</span></span>
+                  <video muted loop playsinline preload="none" poster="img/modelia-poster.webp" aria-hidden="true">
+                    <source src="img/modelia-preview.webm" type="video/webm" />
+                    <source src="img/modelia-preview.mp4" type="video/mp4" />
+                  </video>
+                </span>
+                <span class="sc-phone">
+                  <span class="sc-screen">
+                    <video muted loop playsinline preload="none" poster="img/modelia-movil-poster.webp" aria-hidden="true">
+                      <source src="img/modelia-movil-preview.webm" type="video/webm" />
+                      <source src="img/modelia-movil-preview.mp4" type="video/mp4" />
+                    </video>
+                  </span>
+                </span>
+                <span class="sc-tag"><b>Modelia</b> Flutter · Spring Boot</span>
+              </a>
+              <a
+                class="sc-browser"
+                href="#proyecto-daw"
+                style="--p: var(--daw)"
+                data-i18n-attr="aria-label:hero.scDaw"
+                aria-label="Ver el proyecto MHCars: alquiler y venta de coches con showroom 3D"
+              >
+                <span class="sc-bar" aria-hidden="true"><i></i><i></i><i></i><span>mohasb.github.io/MHCars-React</span></span>
+                <video muted loop playsinline preload="none" poster="img/mhcars-poster.webp" aria-hidden="true">
+                  <source src="img/mhcars-preview.webm" type="video/webm" />
+                  <source src="img/mhcars-preview.mp4" type="video/mp4" />
+                </video>
+                <span class="sc-tag"><b>MHCars</b> React · ASP.NET Core</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -2050,8 +2385,8 @@
                   data-i18n-attr="aria-label:dam.chapters"
                 >
                   <button class="chip-btn chapter" type="button" data-start="0" data-i18n="ch.visor3d">Visor 3D</button>
-                  <button class="chip-btn chapter" type="button" data-start="7.6" data-i18n="ch.catalogo">Catálogo</button>
-                  <button class="chip-btn chapter" type="button" data-start="21" data-i18n="ch.temas">Editor de temas</button>
+                  <button class="chip-btn chapter" type="button" data-start="15.9" data-i18n="ch.catalogo">Catálogo</button>
+                  <button class="chip-btn chapter" type="button" data-start="29.3" data-i18n="ch.temas">Editor de temas</button>
                   <button
                     class="chip-btn play-toggle"
                     type="button"
@@ -2256,7 +2591,7 @@
                   <button
                     class="chip-btn chapter"
                     type="button"
-                    data-start="12.6"
+                    data-start="13.3"
                     data-i18n="ch.sale"
                   >
                     Venta
@@ -3053,6 +3388,123 @@
           setTimeout(() => wave(w * 0.7, h * 0.45, 0.8), 900);
         })();
 
+        /* ---------- Icono de la pestaña: «MH» con el color de acento activo ----------
+           Los archivos fijos (favicon.ico, iconos de móvil) usan el acento original; aquí se
+           redibuja para que el icono siga a la paleta sorpresa y al tema. */
+        (() => {
+          const links = [...document.querySelectorAll('link[rel="icon"]')];
+          const cv = document.createElement("canvas");
+          cv.width = cv.height = 64;
+          const c = cv.getContext("2d");
+          // Mezcla un color #rrggbb hacia blanco (to = 255) o negro (to = 0)
+          const mix = (hex, to, k) => {
+            const n = parseInt(hex.slice(1), 16);
+            return `rgb(${[n >> 16, (n >> 8) & 255, n & 255].map((v) => Math.round(v + (to - v) * k))})`;
+          };
+          let last = "";
+          const paint = () => {
+            const st = getComputedStyle(root);
+            const accent = st.getPropertyValue("--accent").trim();
+            const ink = st.getPropertyValue("--accent-ink").trim();
+            if (!/^#[0-9a-f]{6}$/i.test(accent) || accent + ink === last) return;
+            last = accent + ink;
+            c.clearRect(0, 0, 64, 64);
+            const g = c.createLinearGradient(0, 0, 64, 64);
+            g.addColorStop(0, mix(accent, 255, 0.22));
+            g.addColorStop(1, mix(accent, 0, 0.12));
+            c.fillStyle = g;
+            c.beginPath();
+            c.roundRect ? c.roundRect(0, 0, 64, 64, 13) : c.rect(0, 0, 64, 64);
+            c.fill();
+            let size = 36;
+            const font = () => (c.font = `800 ${size}px "Bricolage Grotesque", sans-serif`);
+            font();
+            if ("letterSpacing" in c) c.letterSpacing = "-1.4px";
+            while (c.measureText("MH").width > 44 && size > 10) size--, font();
+            const m = c.measureText("MH");
+            c.fillStyle = ink;
+            c.textAlign = "center";
+            c.fillText("MH", 32, 32 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+            const url = cv.toDataURL("image/png");
+            links.forEach((l) => (l.href = url));
+          };
+          document.fonts.ready.then(paint);
+          new MutationObserver(paint).observe(root, {
+            attributes: true,
+            attributeFilter: ["data-theme", "data-palette", "style"],
+          });
+          matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+        })();
+
+        /* ---------- Escaparate del hero: vídeos solo mientras se ven (nunca con movimiento reducido) ---------- */
+        if (!reduce) {
+          const io = new IntersectionObserver((entries) =>
+            entries.forEach((e) =>
+              e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(),
+            ),
+          );
+          document.querySelectorAll(".showcase video").forEach((v) => io.observe(v));
+        }
+        /* Delante/detrás. Con el ratón se decide por las zonas fijas de cada proyecto, no por las
+           ventanas (que cambian de tamaño y provocarían cambios en bucle): en la zona de MHCars va
+           delante MHCars y en la de Modelia, Modelia; donde se solapan no cambia nada; al salir del
+           escaparate vuelve MHCars. En pantallas táctiles se alternan solos cada 5 s, y tocar el
+           de detrás lo trae delante (un segundo toque abre el proyecto). Con movimiento reducido
+           no hay intercambio automático. */
+        (() => {
+          const sc = document.querySelector(".showcase");
+          if (!sc) return;
+          const items = { daw: sc.querySelector(".sc-browser"), dam: sc.querySelector(".sc-group") };
+          const front = (f) => (sc.dataset.front = f);
+          // Huecos: el de delante es el de MHCars y el de detrás el de Modelia (medidas sin
+          // transformar). Cada uno se escala para caber en el otro hueco, centrado.
+          let F, B; // huecos de delante y de detrás (centro y tamaño, sin transformar)
+          const measure = () => {
+            const box = (el) => ({ x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2, w: el.offsetWidth, h: el.offsetHeight });
+            F = box(items.daw);
+            B = box(items.dam);
+            const st = sc.style;
+            st.setProperty("--gx", `${F.x - B.x}px`);
+            st.setProperty("--gy", `${F.y - B.y}px`);
+            // En móvil (teléfono estrecho frente a ventana ancha) el teléfono puede crecer algo más
+            // que el hueco y la ventana no se encoge por debajo de la mitad
+            st.setProperty("--gk", Math.min(F.w / B.w, (F.h / B.h) * 1.35).toFixed(3));
+            st.setProperty("--bx", `${B.x - F.x}px`);
+            st.setProperty("--by", `${B.y - F.y}px`);
+            st.setProperty("--bk", Math.max(Math.min(B.w / F.w, B.h / F.h), 0.55).toFixed(3));
+          };
+          new ResizeObserver(measure).observe(sc);
+          front("daw");
+          const dentro = (b, x, y) => Math.abs(x - b.x) <= b.w / 2 && Math.abs(y - b.y) <= b.h / 2;
+          sc.addEventListener("pointermove", (e) => {
+            if (e.pointerType !== "mouse") return;
+            const r = sc.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+            const enF = dentro(F, x, y), enB = dentro(B, x, y);
+            if (enF && !enB) front("daw");
+            else if (enB && !enF) front("dam");
+          });
+          sc.addEventListener("pointerleave", (e) => {
+            if (e.pointerType === "mouse") front("daw");
+          });
+          for (const [k, el] of Object.entries(items)) el.addEventListener("focus", () => front(k));
+          if (!matchMedia("(hover: none)").matches) return;
+          let timer = 0, visible = false;
+          const swap = () => front(sc.dataset.front === "daw" ? "dam" : "daw");
+          const run = () => {
+            clearInterval(timer);
+            if (visible && !reduce) timer = setInterval(swap, 5000);
+          };
+          new IntersectionObserver(([e]) => ((visible = e.isIntersecting), run())).observe(sc);
+          for (const [k, el] of Object.entries(items))
+            el.addEventListener("click", (e) => {
+              if (sc.dataset.front !== k) {
+                e.preventDefault();
+                front(k);
+                run();
+              }
+            });
+        })();
+
         /* ---------- Scroll: barra de progreso, nav y enlace activo ---------- */
         const nav = document.querySelector(".nav"),
           bar = document.querySelector(".progress");
@@ -3229,69 +3681,6 @@
         const css = (v) => `var(${v})`;
         // El diagrama del hero cuenta mi trabajo real y termina en una llamada a la acción
         const flows = {
-          hero: {
-            nodes: [
-              {
-                id: "c",
-                x: 20,
-                y: 30,
-                w: 220,
-                h: 86,
-                title: "Frontend",
-                sub: "Angular · React",
-                color: css("--accent"),
-              },
-              {
-                id: "a",
-                x: 280,
-                y: 172,
-                w: 230,
-                h: 86,
-                title: "Backend",
-                sub: "Spring · .NET · Node",
-                color: css("--accent"),
-              },
-              {
-                id: "d",
-                x: 20,
-                y: 314,
-                w: 220,
-                h: 86,
-                title: "Datos",
-                sub: "Oracle · SQLite",
-                color: css("--accent"),
-              },
-            ],
-            links: [
-              { id: "ca", from: "c", to: "a" },
-              { id: "ad", from: "a", to: "d" },
-            ],
-            script: [
-              { link: "ca", dir: 1, label: "GET /experiencia", kind: "req" },
-              { link: "ad", dir: 1, label: "SELECT", kind: "req" },
-              { link: "ad", dir: -1, label: "Iberdrola, Orange", kind: "res" },
-              { link: "ca", dir: -1, label: "200 OK · desde 2023", kind: "res" },
-              { link: "ca", dir: 1, label: "AUTH Azure AD + MFA", kind: "req" },
-              { link: "ca", dir: -1, label: "200 OK", kind: "res" },
-              { link: "ca", dir: 1, label: "POST /entrevista", kind: "req" },
-              { link: "ad", dir: 1, label: "INSERT", kind: "req" },
-              { link: "ad", dir: -1, label: "1 fila", kind: "res" },
-              {
-                link: "ca",
-                dir: -1,
-                label: "201 Created",
-                kind: "res",
-                signal: "cta",
-                pause: 1400,
-              },
-            ],
-            onSignal: () => {
-              const b = document.getElementById("heroContact");
-              b.classList.remove("glow");
-              void b.offsetWidth;
-              b.classList.add("glow");
-            },
-          },
           daw: {
             nodes: [
               {
@@ -3360,7 +3749,6 @@
         };
 
         document.fonts.ready.then(() => {
-          buildFlow(document.getElementById("heroFlow"), flows.hero);
           document
             .querySelectorAll("[data-flow]")
             .forEach((svg) => buildFlow(svg, flows[svg.dataset.flow]));
