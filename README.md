@@ -1,5 +1,7 @@
 # Muhammad Hicho Haidor · Portfolio
 
+[![Muhammad Hicho Haidor, desarrollador de software, con sus proyectos MHCars y Modelia](og-image.jpg)](https://mohasb.github.io)
+
 **Web:** [mohasb.github.io](https://mohasb.github.io)
 
 Portfolio profesional de Muhammad Hicho Haidor, desarrollador de software. Reúne mi experiencia en proyectos empresariales para Iberdrola y Orange (NTT DATA), mi formación y mis dos proyectos finales, **Modelia** (DAM) y **MHCars** (DAW). Los dos proyectos se pueden probar en vivo desde la propia página, sin instalar nada.
