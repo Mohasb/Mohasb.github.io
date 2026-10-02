@@ -1048,6 +1048,25 @@
           width: 112%;
         }
       }
+      /* Balanceo lento mientras nadie interactúa: se pausa con el ratón encima y se detiene al
+         primer toque (clase .quieto, la pone el JS) */
+      @media (prefers-reduced-motion: no-preference) {
+        .js .showcase {
+          animation: sway 14s ease-in-out infinite alternate;
+        }
+        .js .showcase:hover,
+        .js .showcase.quieto {
+          animation-play-state: paused;
+        }
+      }
+      @keyframes sway {
+        from {
+          transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+        }
+        to {
+          transform: perspective(1400px) rotateY(6deg) rotateX(-1deg);
+        }
+      }
       .sc-browser,
       .sc-group {
         position: absolute;
@@ -1245,36 +1264,49 @@
         left: 12px;
       }
       @media (max-width: 560px) {
-        /* En pantallas pequeñas: MHCars y, detrás, solo el teléfono de Modelia */
+        /* En pantallas pequeñas, la misma composición: MHCars delante y Modelia (ventana y
+           teléfono) detrás, algo más grandes para que se lean */
         .showcase {
-          aspect-ratio: 1 / 0.8;
-        }
-        .sc-win {
-          display: none;
+          aspect-ratio: 1 / 0.82;
         }
         .sc-group {
-          width: 27%;
-          aspect-ratio: 390 / 844;
-          right: 1%;
+          width: 70%;
         }
-
         .sc-phone {
-          width: 100%;
           padding: 3px;
         }
-        .sc-group .sc-tag {
-          top: auto;
-          left: auto;
-          right: 0;
-          bottom: calc(100% + 8px);
-        }
-        /* Delante, el teléfono crece y se aleja del borde: la etiqueta va centrada */
-        .showcase[data-front="dam"] .sc-group .sc-tag {
-          right: 50%;
-          transform: translateX(50%);
+        /* Etiquetas fuera de las ventanas (dentro taparían lo poco que se ve): solo se ve la del
+           que está delante, siempre debajo de él */
+        .showcase {
+          margin-bottom: 2.6rem;
         }
         .sc-browser {
-          width: 82%;
+          overflow: visible;
+        }
+        .sc-browser .sc-bar {
+          border-radius: 14px 14px 0 0;
+        }
+        .sc-browser video {
+          border-radius: 0 0 14px 14px;
+        }
+        .sc-browser .sc-tag {
+          left: 0;
+          bottom: auto;
+          top: calc(100% + 10px);
+        }
+        .sc-group .sc-tag {
+          left: 0;
+          top: calc(100% + 10px);
+        }
+        .sc-tag {
+          transition: opacity 0.4s;
+        }
+        .showcase[data-front="dam"] .sc-browser .sc-tag,
+        .showcase:not([data-front="dam"]) .sc-group .sc-tag {
+          opacity: 0;
+        }
+        .sc-browser {
+          width: 80%;
         }
         .sc-bar {
           height: 24px;
@@ -3448,9 +3480,10 @@
         /* Delante/detrás. Con el ratón se decide por las zonas fijas de cada proyecto, no por las
            ventanas (que cambian de tamaño y provocarían cambios en bucle): en la zona de MHCars va
            delante MHCars y en la de Modelia, Modelia; donde se solapan no cambia nada; al salir del
-           escaparate vuelve MHCars. En pantallas táctiles se alternan solos cada 5 s, y tocar el
-           de detrás lo trae delante (un segundo toque abre el proyecto). Con movimiento reducido
-           no hay intercambio automático. */
+           escaparate vuelve MHCars. En pantallas táctiles se alternan solos cuando termina el clip
+           del que está delante (y el nuevo empieza desde el principio), hasta el primer toque:
+           desde ahí decide el visitante, y tocar el de detrás lo trae delante (un segundo toque
+           abre el proyecto). Con movimiento reducido no hay intercambio automático. */
         (() => {
           const sc = document.querySelector(".showcase");
           if (!sc) return;
@@ -3488,19 +3521,31 @@
           });
           for (const [k, el] of Object.entries(items)) el.addEventListener("focus", () => front(k));
           if (!matchMedia("(hover: none)").matches) return;
-          let timer = 0, visible = false;
-          const swap = () => front(sc.dataset.front === "daw" ? "dam" : "daw");
-          const run = () => {
-            clearInterval(timer);
-            if (visible && !reduce) timer = setInterval(swap, 5000);
-          };
-          new IntersectionObserver(([e]) => ((visible = e.isIntersecting), run())).observe(sc);
+          // Clip que marca el turno de cada uno: el de MHCars y el del teléfono de Modelia
+          const clips = { daw: items.daw.querySelector("video"), dam: items.dam.querySelector(".sc-phone video") };
+          let auto = !reduce;
+          const last = { daw: 0, dam: 0 };
+          for (const [k, v] of Object.entries(clips)) {
+            v.addEventListener("timeupdate", () => {
+              const vuelta = v.currentTime + 0.5 < last[k]; // el bucle ha vuelto al principio
+              last[k] = v.currentTime;
+              if (!auto || !vuelta || sc.dataset.front !== k) return;
+              // El que pasa delante empieza desde el principio (sin contarlo como vuelta)
+              const otro = k === "daw" ? "dam" : "daw";
+              items[otro].querySelectorAll("video").forEach((o) => (o.currentTime = 0));
+              last[otro] = 0;
+              front(otro);
+            });
+          }
+          sc.addEventListener("pointerdown", () => {
+            auto = false;
+            sc.classList.add("quieto");
+          });
           for (const [k, el] of Object.entries(items))
             el.addEventListener("click", (e) => {
               if (sc.dataset.front !== k) {
                 e.preventDefault();
                 front(k);
-                run();
               }
             });
         })();
