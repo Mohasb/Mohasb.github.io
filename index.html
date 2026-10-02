@@ -9,34 +9,98 @@
     <title>Muhammad Hicho Haidor — Desarrollador de software</title>
     <meta
       name="description"
-      content="Portfolio de Muhammad Hicho Haidor, desarrollador de software en Alicante (remoto). Desde 2023 desarrollo aplicaciones en todas sus capas para clientes como Iberdrola y Orange, con Java, Spring y Angular."
+      content="Portfolio de Muhammad Hicho Haidor, desarrollador de software en Alicante (remoto). Desde 2023 desarrollo aplicaciones en todas sus capas para clientes como Iberdrola y Orange, con Java, Spring, Angular y JS."
     />
     <script>
       // Paleta sorpresa (opcional, se activa con el botón 🎨 de la barra): cada visita usa una
       // paleta distinta de esta lista. Generadas en OKLCH y con el contraste WCAG comprobado.
       // Orden de cada fila: --bg, --surface, --line, --accent, --accent-soft, --accent-ink
       window.PALETTES = [
-        [["#FCEFEE", "#FFFDFD", "#E7D4D3", "#B6303E", "#FEDDDC", "#FFFFFF"], ["#180F0F", "#241818", "#3C2C2B", "#F98E8F", "#4A2323", "#180808"]], // coral
-        [["#FBF0EB", "#FFFDFC", "#E6D5CD", "#AB4501", "#FFDED0", "#FFFFFF"], ["#180F0C", "#241914", "#3B2D26", "#F59569", "#492515", "#180904"]], // naranja
-        [["#F8F1E8", "#FEFDFC", "#E2D7CA", "#8D5E05", "#F8E3C6", "#FFFFFF"], ["#16110A", "#211A11", "#382F23", "#E1A447", "#422B06", "#150B01"]], // ámbar
-        [["#EEF5EC", "#FCFEFC", "#D2DDCF", "#257E03", "#D7EED2", "#FFFFFF"], ["#0E130D", "#171E15", "#2A3328", "#83C575", "#1F3819", "#061005"]], // verde
-        [["#E9F6F2", "#FBFEFD", "#CBDED8", "#007B66", "#C8F1E4", "#FFFFFF"], ["#0A1411", "#121F1B", "#233430", "#37CCAC", "#013A2F", "#00110C"]], // turquesa
-        [["#E8F5F8", "#FBFEFF", "#C9DDE1", "#007785", "#C5EFF7", "#FFFFFF"], ["#091415", "#101E21", "#223437", "#0EC7DE", "#03373F", "#001014"]], // cielo
-        [["#ECF3FC", "#FCFDFF", "#CFDBE7", "#036BB9", "#D4E9FF", "#FFFFFF"], ["#0C1218", "#151D25", "#27313C", "#6FB6FE", "#16324D", "#040E1A"]], // azul
-        [["#F0F2FC", "#FDFDFF", "#D6D8E8", "#5A56C7", "#E1E4FE", "#FFFFFF"], ["#101119", "#1A1B25", "#2E2F3C", "#A2A8FE", "#2B2C4E", "#0B0C1A"]], // índigo
-        [["#F4F0FA", "#FEFDFE", "#DCD6E5", "#8048B6", "#EDE0FE", "#FFFFFF"], ["#131017", "#1E1923", "#332D3A", "#C49BF3", "#372849", "#100A18"]], // violeta
-        [["#F9EFF5", "#FEFDFE", "#E4D4DE", "#A43687", "#FCDBF0", "#FFFFFF"], ["#170F14", "#22181F", "#392C34", "#E88FCB", "#44233A", "#160811"]], // frambuesa
+        [
+          ["#FBEFF2", "#FFFDFD", "#E6D3D8", "#B13065", "#FFDBE5", "#FFFFFF"],
+          ["#180F11", "#24181B", "#3B2B30", "#F48CAE", "#48222F", "#17080D"],
+        ], // rosa
+        [
+          ["#FCEFEE", "#FFFDFD", "#E7D4D3", "#B6303E", "#FEDDDC", "#FFFFFF"],
+          ["#180F0F", "#241818", "#3C2C2B", "#F98E8F", "#4A2323", "#180808"],
+        ], // coral
+        [
+          ["#FBF0EB", "#FFFDFC", "#E6D5CD", "#AB4501", "#FFDED0", "#FFFFFF"],
+          ["#180F0C", "#241914", "#3B2D26", "#F59569", "#492515", "#180904"],
+        ], // naranja
+        [
+          ["#F8F1E8", "#FEFDFC", "#E2D7CA", "#8D5E05", "#F8E3C6", "#FFFFFF"],
+          ["#16110A", "#211A11", "#382F23", "#E1A447", "#422B06", "#150B01"],
+        ], // ámbar
+        [
+          ["#F4F3E9", "#FEFEFB", "#DBDACA", "#736C01", "#EAE9C6", "#FFFFFF"],
+          ["#13120A", "#1D1C11", "#323123", "#BEB548", "#353206", "#0F0E01"],
+        ], // lima
+        [
+          ["#EEF5EC", "#FCFEFC", "#D2DDCF", "#257E03", "#D7EED2", "#FFFFFF"],
+          ["#0E130D", "#171E15", "#2A3328", "#83C575", "#1F3819", "#061005"],
+        ], // verde
+        [
+          ["#EBF5EF", "#FBFEFC", "#CEDED4", "#067D4D", "#CEF0DB", "#FFFFFF"],
+          ["#0C140F", "#141F18", "#26342C", "#5ECA91", "#0F3924", "#031108"],
+        ], // menta
+        [
+          ["#E9F6F2", "#FBFEFD", "#CBDED8", "#007B66", "#C8F1E4", "#FFFFFF"],
+          ["#0A1411", "#121F1B", "#233430", "#37CCAC", "#013A2F", "#00110C"],
+        ], // turquesa
+        [
+          ["#E8F6F5", "#FBFEFE", "#C9DEDD", "#067976", "#C5F0EE", "#FFFFFF"],
+          ["#091413", "#101F1E", "#223433", "#05CBC6", "#023837", "#001110"],
+        ], // petróleo
+        [
+          ["#E8F5F8", "#FBFEFF", "#C9DDE1", "#007785", "#C5EFF7", "#FFFFFF"],
+          ["#091415", "#101E21", "#223437", "#0EC7DE", "#03373F", "#001014"],
+        ], // cielo
+        [
+          ["#EAF4FA", "#FCFEFE", "#CBDCE5", "#00729B", "#CBECFE", "#FFFFFF"],
+          ["#0A1317", "#121D24", "#24333A", "#48BFF5", "#043549", "#010F18"],
+        ], // zafiro
+        [
+          ["#ECF3FC", "#FCFDFF", "#CFDBE7", "#036BB9", "#D4E9FF", "#FFFFFF"],
+          ["#0C1218", "#151D25", "#27313C", "#6FB6FE", "#16324D", "#040E1A"],
+        ], // azul
+        [
+          ["#F0F2FC", "#FDFDFF", "#D6D8E8", "#5A56C7", "#E1E4FE", "#FFFFFF"],
+          ["#101119", "#1A1B25", "#2E2F3C", "#A2A8FE", "#2B2C4E", "#0B0C1A"],
+        ], // índigo
+        [
+          ["#F4F0FA", "#FEFDFE", "#DCD6E5", "#8048B6", "#EDE0FE", "#FFFFFF"],
+          ["#131017", "#1E1923", "#332D3A", "#C49BF3", "#372849", "#100A18"],
+        ], // violeta
+        [
+          ["#F7EFF8", "#FEFDFE", "#E0D5E2", "#943FA2", "#F5DDF8", "#FFFFFF"],
+          ["#150F16", "#201921", "#362C38", "#D894E2", "#3E2542", "#130915"],
+        ], // magenta
+        [
+          ["#F9EFF5", "#FEFDFE", "#E4D4DE", "#A43687", "#FCDBF0", "#FFFFFF"],
+          ["#170F14", "#22181F", "#392C34", "#E88FCB", "#44233A", "#160811"],
+        ], // frambuesa
       ];
       // Aplica la paleta i según el tema efectivo (claro/oscuro); i = null vuelve a la original
       window.applyPalette = (i) => {
         const root = document.documentElement,
-          vars = ["--bg", "--surface", "--line", "--accent", "--accent-soft", "--accent-ink", "--req"];
+          vars = [
+            "--bg",
+            "--surface",
+            "--line",
+            "--accent",
+            "--accent-soft",
+            "--accent-ink",
+            "--req",
+          ];
         if (i == null) {
           vars.forEach((v) => root.style.removeProperty(v));
           delete root.dataset.palette;
           return;
         }
-        const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        const dark = root.dataset.theme
+          ? root.dataset.theme === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches;
         const row = window.PALETTES[i][dark ? 1 : 0];
         // --req (peticiones del diagrama) usa el mismo color que el acento
         vars.forEach((v, k) => root.style.setProperty(v, row[k === 6 ? 3 : k]));
@@ -47,7 +111,8 @@
           const t = localStorage.getItem("theme");
           if (t) document.documentElement.dataset.theme = t;
           if (localStorage.getItem("palette") !== "on") return;
-          const last = +localStorage.getItem("paletteLast"), n = window.PALETTES.length;
+          const last = +localStorage.getItem("paletteLast"),
+            n = window.PALETTES.length;
           let i = Math.floor(Math.random() * (n - 1));
           if (i >= last) i++; // nunca repite la de la visita anterior
           localStorage.setItem("paletteLast", i);
@@ -70,7 +135,11 @@
         }
         // Navegador en español, catalán, gallego o euskera → español; cualquier otro → inglés
         if (!L.includes(l)) {
-          const b = String((navigator.languages || [navigator.language])[0] || "es").slice(0, 2).toLowerCase();
+          const b = String(
+            (navigator.languages || [navigator.language])[0] || "es",
+          )
+            .slice(0, 2)
+            .toLowerCase();
           l = ["es", "ca", "gl", "eu"].includes(b) ? "es" : "en";
         }
         root.dataset.lang = l;
@@ -96,20 +165,39 @@
          tools/preview (npm run og). Las URL deben ser absolutas. -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mohasb.github.io/" />
-    <meta property="og:title" content="Muhammad Hicho Haidor — Desarrollador de software" />
-    <meta property="og:description" content="Desarrollador de software en Alicante (remoto). Proyectos para Iberdrola y Orange, y dos apps con demo en vivo: MHCars y Modelia." />
+    <meta
+      property="og:title"
+      content="Muhammad Hicho Haidor — Desarrollador de software"
+    />
+    <meta
+      property="og:description"
+      content="Desarrollador de software en Alicante (remoto). Proyectos para Iberdrola y Orange, y dos apps con demo en vivo: MHCars y Modelia."
+    />
     <meta property="og:image" content="https://mohasb.github.io/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Muhammad Hicho Haidor, desarrollador de software, con capturas de sus proyectos MHCars y Modelia" />
+    <meta
+      property="og:image:alt"
+      content="Muhammad Hicho Haidor, desarrollador de software, con capturas de sus proyectos MHCars y Modelia"
+    />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:locale:alternate" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://mohasb.github.io/" />
     <!-- Iconos «MH².»: se generan con tools/preview (npm run iconos) -->
     <link rel="icon" href="favicon.ico" sizes="48x48" />
-    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/icon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/icon-16.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/icons/icon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/icons/icon-16.png"
+    />
     <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -505,7 +593,8 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: calc(0.45rem + env(safe-area-inset-top, 0px)) 0.6rem 0.45rem 0.9rem;
+        padding: calc(0.45rem + env(safe-area-inset-top, 0px)) 0.6rem 0.45rem
+          0.9rem;
         border-bottom: 1px solid var(--line);
       }
       .sheet-dots {
@@ -799,6 +888,51 @@
         align-items: center;
         position: relative;
       }
+      /* Rol encima del nombre, con un punto que late en el color de acento (sigue a la paleta) */
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--muted);
+        margin-bottom: 1.4rem;
+        padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+      }
+      .status span span {
+        white-space: nowrap;
+      }
+      @media (max-width: 480px) {
+        .status {
+          font-size: 0.82rem;
+          border-radius: 1rem;
+        }
+      }
+      .status i {
+        flex: none;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: ping 2.2s infinite;
+      }
+      @keyframes ping {
+        0% {
+          box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+        }
+        80%,
+        100% {
+          box-shadow: 0 0 0 10px transparent;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .status i {
+          animation: none;
+        }
+      }
       .name {
         font-size: clamp(3.2rem, 8.5vw, 6.8rem);
         font-weight: 800;
@@ -1061,10 +1195,12 @@
       }
       @keyframes sway {
         from {
-          transform: perspective(1400px) translateY(-8px) rotateY(-14deg) rotateX(4deg);
+          transform: perspective(1400px) translateY(-8px) rotateY(-14deg)
+            rotateX(4deg);
         }
         to {
-          transform: perspective(1400px) translateY(8px) rotateY(12deg) rotateX(-3deg);
+          transform: perspective(1400px) translateY(8px) rotateY(12deg)
+            rotateX(-3deg);
         }
       }
       .sc-browser,
@@ -1119,11 +1255,12 @@
           transform-origin: 50% 50%;
         }
         .showcase[data-front="dam"] .sc-group {
-          transform: translate(var(--gx, 0), var(--gy, 0)) scale(var(--gk, 1)) rotateY(-8deg) rotateX(3deg);
+          transform: translate(var(--gx, 0), var(--gy, 0)) scale(var(--gk, 1))
+            rotateY(-8deg) rotateX(3deg);
         }
         .showcase[data-front="dam"] .sc-browser {
-          transform: translate(var(--bx, 0), var(--by, 0)) scale(var(--bk, 1)) rotateY(-12deg) rotateX(4deg)
-            translateZ(-110px) scale(0.92);
+          transform: translate(var(--bx, 0), var(--by, 0)) scale(var(--bk, 1))
+            rotateY(-12deg) rotateX(4deg) translateZ(-110px) scale(0.92);
         }
       }
       .sc-browser:focus-visible,
@@ -1599,7 +1736,6 @@
         color: var(--muted);
         font-size: 0.92rem;
       }
-
 
       /* Encendido de la demo */
       .power {
@@ -2102,7 +2238,12 @@
       <div class="wrap nav-inner">
         <a class="brand" href="#inicio">MH².</a>
         <div class="nav-right">
-          <nav class="nav-links" id="navLinks" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
+          <nav
+            class="nav-links"
+            id="navLinks"
+            aria-label="Principal"
+            data-i18n-attr="aria-label:nav.main"
+          >
             <a href="#experiencia" data-i18n="nav.exp">Experiencia</a>
             <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
             <a href="#formacion" data-i18n="nav.edu">Formación</a>
@@ -2110,18 +2251,129 @@
             <a href="#contacto" data-i18n="nav.contact">Contacto</a>
           </nav>
           <div class="nav-tools">
-            <div class="flags" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang">
-              <button class="flag" type="button" data-lang="es" lang="es" aria-pressed="true" aria-label="Español" title="Español"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/></svg></button>
-              <button class="flag" type="button" data-lang="en" lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 60 40" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><clipPath id="gb-t"><path d="M30 20h30v20zv20H0zH0V0zV0h30z"/></clipPath><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="4" clip-path="url(#gb-t)"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="7"/></svg></button>
+            <div
+              class="flags"
+              role="group"
+              aria-label="Idioma"
+              data-i18n-attr="aria-label:nav.lang"
+            >
+              <button
+                class="flag"
+                type="button"
+                data-lang="es"
+                lang="es"
+                aria-pressed="true"
+                aria-label="Español"
+                title="Español"
+              >
+                <svg viewBox="0 0 3 2" aria-hidden="true">
+                  <rect width="3" height="2" fill="#AA151B" />
+                  <rect y=".5" width="3" height="1" fill="#F1BF00" />
+                </svg>
+              </button>
+              <button
+                class="flag"
+                type="button"
+                data-lang="en"
+                lang="en"
+                aria-pressed="false"
+                aria-label="English"
+                title="English"
+              >
+                <svg
+                  viewBox="0 0 60 40"
+                  aria-hidden="true"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <clipPath id="gb-t">
+                    <path d="M30 20h30v20zv20H0zH0V0zV0h30z" />
+                  </clipPath>
+                  <rect width="60" height="40" fill="#012169" />
+                  <path
+                    d="M0 0l60 40M60 0L0 40"
+                    stroke="#fff"
+                    stroke-width="8"
+                  />
+                  <path
+                    d="M0 0l60 40M60 0L0 40"
+                    stroke="#C8102E"
+                    stroke-width="4"
+                    clip-path="url(#gb-t)"
+                  />
+                  <path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12" />
+                  <path
+                    d="M30 0v40M0 20h60"
+                    stroke="#C8102E"
+                    stroke-width="7"
+                  />
+                </svg>
+              </button>
             </div>
-            <button class="tool-btn palette-btn" type="button" aria-pressed="false" aria-label="Paleta sorpresa: colores distintos en cada visita" title="Paleta sorpresa: colores distintos en cada visita" data-i18n-attr="aria-label:nav.palette;title:nav.palette">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10.5" cy="7" r="1.2" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1.2" fill="currentColor"/></svg>
+            <button
+              class="tool-btn palette-btn"
+              type="button"
+              aria-pressed="false"
+              aria-label="Paleta sorpresa: colores distintos en cada visita"
+              title="Paleta sorpresa: colores distintos en cada visita"
+              data-i18n-attr="aria-label:nav.palette;title:nav.palette"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3Z"
+                />
+                <circle cx="7.5" cy="11" r="1.2" fill="currentColor" />
+                <circle cx="10.5" cy="7" r="1.2" fill="currentColor" />
+                <circle cx="15.5" cy="7.5" r="1.2" fill="currentColor" />
+              </svg>
             </button>
-            <button class="tool-btn theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label:nav.theme">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            <button
+              class="tool-btn theme-btn"
+              type="button"
+              aria-label="Cambiar entre tema claro y oscuro"
+              data-i18n-attr="aria-label:nav.theme"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="4.5" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                />
+              </svg>
             </button>
-            <button class="tool-btn menu-btn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menú" data-i18n-attr="aria-label:nav.menu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg>
+            <button
+              class="tool-btn menu-btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="navLinks"
+              aria-label="Menú"
+              data-i18n-attr="aria-label:nav.menu"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path class="m1" d="M4 7h16" />
+                <path class="m2" d="M4 12h16" />
+                <path class="m3" d="M4 17h16" />
+              </svg>
             </button>
           </div>
         </div>
@@ -2134,58 +2386,71 @@
         <canvas class="hive" aria-hidden="true"></canvas>
         <div class="wrap hero-grid">
           <div>
+            <p class="status fade" style="--d: 0.05s">
+              <i aria-hidden="true"></i
+              ><span data-i18n="hero.status"
+                ><span>Desarrollador full stack</span> · <span>Web y multiplataforma</span></span
+              >
+            </p>
             <h1 class="name" data-split>Muhammad Hicho Haidor</h1>
-            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">Desde 2023 desarrollo, mejoro y mantengo aplicaciones empresariales en todas sus capas: la interfaz, la API, la base de datos y los despliegues, hasta lo que pasa cuando algo falla en producción. Primero en Centauro Rent a Car y después en NTT DATA, con clientes como <strong>Orange</strong> e <strong>Iberdrola</strong>.</p>
+            <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">
+              Desde 2023 desarrollo y mantengo aplicaciones empresariales para
+              <strong>Orange</strong> e <strong>Iberdrola</strong>, de la interfaz
+              a la base de datos. En mis proyectos llevo la web y el móvil más
+              allá, con 3D y realidad aumentada.
+            </p>
             <div class="cta fade" style="--d: 0.85s">
               <div class="cta-main">
-              <a
-                class="btn"
-                id="heroContact"
-                href="#contacto"
-                data-i18n="hero.contact"
-                >Contactar</a
-              >
-              <button
-                class="btn ghost"
-                type="button"
-                data-cv
-                aria-haspopup="dialog"
-                data-i18n="hero.cv"
-              >
-                Solicitar CV
-              </button>
+                <a
+                  class="btn"
+                  id="heroContact"
+                  href="#contacto"
+                  data-i18n="hero.contact"
+                  >Contactar</a
+                >
+                <button
+                  class="btn ghost"
+                  type="button"
+                  data-cv
+                  aria-haspopup="dialog"
+                  data-i18n="hero.cv"
+                >
+                  Solicitar CV
+                </button>
               </div>
               <div class="cta-social">
-              <a
-                class="icon-btn"
-                href="https://www.linkedin.com/in/mhhaidor"
-                target="_blank"
-                rel="noopener"
-                aria-label="LinkedIn"
-                ><span class="soc-label">LinkedIn</span><svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.25H3V9.75Zm6.5 0h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-5.08c0-1.21-.02-2.77-1.69-2.77-1.69 0-1.95 1.32-1.95 2.68V21h-4V9.75Z"
-                  /></svg
-              ></a>
-              <a
-                class="icon-btn"
-                href="https://github.com/Mohasb"
-                target="_blank"
-                rel="noopener"
-                aria-label="GitHub"
-                ><span class="soc-label">GitHub</span><svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
-                  /></svg
-              ></a>
+                <a
+                  class="icon-btn"
+                  href="https://www.linkedin.com/in/mhichohaidor"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="LinkedIn"
+                  ><span class="soc-label">LinkedIn</span
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.25H3V9.75Zm6.5 0h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-5.08c0-1.21-.02-2.77-1.69-2.77-1.69 0-1.95 1.32-1.95 2.68V21h-4V9.75Z"
+                    /></svg
+                ></a>
+                <a
+                  class="icon-btn"
+                  href="https://github.com/Mohasb"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub"
+                  ><span class="soc-label">GitHub</span
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
+                    /></svg
+                ></a>
               </div>
             </div>
           </div>
@@ -2200,17 +2465,40 @@
                 aria-label="Ver el proyecto Modelia: tienda multiplataforma con visor 3D y realidad aumentada"
               >
                 <span class="sc-win">
-                  <span class="sc-bar" aria-hidden="true"><i></i><i></i><i></i><span>mohasb.github.io/modeliaWeb</span></span>
-                  <video muted loop playsinline preload="none" poster="img/modelia-poster.webp" aria-hidden="true">
+                  <span class="sc-bar" aria-hidden="true"
+                    ><i></i><i></i><i></i
+                    ><span>mohasb.github.io/modeliaWeb</span></span
+                  >
+                  <video
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    poster="img/modelia-poster.webp"
+                    aria-hidden="true"
+                  >
                     <source src="img/modelia-preview.webm" type="video/webm" />
                     <source src="img/modelia-preview.mp4" type="video/mp4" />
                   </video>
                 </span>
                 <span class="sc-phone">
                   <span class="sc-screen">
-                    <video muted loop playsinline preload="none" poster="img/modelia-movil-poster.webp" aria-hidden="true">
-                      <source src="img/modelia-movil-preview.webm" type="video/webm" />
-                      <source src="img/modelia-movil-preview.mp4" type="video/mp4" />
+                    <video
+                      muted
+                      loop
+                      playsinline
+                      preload="none"
+                      poster="img/modelia-movil-poster.webp"
+                      aria-hidden="true"
+                    >
+                      <source
+                        src="img/modelia-movil-preview.webm"
+                        type="video/webm"
+                      />
+                      <source
+                        src="img/modelia-movil-preview.mp4"
+                        type="video/mp4"
+                      />
                     </video>
                   </span>
                 </span>
@@ -2223,8 +2511,18 @@
                 data-i18n-attr="aria-label:hero.scDaw"
                 aria-label="Ver el proyecto MHCars: alquiler y venta de coches con showroom 3D"
               >
-                <span class="sc-bar" aria-hidden="true"><i></i><i></i><i></i><span>mohasb.github.io/MHCars-React</span></span>
-                <video muted loop playsinline preload="none" poster="img/mhcars-poster.webp" aria-hidden="true">
+                <span class="sc-bar" aria-hidden="true"
+                  ><i></i><i></i><i></i
+                  ><span>mohasb.github.io/MHCars-React</span></span
+                >
+                <video
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="img/mhcars-poster.webp"
+                  aria-hidden="true"
+                >
                   <source src="img/mhcars-preview.webm" type="video/webm" />
                   <source src="img/mhcars-preview.mp4" type="video/mp4" />
                 </video>
@@ -2253,11 +2551,17 @@
                 </p>
                 <ul class="features">
                   <li data-i18n="job1.b1">
-                    Evoluciono y mantengo una aplicación crítica Java EE/Spring
-                    con más de 15 años en producción: frontend, backend y base
-                    de datos Oracle.
+                    Evoluciono y mantengo una aplicación Java EE/Spring con más de 15 años en producción: frontend, backend y base de datos Oracle.
                   </li>
-                  <li data-i18n="job1.b2">Implemento la migración del login de varias aplicaciones web, con distintas tecnologías, a Azure Active Directory con MFA.</li>
+                  <li data-i18n="job1.b7">
+                    Mantengo también la app Android de la misma aplicación.
+                  </li>
+                  <li data-i18n="job1.b8">
+                    Escribo tests unitarios con JUnit y Jasmine, y resuelvo las incidencias que detecta SonarQube.
+                  </li>
+                  <li data-i18n="job1.b2">
+                    He implementado la migración del login de varias aplicaciones web, con distintas tecnologías, a Azure Active Directory con MFA.
+                  </li>
                   <li data-i18n="job1.b3">
                     Resuelvo incidencias en producción con análisis de causa
                     raíz y corrijo vulnerabilidades de seguridad.
@@ -2270,7 +2574,9 @@
                     Desarrollo a partir de historias en Gherkin (BDD) y diseño
                     las pruebas con Xray, en Scrum.
                   </li>
-                  <li data-i18n="job1.b6">Documento en Confluence y Enterprise Architect. Trato directamente con el cliente en un equipo de más de 15 personas.</li>
+                  <li data-i18n="job1.b6">
+                    Documento en Confluence y Enterprise Architect. Trato directamente con el cliente en un equipo de más de 30 personas. La aplicación la usan más de 600 personas.
+                  </li>
                 </ul>
               </div>
             </li>
@@ -2286,7 +2592,12 @@
                   NTT DATA · cliente: Orange
                 </p>
                 <ul class="features">
-                  <li data-i18n="job2.b1">Desarrollo en una aplicación corporativa de gran escala con micro-frontends (Module Federation): cada módulo usaba una versión distinta de Angular, desde AngularJS hasta Angular 17.</li>
+                  <li data-i18n="job2.b1">
+                    Desarrollo en una aplicación corporativa de gran escala con
+                    micro-frontends (Module Federation): cada módulo usaba una
+                    versión distinta de Angular, desde AngularJS hasta Angular
+                    17.
+                  </li>
                   <li data-i18n="job2.b3">
                     Implementé una capa BFF en Node.js que orquesta llamadas a
                     varios servicios del backend.
@@ -2323,199 +2634,15 @@
       <section id="proyectos">
         <div class="wrap">
           <h2 class="reveal" data-i18n="proj.title">Proyectos</h2>
-          <p class="section-intro reveal" data-i18n="proj.intro">Mis proyectos de DAM y DAW: dos aplicaciones completas, de la pantalla a la base de datos. Pulsa «Cómo funciona» para ver la arquitectura de cada una.</p>
-
-          <!-- PROYECTO DAM -->
-          <article
-            class="project reveal"
-            id="proyecto-dam"
-            style="--p: var(--dam)"
-          >
-            <div class="project-media">
-              <div
-                class="tabs"
-                role="tablist"
-                aria-label="Vista del proyecto DAM"
-                data-i18n-attr="aria-label:dam.tabs"
-              >
-                <span class="pill" aria-hidden="true"></span>
-                <button
-                  role="tab"
-                  id="dam-t1"
-                  aria-selected="true"
-                  aria-controls="dam-demo"
-                  data-i18n="tab.demo"
-                >
-                  Demo en vivo
-                </button>
-                <button
-                  role="tab"
-                  id="dam-t2"
-                  aria-selected="false"
-                  aria-controls="dam-arch"
-                  tabindex="-1"
-                  data-i18n="tab.how"
-                >
-                  Cómo funciona
-                </button>
-              </div>
-              <div
-                class="panel demo has-preview"
-                id="dam-demo"
-                role="tabpanel"
-                aria-labelledby="dam-t1"
-                data-demo="dam"
-                data-name="Modelia"
-              >
-                <div class="browser tilt">
-                  <div class="browser-bar">
-                    <span></span><span></span><span></span>
-                    <div class="url" data-url>
-                      mohasb.github.io/modeliaWeb
-                    </div>
-                  </div>
-                  <div class="screen">
-                    <!-- Vídeo grabado de la demo real: visor 3D, catálogo y editor de temas -->
-                    <video
-                      class="preview"
-                      muted
-                      loop
-                      playsinline
-                      preload="none"
-                      poster="img/modelia-poster.webp"
-                      data-i18n-attr="aria-label:dam.videoAlt"
-                      aria-label="Vídeo de Modelia: visor 3D, catálogo y editor de temas"
-                    >
-                      <source src="img/modelia-preview.webm" type="video/webm" />
-                      <source src="img/modelia-preview.mp4" type="video/mp4" />
-                    </video>
-                    <div class="power">
-                      <button class="power-btn" type="button">
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.4"
-                          stroke-linecap="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M12 3v8" />
-                          <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
-                        ><span data-i18n="dam.try">Pruébalo</span>
-                      </button>
-                    </div>
-                    <div class="boot">
-                      <div class="loader"></div>
-                      <span data-i18n="dam.boot">Arrancando la app…</span>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="chapters"
-                  role="group"
-                  aria-label="Partes del vídeo"
-                  data-i18n-attr="aria-label:dam.chapters"
-                >
-                  <button class="chip-btn chapter" type="button" data-start="0" data-i18n="ch.visor3d">Visor 3D</button>
-                  <button class="chip-btn chapter" type="button" data-start="15.9" data-i18n="ch.catalogo">Catálogo</button>
-                  <button class="chip-btn chapter" type="button" data-start="29.3" data-i18n="ch.temas">Editor de temas</button>
-                  <button
-                    class="chip-btn play-toggle"
-                    type="button"
-                    aria-label="Reproducir vídeo"
-                  >
-                    <svg
-                      class="i-play"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M8 5.5v13l10.5-6.5z" /></svg
-                    ><svg
-                      class="i-pause"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
-                    </svg>
-                  </button>
-                </div>
-                <p class="demo-note" data-i18n="dam.note">El vídeo es la demo real. Pruébala tú: entras como cliente y, si cierras sesión, también como administrador. Datos de ejemplo, sin servidor.</p>
-              </div>
-              <div
-                class="panel arch"
-                id="dam-arch"
-                role="tabpanel"
-                aria-labelledby="dam-t2"
-                hidden
-              >
-                <svg
-                  class="flow"
-                  data-flow="dam"
-                  viewBox="0 0 640 330"
-                  role="img"
-                  data-i18n-attr="aria-label:dam.flowAlt"
-                  aria-label="Flutter pide datos a la API de Spring Boot, que comprueba el token JWT y consulta MariaDB con Spring Data JPA."
-                ></svg>
-                <p class="flow-note" data-i18n="dam.flowNote">La app Flutter consume una API REST en Spring Boot protegida con Spring Security y JWT. Spring Data JPA guarda los datos en MariaDB. En esta demo, un cliente HTTP simulado responde en lugar del servidor.</p>
-              </div>
-            </div>
-            <div class="project-text">
-              <p class="project-kind" data-i18n="dam.kind">Proyecto final de DAM</p>
-              <h3>Modelia</h3>
-              <p class="lead" data-i18n="dam.lead">Tienda online multiplataforma con visor 3D y realidad aumentada: cada producto se puede girar en 3D y, en el móvil, ver en tu espacio antes de comprarlo. Funciona en Android, Windows y web con el mismo código. Proyecto final de DAM, hecho en solitario. <strong>Nota: 9.</strong></p>
-              <ul class="features">
-                <li data-i18n="dam.f1"><strong>Visor 3D y realidad aumentada:</strong> los productos se ven en 3D con &lt;model-viewer&gt; en Android y web, y dentro de WebView2 en Windows. Fue lo más difícil: el 3D es otra plataforma y lo integré en Flutter sin Three.js, con un visor para cada sistema.</li>
-                <li data-i18n="dam.f2"><strong>Un solo código, tres plataformas:</strong> Flutter con Riverpod para el estado y go_router para la navegación, adaptado a móvil y escritorio.</li>
-                <li data-i18n="dam.f3"><strong>Panel de administración:</strong> productos, categorías, pedidos y usuarios, y un editor de temas que cambia los colores y el nombre de la app con vista previa en tiempo real.</li>
-                <li data-i18n="dam.f4"><strong>API REST en Spring Boot:</strong> Spring Security con JWT y refresh tokens, Spring Data JPA sobre MariaDB y documentación con Swagger.</li>
-              </ul>
-              <dl class="stack">
-                <div>
-                  <dt>App</dt>
-                  <dd>Flutter, Dart, Riverpod, go_router</dd>
-                </div>
-                <div>
-                  <dt>Backend</dt>
-                  <dd>Spring Boot, Spring Security, JWT, Spring Data JPA</dd>
-                </div>
-                <div>
-                  <dt data-i18n="stack.data">Datos</dt>
-                  <dd>MariaDB (MySQL)</dd>
-                </div>
-              </dl>
-              <div class="actions">
-                <a
-                  class="btn"
-                  href="https://github.com/Mohasb/Modelia"
-                  target="_blank"
-                  rel="noopener"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
-                    /></svg
-                  ><span data-i18n="dam.codeApp">Código de la app</span></a
-                >
-                <a
-                  class="btn ghost"
-                  href="https://github.com/Mohasb/ModeliaBackend"
-                  target="_blank"
-                  rel="noopener"
-                  data-i18n="dam.codeApi"
-                  >Código de la API</a
-                >
-              </div>
-            </div>
-          </article>
+          <p class="section-intro reveal" data-i18n="proj.intro">
+            Mis proyectos de DAW y DAM: dos aplicaciones completas, de la
+            pantalla a la base de datos. Pulsa «Cómo funciona» para ver la
+            arquitectura de cada una.
+          </p>
 
           <!-- PROYECTO DAW -->
           <article
-            class="project flip reveal"
+            class="project reveal"
             id="proyecto-daw"
             style="--p: var(--daw)"
           >
@@ -2684,10 +2811,7 @@
               </p>
               <h3>MHCars</h3>
               <p class="lead" data-i18n="daw.lead">
-                Web de alquiler y venta de coches para una empresa ficticia con
-                sucursales en Benidorm, Alicante, Torrevieja, Lisboa y Roma.
-                Proyecto final de DAW, hecho en solitario.
-                <strong>Nota: 10.</strong>
+                Web de alquiler y venta de coches para una empresa ficticia con sucursales en Benidorm, Alicante, Torrevieja, Lisboa y Roma. Proyecto final de DAW, hecho en solitario.
               </p>
               <ul class="features">
                 <li data-i18n="daw.f1">
@@ -2754,6 +2878,243 @@
             </div>
           </article>
 
+          <!-- PROYECTO DAM -->
+          <article
+            class="project flip reveal"
+            id="proyecto-dam"
+            style="--p: var(--dam)"
+          >
+            <div class="project-media">
+              <div
+                class="tabs"
+                role="tablist"
+                aria-label="Vista del proyecto DAM"
+                data-i18n-attr="aria-label:dam.tabs"
+              >
+                <span class="pill" aria-hidden="true"></span>
+                <button
+                  role="tab"
+                  id="dam-t1"
+                  aria-selected="true"
+                  aria-controls="dam-demo"
+                  data-i18n="tab.demo"
+                >
+                  Demo en vivo
+                </button>
+                <button
+                  role="tab"
+                  id="dam-t2"
+                  aria-selected="false"
+                  aria-controls="dam-arch"
+                  tabindex="-1"
+                  data-i18n="tab.how"
+                >
+                  Cómo funciona
+                </button>
+              </div>
+              <div
+                class="panel demo has-preview"
+                id="dam-demo"
+                role="tabpanel"
+                aria-labelledby="dam-t1"
+                data-demo="dam"
+                data-name="Modelia"
+              >
+                <div class="browser tilt">
+                  <div class="browser-bar">
+                    <span></span><span></span><span></span>
+                    <div class="url" data-url>mohasb.github.io/modeliaWeb</div>
+                  </div>
+                  <div class="screen">
+                    <!-- Vídeo grabado de la demo real: visor 3D, catálogo y editor de temas -->
+                    <video
+                      class="preview"
+                      muted
+                      loop
+                      playsinline
+                      preload="none"
+                      poster="img/modelia-poster.webp"
+                      data-i18n-attr="aria-label:dam.videoAlt"
+                      aria-label="Vídeo de Modelia: visor 3D, catálogo y editor de temas"
+                    >
+                      <source
+                        src="img/modelia-preview.webm"
+                        type="video/webm"
+                      />
+                      <source src="img/modelia-preview.mp4" type="video/mp4" />
+                    </video>
+                    <div class="power">
+                      <button class="power-btn" type="button">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                          stroke-linecap="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 3v8" />
+                          <path d="M6.3 6.8a8 8 0 1 0 11.4 0" /></svg
+                        ><span data-i18n="dam.try">Pruébalo</span>
+                      </button>
+                    </div>
+                    <div class="boot">
+                      <div class="loader"></div>
+                      <span data-i18n="dam.boot">Arrancando la app…</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="chapters"
+                  role="group"
+                  aria-label="Partes del vídeo"
+                  data-i18n-attr="aria-label:dam.chapters"
+                >
+                  <button
+                    class="chip-btn chapter"
+                    type="button"
+                    data-start="0"
+                    data-i18n="ch.visor3d"
+                  >
+                    Visor 3D
+                  </button>
+                  <button
+                    class="chip-btn chapter"
+                    type="button"
+                    data-start="15.9"
+                    data-i18n="ch.catalogo"
+                  >
+                    Catálogo
+                  </button>
+                  <button
+                    class="chip-btn chapter"
+                    type="button"
+                    data-start="29.3"
+                    data-i18n="ch.temas"
+                  >
+                    Editor de temas
+                  </button>
+                  <button
+                    class="chip-btn play-toggle"
+                    type="button"
+                    aria-label="Reproducir vídeo"
+                  >
+                    <svg
+                      class="i-play"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 5.5v13l10.5-6.5z" /></svg
+                    ><svg
+                      class="i-pause"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
+                    </svg>
+                  </button>
+                </div>
+                <p class="demo-note" data-i18n="dam.note">
+                  El vídeo es la demo real. Pruébala tú: entras como cliente y,
+                  si cierras sesión, también como administrador. Datos de
+                  ejemplo, sin servidor.
+                </p>
+              </div>
+              <div
+                class="panel arch"
+                id="dam-arch"
+                role="tabpanel"
+                aria-labelledby="dam-t2"
+                hidden
+              >
+                <svg
+                  class="flow"
+                  data-flow="dam"
+                  viewBox="0 0 640 330"
+                  role="img"
+                  data-i18n-attr="aria-label:dam.flowAlt"
+                  aria-label="Flutter pide datos a la API de Spring Boot, que comprueba el token JWT y consulta MariaDB con Spring Data JPA."
+                ></svg>
+                <p class="flow-note" data-i18n="dam.flowNote">
+                  La app Flutter consume una API REST en Spring Boot protegida
+                  con Spring Security y JWT. Spring Data JPA guarda los datos en
+                  MariaDB. En esta demo, un cliente HTTP simulado responde en
+                  lugar del servidor.
+                </p>
+              </div>
+            </div>
+            <div class="project-text">
+              <p class="project-kind" data-i18n="dam.kind">
+                Proyecto final de DAM
+              </p>
+              <h3>Modelia</h3>
+              <p class="lead" data-i18n="dam.lead">
+                Tienda online multiplataforma con visor 3D y realidad aumentada: cada producto se puede girar en 3D y, en el móvil, ver en tu espacio antes de comprarlo. Funciona en Android, Windows y web con el mismo código. Proyecto final de DAM, hecho en solitario.
+              </p>
+              <ul class="features">
+                <li data-i18n="dam.f1">
+                  <strong>Visor 3D y realidad aumentada:</strong> los productos se ven en 3D con &lt;model-viewer&gt; en Android y web, y dentro de WebView2 en Windows. Fue lo más difícil: integré el 3D en Flutter sin Three.js, con un visor para cada sistema.
+                </li>
+                <li data-i18n="dam.f2">
+                  <strong>Un solo código, tres plataformas:</strong> Flutter con
+                  Riverpod para el estado y go_router para la navegación,
+                  adaptado a móvil y escritorio.
+                </li>
+                <li data-i18n="dam.f3">
+                  <strong>Panel de administración:</strong> productos,
+                  categorías, pedidos y usuarios, y un editor de temas que
+                  cambia los colores y el nombre de la app con vista previa en
+                  tiempo real.
+                </li>
+                <li data-i18n="dam.f4">
+                  <strong>API REST en Spring Boot:</strong> Spring Security con
+                  JWT y refresh tokens, Spring Data JPA sobre MariaDB y
+                  documentación con Swagger.
+                </li>
+              </ul>
+              <dl class="stack">
+                <div>
+                  <dt>App</dt>
+                  <dd>Flutter, Dart, Riverpod, go_router</dd>
+                </div>
+                <div>
+                  <dt>Backend</dt>
+                  <dd>Spring Boot, Spring Security, JWT, Spring Data JPA</dd>
+                </div>
+                <div>
+                  <dt data-i18n="stack.data">Datos</dt>
+                  <dd>MariaDB (MySQL)</dd>
+                </div>
+              </dl>
+              <div class="actions">
+                <a
+                  class="btn"
+                  href="https://github.com/Mohasb/Modelia"
+                  target="_blank"
+                  rel="noopener"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
+                    /></svg
+                  ><span data-i18n="dam.codeApp">Código de la app</span></a
+                >
+                <a
+                  class="btn ghost"
+                  href="https://github.com/Mohasb/ModeliaBackend"
+                  target="_blank"
+                  rel="noopener"
+                  data-i18n="dam.codeApi"
+                  >Código de la API</a
+                >
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -2769,14 +3130,15 @@
                 <h3 data-i18n="edu.dam">
                   Desarrollo de Aplicaciones Multiplataforma
                 </h3>
-                <p data-i18n="edu.damP">Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto final: Modelia, con Flutter y Spring Boot.</p>
+                <p data-i18n="edu.damP">
+                  Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto final: Modelia, con Flutter y Spring Boot. <strong>Nota: 9.</strong>
+                </p>
               </li>
               <li>
                 <span class="when">2021 – 2023</span>
                 <h3 data-i18n="edu.daw">Desarrollo de Aplicaciones Web</h3>
                 <p data-i18n="edu.dawP">
-                  Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto:
-                  MHCars, con React y ASP.NET Core.
+                  Técnico Superior. IES Pere Maria Orts i Bosch. Proyecto final: MHCars, con React y ASP.NET Core. <strong>Nota: 10.</strong>
                 </p>
               </li>
               <li>
@@ -2830,7 +3192,9 @@
                 </li>
                 <li>
                   <strong>AngularJS</strong
-                  ><small data-i18n="sk.angularjs">Micro-frontends en Orange</small>
+                  ><small data-i18n="sk.angularjs"
+                    >Micro-frontends en Orange</small
+                  >
                 </li>
                 <li>
                   <strong data-i18n="sk.jsTs">JavaScript y TypeScript</strong
@@ -2857,8 +3221,10 @@
               <h3 data-i18n="sk.data">Datos</h3>
               <ul>
                 <li><strong>Oracle</strong><small>Iberdrola</small></li>
-                <li><strong>MariaDB / MySQL</strong><small>Modelia (DAM)</small></li>
-          <li><strong>SQLite</strong><small>MHCars (DAW)</small></li>
+                <li>
+                  <strong>MariaDB / MySQL</strong><small>Modelia (DAM)</small>
+                </li>
+                <li><strong>SQLite</strong><small>MHCars (DAW)</small></li>
                 <li><strong>SQL Server</strong></li>
                 <li><strong>MongoDB</strong></li>
               </ul>
@@ -2866,15 +3232,20 @@
             <div>
               <h3 data-i18n="sk.security">Seguridad</h3>
               <ul>
-                <li><strong data-i18n="sk.springSec">Spring Security y JWT</strong><small>Modelia (DAM) · MHCars (DAW)</small></li>
-          <li>
+                <li>
+                  <strong data-i18n="sk.springSec">Spring Security y JWT</strong
+                  ><small>Modelia (DAM)</small>
+                </li>
+                <li>
                   <strong data-i18n="sk.azure"
                     >Azure Active Directory y MFA</strong
                   ><small data-i18n="sk.azureWhere"
                     >Migración del login en Iberdrola</small
                   >
                 </li>
-                <li><strong>OAuth 2.0 / SSO</strong></li>
+                <li><strong>OAuth 2.0 / SSO</strong><small data-i18n="sk.azureWhere"
+                    >Migración del login en Iberdrola</small
+                  ></li>
               </ul>
             </div>
             <div>
@@ -2951,7 +3322,7 @@
             >
             <a
               class="btn ghost"
-              href="https://www.linkedin.com/in/mhhaidor"
+              href="https://www.linkedin.com/in/mhichohaidor"
               target="_blank"
               rel="noopener"
               >LinkedIn</a
@@ -2973,28 +3344,120 @@
       <div class="demo-sheet-bar">
         <span class="sheet-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="sheet-url" id="demoSheetUrl"></span>
-        <div class="sheet-modes" role="group" aria-label="Vista" data-i18n-attr="aria-label:demo.view">
-          <button type="button" data-mode="desktop" aria-pressed="true" aria-label="Versión de ordenador" title="Versión de ordenador" data-i18n-attr="aria-label:demo.desktop;title:demo.desktop">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        <div
+          class="sheet-modes"
+          role="group"
+          aria-label="Vista"
+          data-i18n-attr="aria-label:demo.view"
+        >
+          <button
+            type="button"
+            data-mode="desktop"
+            aria-pressed="true"
+            aria-label="Versión de ordenador"
+            title="Versión de ordenador"
+            data-i18n-attr="aria-label:demo.desktop;title:demo.desktop"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="4" width="18" height="12" rx="2" />
+              <path d="M8 20h8M12 16v4" />
+            </svg>
           </button>
-          <button type="button" data-mode="mobile" aria-pressed="false" aria-label="Versión móvil" title="Versión móvil" data-i18n-attr="aria-label:demo.mobile;title:demo.mobile">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg>
+          <button
+            type="button"
+            data-mode="mobile"
+            aria-pressed="false"
+            aria-label="Versión móvil"
+            title="Versión móvil"
+            data-i18n-attr="aria-label:demo.mobile;title:demo.mobile"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
+              <path d="M11 18h2" />
+            </svg>
           </button>
         </div>
         <div class="sheet-actions">
-          <button class="tool-btn" type="button" data-act="reload" aria-label="Reiniciar" title="Reiniciar" data-i18n-attr="aria-label:ctrl.reload;title:ctrl.reload">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+          <button
+            class="tool-btn"
+            type="button"
+            data-act="reload"
+            aria-label="Reiniciar"
+            title="Reiniciar"
+            data-i18n-attr="aria-label:ctrl.reload;title:ctrl.reload"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M20 11a8 8 0 1 0-2.3 5.7" />
+              <path d="M20 4v7h-7" />
+            </svg>
           </button>
-          <a class="tool-btn" id="demoSheetOpen" target="_blank" rel="noopener" aria-label="Abrir en una pestaña nueva" title="Abrir en una pestaña nueva" data-i18n-attr="aria-label:ctrl.open;title:ctrl.open">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          <a
+            class="tool-btn"
+            id="demoSheetOpen"
+            target="_blank"
+            rel="noopener"
+            aria-label="Abrir en una pestaña nueva"
+            title="Abrir en una pestaña nueva"
+            data-i18n-attr="aria-label:ctrl.open;title:ctrl.open"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" />
+            </svg>
           </a>
-          <button class="tool-btn" type="button" data-close aria-label="Cerrar la demo" title="Cerrar la demo" data-i18n-attr="aria-label:js.closeDemo;title:js.closeDemo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <button
+            class="tool-btn"
+            type="button"
+            data-close
+            aria-label="Cerrar la demo"
+            title="Cerrar la demo"
+            data-i18n-attr="aria-label:js.closeDemo;title:js.closeDemo"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
           </button>
         </div>
       </div>
       <div class="sheet-stage">
-        <div class="sheet-boot" aria-hidden="true"><div class="loader"></div></div>
+        <div class="sheet-boot" aria-hidden="true">
+          <div class="loader"></div>
+        </div>
       </div>
     </dialog>
 
@@ -3019,7 +3482,10 @@
         </svg>
       </button>
       <h2 id="cvTitle" data-i18n="cv.title">¿Quieres mi CV?</h2>
-      <p class="modal-lead" data-i18n="cv.lead">Déjame tus datos y te lo envío personalmente. Al pulsar el botón se abrirá tu correo con la solicitud ya escrita.</p>
+      <p class="modal-lead" data-i18n="cv.lead">
+        Déjame tus datos y te lo envío personalmente. Al pulsar el botón se
+        abrirá tu correo con la solicitud ya escrita.
+      </p>
       <form class="cv-form" id="cvForm">
         <div class="field-row">
           <label
@@ -3056,7 +3522,7 @@
         </button>
         <a
           class="chip-btn"
-          href="https://www.linkedin.com/in/mhhaidor"
+          href="https://www.linkedin.com/in/mhichohaidor"
           target="_blank"
           rel="noopener"
           >LinkedIn</a
@@ -3097,7 +3563,8 @@
           "js.pause": "Pausar vídeo",
           "js.copied": "Email copiado",
           "js.copyFail": "No se pudo copiar. Selecciona el email a mano.",
-          "js.paletteOn": "Paleta sorpresa activada: cada visita tendrá colores distintos.",
+          "js.paletteOn":
+            "Paleta sorpresa activada: cada visita tendrá colores distintos.",
           "js.paletteOff": "Vuelves a la paleta original.",
           "js.closeDemo": "Cerrar la demo",
           "cv.mailSubject": "Solicitud de CV — {company}",
@@ -3172,8 +3639,16 @@
 
         // Idioma: banderas (botones conmutables)
         const flags = [...document.querySelectorAll(".flag")];
-        onLang(() => flags.forEach((f) => f.setAttribute("aria-pressed", f.dataset.lang === lang)));
-        flags.forEach((f) => f.addEventListener("click", () => { if (f.dataset.lang !== lang) setLang(f.dataset.lang); }));
+        onLang(() =>
+          flags.forEach((f) =>
+            f.setAttribute("aria-pressed", f.dataset.lang === lang),
+          ),
+        );
+        flags.forEach((f) =>
+          f.addEventListener("click", () => {
+            if (f.dataset.lang !== lang) setLang(f.dataset.lang);
+          }),
+        );
 
         // Menú de secciones en pantallas estrechas
         const navBar = document.querySelector(".nav");
@@ -3185,11 +3660,23 @@
           if (open) navLinks.querySelector("a").focus();
           else if (focusBtn) menuBtn.focus();
         };
-        menuBtn.addEventListener("click", () => setMenu(!navBar.classList.contains("open")));
-        navLinks.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
-        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && navBar.classList.contains("open")) setMenu(false, true); });
-        document.addEventListener("click", (e) => { if (navBar.classList.contains("open") && !e.target.closest(".nav")) setMenu(false); });
-        matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
+        menuBtn.addEventListener("click", () =>
+          setMenu(!navBar.classList.contains("open")),
+        );
+        navLinks.addEventListener("click", (e) => {
+          if (e.target.closest("a")) setMenu(false);
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && navBar.classList.contains("open"))
+            setMenu(false, true);
+        });
+        document.addEventListener("click", (e) => {
+          if (navBar.classList.contains("open") && !e.target.closest(".nav"))
+            setMenu(false);
+        });
+        matchMedia("(min-width: 901px)").addEventListener("change", (e) => {
+          if (e.matches) setMenu(false);
+        });
 
         /* ---------- Tema claro / oscuro ---------- */
         try {
@@ -3212,24 +3699,32 @@
            de window.PALETTES (definidas y aplicadas en el <head>, antes de pintar). */
         const paletteBtn = document.querySelector(".palette-btn");
         const reapplyPalette = () => {
-          if (root.dataset.palette != null) window.applyPalette(+root.dataset.palette);
+          if (root.dataset.palette != null)
+            window.applyPalette(+root.dataset.palette);
         };
-        matchMedia("(prefers-color-scheme: dark)").addEventListener("change", reapplyPalette);
-        const syncPaletteBtn = () => paletteBtn.setAttribute("aria-pressed", root.dataset.palette != null);
+        matchMedia("(prefers-color-scheme: dark)").addEventListener(
+          "change",
+          reapplyPalette,
+        );
+        const syncPaletteBtn = () =>
+          paletteBtn.setAttribute("aria-pressed", root.dataset.palette != null);
         syncPaletteBtn();
         paletteBtn.addEventListener("click", () => {
           const on = root.dataset.palette == null;
           try {
             localStorage.setItem("palette", on ? "on" : "off");
             if (on) {
-              const last = +localStorage.getItem("paletteLast"), n = window.PALETTES.length;
+              const last = +localStorage.getItem("paletteLast"),
+                n = window.PALETTES.length;
               let i = Math.floor(Math.random() * (n - 1));
               if (i >= last) i++;
               localStorage.setItem("paletteLast", i);
               window.applyPalette(i);
             } else window.applyPalette(null);
           } catch (e) {
-            window.applyPalette(on ? Math.floor(Math.random() * window.PALETTES.length) : null);
+            window.applyPalette(
+              on ? Math.floor(Math.random() * window.PALETTES.length) : null,
+            );
           }
           syncPaletteBtn();
           showToast(t(on ? "js.paletteOn" : "js.paletteOff"));
@@ -3438,7 +3933,8 @@
             const st = getComputedStyle(root);
             const accent = st.getPropertyValue("--accent").trim();
             const ink = st.getPropertyValue("--accent-ink").trim();
-            if (!/^#[0-9a-f]{6}$/i.test(accent) || accent + ink === last) return;
+            if (!/^#[0-9a-f]{6}$/i.test(accent) || accent + ink === last)
+              return;
             last = accent + ink;
             c.clearRect(0, 0, 64, 64);
             const g = c.createLinearGradient(0, 0, 64, 64);
@@ -3449,14 +3945,20 @@
             c.roundRect ? c.roundRect(0, 0, 64, 64, 13) : c.rect(0, 0, 64, 64);
             c.fill();
             let size = 36;
-            const font = () => (c.font = `800 ${size}px "Bricolage Grotesque", sans-serif`);
+            const font = () =>
+              (c.font = `800 ${size}px "Bricolage Grotesque", sans-serif`);
             font();
             if ("letterSpacing" in c) c.letterSpacing = "-1.4px";
-            while (c.measureText("MH").width > 44 && size > 10) size--, font();
+            while (c.measureText("MH").width > 44 && size > 10)
+              (size--, font());
             const m = c.measureText("MH");
             c.fillStyle = ink;
             c.textAlign = "center";
-            c.fillText("MH", 32, 32 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+            c.fillText(
+              "MH",
+              32,
+              32 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2,
+            );
             const url = cv.toDataURL("image/png");
             links.forEach((l) => (l.href = url));
           };
@@ -3465,17 +3967,24 @@
             attributes: true,
             attributeFilter: ["data-theme", "data-palette", "style"],
           });
-          matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+          matchMedia("(prefers-color-scheme: dark)").addEventListener(
+            "change",
+            paint,
+          );
         })();
 
         /* ---------- Escaparate del hero: vídeos solo mientras se ven (nunca con movimiento reducido) ---------- */
         if (!reduce) {
           const io = new IntersectionObserver((entries) =>
             entries.forEach((e) =>
-              e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(),
+              e.isIntersecting
+                ? e.target.play().catch(() => {})
+                : e.target.pause(),
             ),
           );
-          document.querySelectorAll(".showcase video").forEach((v) => io.observe(v));
+          document
+            .querySelectorAll(".showcase video")
+            .forEach((v) => io.observe(v));
         }
         /* Delante/detrás. Con el ratón se decide por las zonas fijas de cada proyecto, no por las
            ventanas (que cambian de tamaño y provocarían cambios en bucle): en la zona de MHCars va
@@ -3487,13 +3996,21 @@
         (() => {
           const sc = document.querySelector(".showcase");
           if (!sc) return;
-          const items = { daw: sc.querySelector(".sc-browser"), dam: sc.querySelector(".sc-group") };
+          const items = {
+            daw: sc.querySelector(".sc-browser"),
+            dam: sc.querySelector(".sc-group"),
+          };
           const front = (f) => (sc.dataset.front = f);
           // Huecos: el de delante es el de MHCars y el de detrás el de Modelia (medidas sin
           // transformar). Cada uno se escala para caber en el otro hueco, centrado.
           let F, B; // huecos de delante y de detrás (centro y tamaño, sin transformar)
           const measure = () => {
-            const box = (el) => ({ x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2, w: el.offsetWidth, h: el.offsetHeight });
+            const box = (el) => ({
+              x: el.offsetLeft + el.offsetWidth / 2,
+              y: el.offsetTop + el.offsetHeight / 2,
+              w: el.offsetWidth,
+              h: el.offsetHeight,
+            });
             F = box(items.daw);
             B = box(items.dam);
             const st = sc.style;
@@ -3501,28 +4018,42 @@
             st.setProperty("--gy", `${F.y - B.y}px`);
             // En móvil (teléfono estrecho frente a ventana ancha) el teléfono puede crecer algo más
             // que el hueco y la ventana no se encoge por debajo de la mitad
-            st.setProperty("--gk", Math.min(F.w / B.w, (F.h / B.h) * 1.35).toFixed(3));
+            st.setProperty(
+              "--gk",
+              Math.min(F.w / B.w, (F.h / B.h) * 1.35).toFixed(3),
+            );
             st.setProperty("--bx", `${B.x - F.x}px`);
             st.setProperty("--by", `${B.y - F.y}px`);
-            st.setProperty("--bk", Math.max(Math.min(B.w / F.w, B.h / F.h), 0.55).toFixed(3));
+            st.setProperty(
+              "--bk",
+              Math.max(Math.min(B.w / F.w, B.h / F.h), 0.55).toFixed(3),
+            );
           };
           new ResizeObserver(measure).observe(sc);
           front("daw");
-          const dentro = (b, x, y) => Math.abs(x - b.x) <= b.w / 2 && Math.abs(y - b.y) <= b.h / 2;
+          const dentro = (b, x, y) =>
+            Math.abs(x - b.x) <= b.w / 2 && Math.abs(y - b.y) <= b.h / 2;
           sc.addEventListener("pointermove", (e) => {
             if (e.pointerType !== "mouse") return;
-            const r = sc.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-            const enF = dentro(F, x, y), enB = dentro(B, x, y);
+            const r = sc.getBoundingClientRect(),
+              x = e.clientX - r.left,
+              y = e.clientY - r.top;
+            const enF = dentro(F, x, y),
+              enB = dentro(B, x, y);
             if (enF && !enB) front("daw");
             else if (enB && !enF) front("dam");
           });
           sc.addEventListener("pointerleave", (e) => {
             if (e.pointerType === "mouse") front("daw");
           });
-          for (const [k, el] of Object.entries(items)) el.addEventListener("focus", () => front(k));
+          for (const [k, el] of Object.entries(items))
+            el.addEventListener("focus", () => front(k));
           if (!matchMedia("(hover: none)").matches) return;
           // Clip que marca el turno de cada uno: el de MHCars y el del teléfono de Modelia
-          const clips = { daw: items.daw.querySelector("video"), dam: items.dam.querySelector(".sc-phone video") };
+          const clips = {
+            daw: items.daw.querySelector("video"),
+            dam: items.dam.querySelector(".sc-phone video"),
+          };
           let auto = !reduce;
           const last = { daw: 0, dam: 0 };
           for (const [k, v] of Object.entries(clips)) {
@@ -3532,7 +4063,9 @@
               if (!auto || !vuelta || sc.dataset.front !== k) return;
               // El que pasa delante empieza desde el principio (sin contarlo como vuelta)
               const otro = k === "daw" ? "dam" : "daw";
-              items[otro].querySelectorAll("video").forEach((o) => (o.currentTime = 0));
+              items[otro]
+                .querySelectorAll("video")
+                .forEach((o) => (o.currentTime = 0));
               last[otro] = 0;
               front(otro);
             });
@@ -3772,9 +4305,36 @@
           },
           dam: {
             nodes: [
-              { id: "c", x: 0, y: 10, w: 220, h: 86, title: "Flutter", sub: "Android · Windows · web", color: css("--dam") },
-              { id: "a", x: 410, y: 122, w: 230, h: 86, title: "Spring Boot", sub: "Spring Security · JWT", color: css("--dam") },
-              { id: "d", x: 0, y: 234, w: 220, h: 86, title: "MariaDB", sub: "Spring Data JPA", color: css("--dam") },
+              {
+                id: "c",
+                x: 0,
+                y: 10,
+                w: 220,
+                h: 86,
+                title: "Flutter",
+                sub: "Android · Windows · web",
+                color: css("--dam"),
+              },
+              {
+                id: "a",
+                x: 410,
+                y: 122,
+                w: 230,
+                h: 86,
+                title: "Spring Boot",
+                sub: "Spring Security · JWT",
+                color: css("--dam"),
+              },
+              {
+                id: "d",
+                x: 0,
+                y: 234,
+                w: 220,
+                h: 86,
+                title: "MariaDB",
+                sub: "Spring Data JPA",
+                color: css("--dam"),
+              },
             ],
             links: [
               { id: "ca", from: "c", to: "a" },
@@ -3851,50 +4411,82 @@
         // Vista ordenador / móvil. El iframe tiene el ancho real de cada dispositivo, así que
         // la web cambia de verdad de diseño (media queries), sin recargar.
         const stage = sheet.querySelector(".sheet-stage");
-        const modeBtns = [...sheet.querySelectorAll(".sheet-modes [data-mode]")];
-        const DESKTOP_W = 1280, PHONE_W = 390, PHONE_H = 844;
+        const modeBtns = [
+          ...sheet.querySelectorAll(".sheet-modes [data-mode]"),
+        ];
+        const DESKTOP_W = 1280,
+          PHONE_W = 390,
+          PHONE_H = 844;
         let sheetMode = "desktop";
         const fitFrame = () => {
           if (!sheetFrame) return;
-          const W = stage.clientWidth, H = stage.clientHeight, f = sheetFrame.style;
+          const W = stage.clientWidth,
+            H = stage.clientHeight,
+            f = sheetFrame.style;
           const phoneFrame = sheetMode === "mobile" && W >= PHONE_W + 80;
           stage.classList.toggle("phone", phoneFrame);
           f.transform = "";
           if (phoneFrame) {
             // Teléfono centrado (el marco de 10 px va fuera del ancho útil)
             const h = Math.min(PHONE_H, H - 48);
-            Object.assign(f, { width: PHONE_W + "px", height: h + "px", left: (W - PHONE_W) / 2 - 10 + "px", top: (H - h) / 2 - 10 + "px" });
+            Object.assign(f, {
+              width: PHONE_W + "px",
+              height: h + "px",
+              left: (W - PHONE_W) / 2 - 10 + "px",
+              top: (H - h) / 2 - 10 + "px",
+            });
           } else if (sheetMode === "desktop" && W < 1024) {
             // Pantalla estrecha: la versión de ordenador se dibuja a 1280 px y se reduce
             const s = W / DESKTOP_W;
-            Object.assign(f, { width: DESKTOP_W + "px", height: H / s + "px", left: "0", top: "0", transform: `scale(${s})` });
+            Object.assign(f, {
+              width: DESKTOP_W + "px",
+              height: H / s + "px",
+              left: "0",
+              top: "0",
+              transform: `scale(${s})`,
+            });
           } else {
-            Object.assign(f, { width: "100%", height: "100%", left: "0", top: "0" });
+            Object.assign(f, {
+              width: "100%",
+              height: "100%",
+              left: "0",
+              top: "0",
+            });
           }
         };
         const setMode = (m) => {
           sheetMode = m;
-          modeBtns.forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === m));
+          modeBtns.forEach((b) =>
+            b.setAttribute("aria-pressed", b.dataset.mode === m),
+          );
           fitFrame();
         };
-        modeBtns.forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
+        modeBtns.forEach((b) =>
+          b.addEventListener("click", () => setMode(b.dataset.mode)),
+        );
         new ResizeObserver(fitFrame).observe(stage);
 
         const openDemo = ({ url, name, opener, onOpen, onClose }) => {
           onOpen();
           sheet.setAttribute("aria-label", t("js.demoOf", { name }));
-          sheetUrl.textContent = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+          sheetUrl.textContent = url
+            .replace(/^https?:\/\//, "")
+            .replace(/\/$/, "");
           document.getElementById("demoSheetOpen").href = url;
           sheet.classList.add("loading");
           sheetFrame = document.createElement("iframe");
           sheetFrame.title = t("js.demoOf", { name });
           // xr-spatial-tracking: realidad aumentada (WebXR) del visor 3D de Modelia
           sheetFrame.allow = "clipboard-write; xr-spatial-tracking";
-          sheetFrame.addEventListener("load", () => sheet.classList.remove("loading"));
+          sheetFrame.addEventListener("load", () =>
+            sheet.classList.remove("loading"),
+          );
           sheetFrame.src = url;
           stage.appendChild(sheetFrame);
           // En escritorio arranca en versión ordenador; en un teléfono, en versión móvil
-          setMode(matchMedia("(max-width: 900px)").matches ? "mobile" : "desktop");
+          setMode(
+            matchMedia("(max-width: 900px)").matches ? "mobile" : "desktop",
+          );
           sheetOnClose = () => {
             opener.focus();
             onClose();
@@ -3909,19 +4501,31 @@
           sheetOnClose?.();
           sheetOnClose = null;
         });
-        sheet.querySelector("[data-close]").addEventListener("click", () => sheet.close());
-        sheet.querySelector('[data-act="reload"]').addEventListener("click", () => {
-          if (!sheetFrame) return;
-          sheet.classList.add("loading");
-          sheetFrame.src = sheetFrame.src;
-        });
+        sheet
+          .querySelector("[data-close]")
+          .addEventListener("click", () => sheet.close());
+        sheet
+          .querySelector('[data-act="reload"]')
+          .addEventListener("click", () => {
+            if (!sheetFrame) return;
+            sheet.classList.add("loading");
+            sheetFrame.src = sheetFrame.src;
+          });
         // Pulsar fuera de la ventana (sobre el fondo difuminado) la cierra
         sheet.addEventListener("click", (e) => {
           const r = sheet.getBoundingClientRect();
-          if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) sheet.close();
+          if (
+            e.clientX < r.left ||
+            e.clientX > r.right ||
+            e.clientY < r.top ||
+            e.clientY > r.bottom
+          )
+            sheet.close();
         });
         // El botón «atrás» del navegador o del móvil cierra la demo en vez de salir del portfolio
-        addEventListener("popstate", () => { if (sheet.open) sheet.close(); });
+        addEventListener("popstate", () => {
+          if (sheet.open) sheet.close();
+        });
         document.querySelectorAll(".demo").forEach((demo) => {
           const url = DEMOS[demo.dataset.demo];
           const screen = demo.querySelector(".screen");
@@ -4004,7 +4608,13 @@
           // La demo se abre en una ventana grande sobre el portfolio (que queda difuminado);
           // en móvil ocupa toda la pantalla. Nunca se sale del portfolio.
           btn.addEventListener("click", () =>
-            openDemo({ url, name: demo.dataset.name, opener: btn, onOpen: preview.pause, onClose: preview.play }),
+            openDemo({
+              url,
+              name: demo.dataset.name,
+              opener: btn,
+              onOpen: preview.pause,
+              onClose: preview.play,
+            }),
           );
         });
 
