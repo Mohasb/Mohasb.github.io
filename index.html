@@ -1052,7 +1052,7 @@
          primer toque (clase .quieto, la pone el JS) */
       @media (prefers-reduced-motion: no-preference) {
         .js .showcase {
-          animation: sway 14s ease-in-out infinite alternate;
+          animation: sway 9s ease-in-out infinite alternate;
         }
         .js .showcase:hover,
         .js .showcase.quieto {
@@ -1061,10 +1061,10 @@
       }
       @keyframes sway {
         from {
-          transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+          transform: perspective(1400px) translateY(-8px) rotateY(-14deg) rotateX(4deg);
         }
         to {
-          transform: perspective(1400px) rotateY(6deg) rotateX(-1deg);
+          transform: perspective(1400px) translateY(8px) rotateY(12deg) rotateX(-3deg);
         }
       }
       .sc-browser,
