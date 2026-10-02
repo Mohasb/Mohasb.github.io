@@ -43,7 +43,7 @@ Todo lo necesario para entender, modificar y volver a publicar el portfolio y su
 ## 3. Las capas de la web (`index.html`)
 
 ### 3.1 Estructura (HTML)
-Secciones semánticas en este orden: barra (`<header>`), hero, `#experiencia`, `#proyectos` (Modelia primero y MHCars después), `#formacion`, `#habilidades` y `#contacto`. Al final están los diálogos: la ventana de demo (`#demoSheet`) y el formulario del CV.
+Secciones semánticas en este orden: barra (`<header>`), hero, `#experiencia`, `#proyectos` (MHCars primero y Modelia después), `#formacion`, `#habilidades` y `#contacto`. Al final están los diálogos: la ventana de demo (`#demoSheet`) y el formulario del CV.
 
 ### 3.2 Diseño (CSS, en el `<style>`)
 - **Variables de diseño en `:root`**, como `--bg`, `--surface`, `--ink`, `--muted`, `--line`, `--accent`, `--daw` y `--dam`. Ningún color va escrito directamente en los componentes.
@@ -144,7 +144,7 @@ Al grabar, la consola muestra el segundo en que empieza cada capítulo: cópialo
 Requisitos: Node.js y Microsoft Edge instalado (Playwright usa el Edge del sistema).
 
 ### 5.2 Paletas de color (Python, `tools/paletas/generar.py`)
-- Genera las 10 paletas de la «paleta sorpresa» en **OKLCH**, un espacio de color en el que la luminosidad se percibe de forma uniforme. Así todas las paletas tienen el mismo equilibrio.
+- Genera las 16 paletas de la «paleta sorpresa» en **OKLCH**, un espacio de color en el que la luminosidad se percibe de forma uniforme. Así todas las paletas tienen el mismo equilibrio.
 - Comprueba el **contraste WCAG** de cada combinación de texto y fondo y descarta las que no lo cumplen.
 
 ```bash

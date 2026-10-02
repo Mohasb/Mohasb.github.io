@@ -40,8 +40,9 @@ INK_L, MUTED_L = '#16171D', '#5A5E6D'
 INK_D, MUTED_D = '#ECEDF3', '#A1A6B6'
 PACKET_TXT_L, PACKET_TXT_D = '#FFFFFF', '#0E0B26'
 
-NAMES = {20: 'coral', 45: 'naranja', 75: 'ámbar', 140: 'verde', 175: 'turquesa', 210: 'cielo',
-         250: 'azul', 280: 'índigo', 305: 'violeta', 340: 'frambuesa'}
+NAMES = {0: 'rosa', 20: 'coral', 45: 'naranja', 75: 'ámbar', 105: 'lima', 140: 'verde', 158: 'menta',
+         175: 'turquesa', 192: 'petróleo', 210: 'cielo', 232: 'zafiro', 250: 'azul', 280: 'índigo',
+         305: 'violeta', 322: 'magenta', 340: 'frambuesa'}
 out, report = [], []
 for h, name in NAMES.items():
     light = {
