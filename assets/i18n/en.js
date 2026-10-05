@@ -15,7 +15,7 @@
   'nav.palette': 'Surprise palette: different colours on every visit',
   'nav.menu': 'Menu',
 
-  'hero.status': '<span>Full stack developer</span> · <span>Web and cross-platform</span>',
+  'hero.status': '<span>Full stack developer</span> · <span>Java, Spring Boot and Angular</span>',
   'hero.tagline': 'Since 2023 I have been building and maintaining enterprise applications for <strong>Orange</strong> and <strong>Iberdrola</strong>, from the interface to the database. In my own projects I take the web and mobile further, with 3D and augmented reality.',
   'hero.contact': 'Get in touch',
   'hero.cv': 'Request my CV',
