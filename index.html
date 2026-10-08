@@ -718,127 +718,6 @@
         }
       }
 
-      /* Diálogo de solicitud de CV */
-      .modal {
-        width: min(520px, calc(100% - 2rem));
-        max-height: calc(100dvh - 2rem);
-        overflow: auto;
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: clamp(1.4rem, 4vw, 2.2rem);
-        background: var(--surface);
-        color: var(--ink);
-        box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
-      }
-      .modal[open] {
-        animation: modalIn 0.35s var(--ease);
-      }
-      @keyframes modalIn {
-        from {
-          opacity: 0;
-          transform: translateY(14px) scale(0.98);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      .modal::backdrop {
-        background: rgba(10, 12, 20, 0.5);
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-      }
-      .modal h2 {
-        font-size: clamp(1.6rem, 4vw, 2.1rem);
-        margin: 0 2rem 0.6rem 0;
-      }
-      .modal-lead {
-        color: var(--muted);
-      }
-      .modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        border: 1px solid var(--line);
-        background: var(--surface);
-        color: var(--ink);
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-      }
-      .modal-close svg {
-        width: 16px;
-        height: 16px;
-      }
-      .cv-form {
-        display: grid;
-        gap: 0.9rem;
-        margin-top: 1.2rem;
-      }
-      .field-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.9rem;
-      }
-      @media (max-width: 480px) {
-        .field-row {
-          grid-template-columns: 1fr;
-        }
-      }
-      .cv-form label {
-        display: grid;
-        gap: 0.35rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-      .cv-form input,
-      .cv-form textarea {
-        font: inherit;
-        font-weight: 400;
-        color: var(--ink);
-        background: var(--bg);
-        border: 1.5px solid var(--line);
-        border-radius: 12px;
-        padding: 0.7rem 0.85rem;
-        width: 100%;
-        resize: vertical;
-        transition: border-color 0.2s;
-      }
-      .cv-form input:focus-visible,
-      .cv-form textarea:focus-visible {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px var(--accent-soft);
-      }
-      .cv-form .btn {
-        justify-self: start;
-        margin-top: 0.3rem;
-      }
-      .cv-status {
-        margin: 0;
-        padding: 0.75rem 0.9rem;
-        border-radius: 12px;
-        background: var(--accent-soft);
-        font-size: 0.92rem;
-      }
-      .modal-alt {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: 1.4rem;
-        padding-top: 1.1rem;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-      .modal-alt span {
-        margin-right: 0.25rem;
-      }
-
       /* Hero */
       .hero {
         /* Algo menos que la pantalla: el título «Experiencia» asoma e invita a bajar */
@@ -896,27 +775,41 @@
         align-items: center;
         position: relative;
       }
-      /* Rol encima del nombre, con un punto que late en el color de acento (sigue a la paleta) */
+      /* Rol debajo del nombre, en una sola línea: punto que late y un brillo de color que recorre
+         las tecnologías (sigue al acento: paleta y tema). Cabe a 360 px. */
       .status {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 0.55rem;
-        font-size: 0.95rem;
+        gap: 0.6rem;
+        margin: -0.4rem 0 1.5rem;
+        font-size: clamp(1rem, 1.6vw, 1.3rem);
         font-weight: 500;
         color: var(--muted);
-        margin-bottom: 1.4rem;
-        padding: 0.35rem 0.9rem 0.35rem 0.7rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: var(--surface);
-      }
-      .status span span {
         white-space: nowrap;
       }
-      @media (max-width: 480px) {
-        .status {
-          font-size: 0.82rem;
-          border-radius: 1rem;
+      .status b {
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .status .r-tech {
+        font-weight: 600;
+        background: linear-gradient(
+            100deg,
+            var(--accent) 0%,
+            color-mix(in srgb, var(--accent) 45%, var(--ink)) 35%,
+            color-mix(in srgb, var(--accent) 70%, var(--surface)) 50%,
+            color-mix(in srgb, var(--accent) 45%, var(--ink)) 65%,
+            var(--accent) 100%
+          )
+          0 0 / 250% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: brillo 6s linear infinite;
+      }
+      @keyframes brillo {
+        to {
+          background-position: -250% 0;
         }
       }
       .status i {
@@ -936,8 +829,15 @@
           box-shadow: 0 0 0 10px transparent;
         }
       }
+      @media (max-width: 520px) {
+        .status {
+          font-size: clamp(0.9rem, 4.3vw, 1.05rem);
+          gap: 0.5rem;
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .status i {
+        .status i,
+        .status .r-tech {
           animation: none;
         }
       }
@@ -2394,13 +2294,13 @@
         <canvas class="hive" aria-hidden="true"></canvas>
         <div class="wrap hero-grid">
           <div>
-            <p class="status fade" style="--d: 0.05s">
+            <h1 class="name" data-split>Muhammad Hicho Haidor</h1>
+            <p class="status fade" style="--d: 0.55s">
               <i aria-hidden="true"></i
               ><span data-i18n="hero.status"
-                ><span>Desarrollador full stack</span> · <span>Java, Spring Boot y Angular</span></span
+                ><b>Desarrollador</b> <span class="r-tech">Java · Spring Boot · Angular</span></span
               >
             </p>
-            <h1 class="name" data-split>Muhammad Hicho Haidor</h1>
             <p class="tagline fade" style="--d: 0.7s" data-i18n="hero.tagline">
               Desde 2023 desarrollo y mantengo aplicaciones empresariales para
               <strong>Orange</strong> e <strong>Iberdrola</strong>, de la interfaz
@@ -2416,15 +2316,14 @@
                   data-i18n="hero.contact"
                   >Contactar</a
                 >
-                <button
+                <a
                   class="btn ghost"
-                  type="button"
-                  data-cv
-                  aria-haspopup="dialog"
-                  data-i18n="hero.cv"
+                  href="cv/Muhammad-Hicho-Haidor-CV.pdf"
+                  download="Muhammad-Hicho-Haidor-CV.pdf"
+                  type="application/pdf"
+                  data-i18n="hero.cvDownload"
+                  >Descargar CV</a
                 >
-                  Solicitar CV
-                </button>
               </div>
               <div class="cta-social">
                 <a
@@ -3469,74 +3368,6 @@
       </div>
     </dialog>
 
-    <!-- Solicitud de CV: prepara un correo en el programa del visitante (mailto), sin servicios externos -->
-    <dialog class="modal" id="cvDialog" aria-labelledby="cvTitle">
-      <button
-        class="modal-close"
-        type="button"
-        data-close
-        aria-label="Cerrar"
-        data-i18n-attr="aria-label:cv.close"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.2"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <path d="M6 6l12 12M18 6L6 18" />
-        </svg>
-      </button>
-      <h2 id="cvTitle" data-i18n="cv.title">¿Quieres mi CV?</h2>
-      <p class="modal-lead" data-i18n="cv.lead">
-        Déjame tus datos y te lo envío personalmente. Al pulsar el botón se
-        abrirá tu correo con la solicitud ya escrita.
-      </p>
-      <form class="cv-form" id="cvForm">
-        <div class="field-row">
-          <label
-            ><span data-i18n="cv.name">Nombre</span
-            ><input name="name" autocomplete="name" required
-          /></label>
-          <label
-            ><span data-i18n="cv.company">Empresa</span
-            ><input name="company" autocomplete="organization" required
-          /></label>
-        </div>
-        <label
-          ><span data-i18n="cv.role">Puesto u oferta (opcional)</span
-          ><input name="role"
-        /></label>
-        <label
-          ><span data-i18n="cv.msg">Mensaje (opcional)</span
-          ><textarea name="msg" rows="3"></textarea>
-        </label>
-        <button class="btn" type="submit" data-i18n="cv.submit">
-          Abrir mi correo
-        </button>
-        <p class="cv-status" role="status" aria-live="polite" hidden></p>
-      </form>
-      <div class="modal-alt">
-        <span data-i18n="cv.alt">¿Prefieres otra vía?</span>
-        <button
-          class="chip-btn"
-          type="button"
-          data-copy="mhichoha@gmail.com"
-          data-i18n="cv.copy"
-        >
-          Copiar mi email
-        </button>
-        <a
-          class="chip-btn"
-          href="https://www.linkedin.com/in/mhichohaidor"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
-      </div>
-    </dialog>
 
     <script>
       (() => {
@@ -3575,11 +3406,6 @@
             "Paleta sorpresa activada: cada visita tendrá colores distintos.",
           "js.paletteOff": "Vuelves a la paleta original.",
           "js.closeDemo": "Cerrar la demo",
-          "cv.mailSubject": "Solicitud de CV — {company}",
-          "cv.mailBody":
-            "Hola, Muhammad:\n\nMe gustaría recibir tu CV.\n\nNombre: {name}\nEmpresa: {company}\nPuesto u oferta: {role}\n\n{msg}\n\nUn saludo.",
-          "cv.sent":
-            "Se ha abierto tu programa de correo con el mensaje listo. Si no se ha abierto, escríbeme a <strong>mhichoha@gmail.com</strong>.",
         };
         document.querySelectorAll("[data-i18n]").forEach((el) => {
           src[el.dataset.i18n] ??= el.innerHTML;
@@ -4667,49 +4493,6 @@
             }
           }),
         );
-
-        /* ---------- Solicitud de CV ----------
-     No hay descarga directa: el formulario abre el correo del visitante con el mensaje
-     listo (mailto). Así sé quién lo pide y respondo yo con el CV. */
-        const cvDialog = document.getElementById("cvDialog");
-        const cvForm = document.getElementById("cvForm");
-        const cvStatus = cvForm.querySelector(".cv-status");
-        document.querySelectorAll("[data-cv]").forEach((b) =>
-          b.addEventListener("click", () => {
-            cvStatus.hidden = true;
-            cvDialog.showModal();
-          }),
-        );
-        cvDialog
-          .querySelector("[data-close]")
-          .addEventListener("click", () => cvDialog.close());
-        cvDialog.addEventListener("click", (e) => {
-          if (e.target === cvDialog) cvDialog.close();
-        });
-        cvForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const d = Object.fromEntries(
-            [...new FormData(cvForm)].map(([k, v]) => [k, String(v).trim()]),
-          );
-          const body = t("cv.mailBody", {
-            name: d.name,
-            company: d.company,
-            role: d.role || "—",
-            msg: d.msg,
-          })
-            .replace(/\n{3,}/g, "\n\n")
-            .replace(/\n/g, "\r\n");
-          location.href =
-            "mailto:mhichoha@gmail.com?subject=" +
-            encodeURIComponent(t("cv.mailSubject", { company: d.company })) +
-            "&body=" +
-            encodeURIComponent(body);
-          cvStatus.innerHTML = t("cv.sent");
-          cvStatus.hidden = false;
-        });
-        onLang(() => {
-          if (!cvStatus.hidden) cvStatus.innerHTML = t("cv.sent");
-        });
 
         document.getElementById("year").textContent = new Date().getFullYear();
 

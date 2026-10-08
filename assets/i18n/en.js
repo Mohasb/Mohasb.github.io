@@ -15,10 +15,10 @@
   'nav.palette': 'Surprise palette: different colours on every visit',
   'nav.menu': 'Menu',
 
-  'hero.status': '<span>Full stack developer</span> · <span>Java, Spring Boot and Angular</span>',
+  'hero.status': '<b>Developer</b> · <span class="r-tech">Java · Spring Boot · Angular</span>',
   'hero.tagline': 'Since 2023 I have been building and maintaining enterprise applications for <strong>Orange</strong> and <strong>Iberdrola</strong>, from the interface to the database. In my own projects I take the web and mobile further, with 3D and augmented reality.',
   'hero.contact': 'Get in touch',
-  'hero.cv': 'Request my CV',
+  'hero.cvDownload': 'Download CV (Spanish)',
   'hero.scDam': 'See the Modelia project: cross-platform store with a 3D viewer and augmented reality',
   'hero.scDaw': 'See the MHCars project: car rental and sales with a 3D showroom',
 
@@ -133,19 +133,6 @@
   'contact.title': 'Shall we talk?',
   'contact.copy': 'Copy email',
 
-  'cv.close': 'Close',
-  'cv.title': 'Would you like my CV?',
-  'cv.lead': 'Leave your details and I will send it to you personally. When you press the button, your email app will open with the request already written.',
-  'cv.name': 'Name',
-  'cv.company': 'Company',
-  'cv.role': 'Role or job posting (optional)',
-  'cv.msg': 'Message (optional)',
-  'cv.submit': 'Open my email',
-  'cv.alt': 'Prefer another way?',
-  'cv.copy': 'Copy my email',
-  'cv.mailSubject': 'CV request — {company}',
-  'cv.mailBody': 'Hi Muhammad,\n\nI would like to receive your CV.\n\nName: {name}\nCompany: {company}\nRole or job posting: {role}\n\n{msg}\n\nBest regards.',
-  'cv.sent': 'Your email app has opened with the message ready. If it did not open, write to me at <strong>mhichoha@gmail.com</strong>.',
 
   'js.soon': 'Demo coming soon',
   'js.demoOf': 'Interactive demo of {name}',

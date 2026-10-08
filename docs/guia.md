@@ -72,7 +72,7 @@ Bloques independientes dentro de una única función:
 | Bloque | Qué hace | Dónde buscarlo |
 |---|---|---|
 | `DEMOS` | URL de cada demo. Si está vacía, el botón sale desactivado | `const DEMOS` |
-| `src` | Textos que pone el propio JavaScript (claves `js.*` y `cv.*`) | `const src` |
+| `src` | Textos que pone el propio JavaScript (claves `js.*`) | `const src` |
 | i18n | Recorre `data-i18n` y `data-i18n-attr` y aplica el diccionario | «Idioma: banderas» |
 | Menú móvil | Botón ☰ por debajo de 900 px | «Menú de secciones» |
 | Panal del hero | Canvas 2D de puntos con olas al mover el cursor o tocar, y una ola suave cada ~7 s. Solo se anima mientras hay olas | «Ola ambiental» |
@@ -80,7 +80,7 @@ Bloques independientes dentro de una única función:
 | Diagramas | `buildFlow(svg, cfg)` dibuja y anima los diagramas de «Cómo funciona» a partir del objeto `flows` (`dam` y `daw`) | `function buildFlow`, `const flows` |
 | Vídeos | Reproducción automática solo cuando son visibles (IntersectionObserver), capítulos y pausa | `data-start` |
 | Ventana de demo | `openDemo` abre el `<dialog>` con el iframe. `setMode` alterna entre ordenador (1280 px escalados) y móvil (390 px) | `function openDemo`, `function setMode` |
-| Formulario del CV | Construye un enlace `mailto:` con los datos. No envía nada a ningún servidor | «No hay descarga directa» |
+| Copiar email | El botón de Contacto copia el email al portapapeles | `data-copy` |
 
 **Movimiento:** todo respeta `prefers-reduced-motion`. Con el movimiento reducido activado, el panal queda quieto y los diagramas no se animan.
 
@@ -186,7 +186,7 @@ Crea una sección «Otros proyectos», más compacta (título, una frase, tecnol
 3. Navega con el **teclado** (Tab): el foco tiene que verse siempre.
 4. Pasa **Lighthouse** (pestaña Lighthouse en F12). El objetivo es 90 o más en todo.
 
-> No envíes el formulario del CV durante las pruebas: abre tu programa de correo de verdad.
+> Si añades algo con `mailto:`, no lo pulses en las pruebas automáticas: abre tu programa de correo de verdad.
 
 ## 8. Publicar
 
