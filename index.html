@@ -1090,13 +1090,12 @@
           width: 112%;
         }
       }
-      /* Balanceo lento mientras nadie interactúa: se pausa con el ratón encima y se detiene al
-         primer toque (clase .quieto, la pone el JS) */
+      /* Balanceo lento mientras nadie interactúa: se detiene al interactuar y se reanuda con el
+         giro automático (clase .quieto, la pone el JS) */
       @media (prefers-reduced-motion: no-preference) {
         .js .showcase {
           animation: sway 9s ease-in-out infinite alternate;
         }
-        .js .showcase:hover,
         .js .showcase.quieto {
           animation-play-state: paused;
         }
@@ -1170,6 +1169,22 @@
           transform: translate(var(--bx, 0), var(--by, 0)) scale(var(--bk, 1))
             rotateY(-12deg) rotateX(4deg) translateZ(-110px) scale(0.92);
         }
+      }
+      /* Giro continuo (clase .gira): el JS mueve las tarjetas con estilos en línea; el balanceo
+         se para mientras giran */
+      .js .showcase.gira {
+        animation: none;
+      }
+      .showcase.gira .sc-browser,
+      .showcase.gira .sc-group {
+        transform-origin: 50% 50%;
+        transition: none;
+      }
+      .showcase.entrando .sc-browser,
+      .showcase.entrando .sc-group {
+        transition:
+          transform 0.8s var(--ease),
+          filter 0.8s var(--ease);
       }
       .sc-browser:focus-visible,
       .sc-group:focus-visible {
@@ -3823,10 +3838,9 @@
         /* Delante/detrás. Con el ratón se decide por las zonas fijas de cada proyecto, no por las
            ventanas (que cambian de tamaño y provocarían cambios en bucle): en la zona de MHCars va
            delante MHCars y en la de Modelia, Modelia; donde se solapan no cambia nada; al salir del
-           escaparate vuelve MHCars. En pantallas táctiles se alternan solos cuando termina el clip
-           del que está delante (y el nuevo empieza desde el principio), hasta el primer toque:
-           desde ahí decide el visitante, y tocar el de detrás lo trae delante (un segundo toque
-           abre el proyecto). Con movimiento reducido no hay intercambio automático. */
+           escaparate vuelve MHCars. Mientras nadie interactúa (en cualquier dispositivo) giran
+           continuamente como un carrusel, y reanudan el giro 20 s después de la última
+           interacción. Con movimiento reducido no giran. */
         (() => {
           const sc = document.querySelector(".showcase");
           if (!sc) return;
@@ -3880,41 +3894,105 @@
           sc.addEventListener("pointerleave", (e) => {
             if (e.pointerType === "mouse") front("daw");
           });
+          // Con teclado (Tab), el enlace con foco pasa delante. El foco de un toque no cuenta: en
+          // móvil el primer toque solo trae el de detrás delante
           for (const [k, el] of Object.entries(items))
-            el.addEventListener("focus", () => front(k));
-          if (!matchMedia("(hover: none)").matches) return;
-          // Clip que marca el turno de cada uno: el de MHCars y el del teléfono de Modelia
-          const clips = {
-            daw: items.daw.querySelector("video"),
-            dam: items.dam.querySelector(".sc-phone video"),
+            el.addEventListener("focus", () => el.matches(":focus-visible") && front(k));
+          // Giro continuo tipo carrusel mientras nadie interactúa: las dos tarjetas dan vueltas
+          // despacio alrededor del centro entre sus huecos (una vuelta cada VUELTA ms). Al
+          // interactuar (ratón encima, toque o Tab) se paran y vuelven a su sitio; ESPERA ms
+          // después de la última interacción, reanudan el giro.
+          const VUELTA = 30000, ESPERA = 20000;
+          const tactil = matchMedia("(hover: none)").matches;
+          let visible = false, manual = false, raf = 0, reanudar = 0;
+          let ang = 0, vel = 0, prev = 0;
+          const lerp = (a, b, k) => a + (b - a) * k;
+          const pintar = () => {
+            const C = { x: (F.x + B.x) / 2, y: (F.y + B.y) / 2 };
+            const D = { x: F.x - C.x, y: F.y - C.y }; // del centro al hueco de delante
+            const P = { x: -D.y * 0.9, y: D.x * 0.35 }; // lado: hacia la derecha y un poco abajo
+            const gk = +sc.style.getPropertyValue("--gk") || 1, bk = +sc.style.getPropertyValue("--bk") || 1;
+            const cartas = [
+              { el: items.daw, base: F, a: ang, sAtras: bk, sDelante: 1 },
+              { el: items.dam, base: B, a: ang + Math.PI, sAtras: 1, sDelante: gk },
+            ];
+            let delante = "daw";
+            cartas.forEach((c, i) => {
+              const cos = Math.cos(c.a), sin = Math.sin(c.a);
+              const k = (cos + 1) / 2; // 1 delante, 0 detrás
+              const x = C.x + D.x * cos + P.x * sin - c.base.x;
+              const y = C.y + D.y * cos + P.y * sin - c.base.y;
+              c.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${lerp(c.sAtras, c.sDelante, k).toFixed(3)}) rotateY(${(-10 + sin * 22).toFixed(1)}deg) rotateX(3deg)`;
+              c.el.style.filter = `brightness(${lerp(0.82, 1, k).toFixed(3)}) saturate(${lerp(0.8, 1, k).toFixed(3)})`;
+              c.el.style.zIndex = k > 0.5 ? 3 : 1;
+              if (i === 1 && k > 0.5) delante = "dam";
+            });
+            if (sc.dataset.front !== delante) front(delante);
           };
-          let auto = !reduce;
-          const last = { daw: 0, dam: 0 };
-          for (const [k, v] of Object.entries(clips)) {
-            v.addEventListener("timeupdate", () => {
-              const vuelta = v.currentTime + 0.5 < last[k]; // el bucle ha vuelto al principio
-              last[k] = v.currentTime;
-              if (!auto || !vuelta || sc.dataset.front !== k) return;
-              // El que pasa delante empieza desde el principio (sin contarlo como vuelta)
-              const otro = k === "daw" ? "dam" : "daw";
-              items[otro]
-                .querySelectorAll("video")
-                .forEach((o) => (o.currentTime = 0));
-              last[otro] = 0;
-              front(otro);
-            });
-          }
-          sc.addEventListener("pointerdown", () => {
-            auto = false;
+          const paso = (t) => {
+            const dt = Math.min(64, t - (prev || t));
+            prev = t;
+            vel = Math.min(1, vel + dt / 2500); // arranque suave
+            ang += ((2 * Math.PI) / VUELTA) * dt * vel;
+            pintar();
+            raf = requestAnimationFrame(paso);
+          };
+          const arrancar = () => {
+            if (raf || reduce || manual || !visible) return;
+            // Empieza desde donde está: MHCars delante (0) o Modelia delante (media vuelta)
+            ang = sc.dataset.front === "dam" ? Math.PI : 0;
+            vel = 0;
+            prev = 0;
+            sc.classList.add("gira", "entrando");
+            setTimeout(() => sc.classList.remove("entrando"), 800);
+            raf = requestAnimationFrame(paso);
+          };
+          const parar = () => {
+            if (!raf) return;
+            cancelAnimationFrame(raf);
+            raf = 0;
+            // Vuelve a su sitio con la transición de siempre; delante, el que estaba más cerca
+            const delanteAhora = Math.cos(ang) >= 0 ? "daw" : "dam";
+            sc.classList.remove("gira");
+            for (const el of Object.values(items)) el.style.transform = el.style.filter = el.style.zIndex = "";
+            front(delanteAhora);
+          };
+          const interactuar = () => {
+            manual = true;
             sc.classList.add("quieto");
+            clearTimeout(reanudar);
+            parar();
+          };
+          const esperar = () => {
+            clearTimeout(reanudar);
+            reanudar = setTimeout(() => {
+              manual = false;
+              sc.classList.remove("quieto");
+              arrancar();
+            }, ESPERA);
+          };
+          new IntersectionObserver(([e]) => {
+            visible = e.isIntersecting;
+            visible ? arrancar() : parar();
+          }).observe(sc);
+          sc.addEventListener("pointerenter", (e) => e.pointerType === "mouse" && interactuar());
+          sc.addEventListener("pointerleave", (e) => e.pointerType === "mouse" && esperar());
+          sc.addEventListener("pointerdown", (e) => {
+            if (e.pointerType === "mouse") return;
+            interactuar();
+            esperar();
           });
-          for (const [k, el] of Object.entries(items))
-            el.addEventListener("click", (e) => {
-              if (sc.dataset.front !== k) {
-                e.preventDefault();
-                front(k);
-              }
-            });
+          sc.addEventListener("focusin", (e) => e.target.matches(":focus-visible") && interactuar());
+          sc.addEventListener("focusout", (e) => e.target.matches(":focus-visible") && esperar());
+          // En táctil, tocar el de detrás lo trae delante (un segundo toque abre el proyecto)
+          if (tactil)
+            for (const [k, el] of Object.entries(items))
+              el.addEventListener("click", (e) => {
+                if (sc.dataset.front !== k) {
+                  e.preventDefault();
+                  front(k);
+                }
+              });
         })();
 
         /* ---------- Scroll: barra de progreso, nav y enlace activo ---------- */
