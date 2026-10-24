@@ -18,7 +18,9 @@
   'hero.status': '<b>Developer</b> · <span class="r-tech">Java · Spring Boot · Angular</span>',
   'hero.tagline': 'Since 2023 I have been building and maintaining enterprise applications for <strong>Orange</strong> and <strong>Iberdrola</strong>, from the interface to the database. In my own projects I take the web and mobile further, with 3D and augmented reality.',
   'hero.contact': 'Get in touch',
-  'hero.cvDownload': 'Download CV (Spanish)',
+  'hero.cvDownload': 'Download CV',
+  'hero.cvHref': 'cv/Muhammad-Hicho-Haidor-CV-EN.pdf',
+  'hero.cvFile': 'Muhammad-Hicho-Haidor-CV-EN.pdf',
   'hero.scDam': 'See the Modelia project: cross-platform store with a 3D viewer and augmented reality',
   'hero.scDaw': 'See the MHCars project: car rental and sales with a 3D showroom',
 
